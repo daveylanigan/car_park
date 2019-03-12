@@ -3,7 +3,9 @@ package ie.cp.activities;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,11 +14,14 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import java.util.Arrays;
+
 import ie.cp.R;
 import ie.cp.fragments.CarParkFragment;
 import ie.cp.models.CarPark;
 import ie.cp.models.CarParkSpace;
 import ie.cp.models.User;
+import io.realm.OrderedRealmCollection;
 
 public class Home extends Base
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -59,6 +64,7 @@ public class Home extends Base
         ft.commit();
 
         this.setupCarParks();
+        this.setupCarParkSpaces();
         this.setTitle(R.string.recentlyViewedLbl);
     }
 
@@ -78,8 +84,15 @@ public class Home extends Base
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        Fragment fragment;
+        ft = getSupportFragmentManager().beginTransaction();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_home) {
+            fragment = CarParkFragment.newInstance();
+            ft.replace(R.id.homeFrame, fragment);
+            ft.addToBackStack(null);
+            ft.commit();
+        } else if (id == R.id.nav_camera) {
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
 
@@ -99,9 +112,15 @@ public class Home extends Base
     }
 
     public void setupCarParks(){
-        app.dbManager.addCarPark(new CarPark("MultiStory 1", "Newgate Street","Waterford",20,20));
-        app.dbManager.addCarPark(new CarPark("MultiStory 2", "City Square","Waterford",20,20));
-        app.dbManager.addCarPark(new CarPark("MultiStory 3", "The Quay","New Ross",20,20));
+   //     if (app.dbManager.getCarParkSpaceByName("MultiStory 1") == null) {
+            app.dbManager.addCarPark(new CarPark("MultiStory 1", "Newgate Street", "Waterford", "4", "4"));
+    //    }
+    //    if (app.dbManager.getCarParkSpaceByName("MultiStory 2") == null) {
+            app.dbManager.addCarPark(new CarPark("MultiStory 2", "City Square","Waterford","4","4"));
+     //   }
+     //   if (app.dbManager.getCarParkSpaceByName("MultiStory 3") == null) {
+            app.dbManager.addCarPark(new CarPark("MultiStory 3", "The Quay","New Ross","4","4"));
+     //   }
 
     }
     public void setupUsers(){
@@ -110,10 +129,36 @@ public class Home extends Base
     }
 
     public void setupCarParkSpaces(){
-        app.dbManager.addCarParkSpace(new CarParkSpace("Space 1", "Space 1","1"));
-        app.dbManager.addCarParkSpace(new CarParkSpace("Space 2", "Space 2","1"));
-        app.dbManager.addCarParkSpace(new CarParkSpace("Space 3", "Space 3","1"));
-        app.dbManager.addCarParkSpace(new CarParkSpace("Space 4", "Space 4","1"));
+
+        OrderedRealmCollection<CarPark> carParks = app.dbManager.getAllCarParks();
+        Log.d("car parks", "arr: " + Arrays.toString(new OrderedRealmCollection[]{carParks}));
+
+        // add 4 spaces for each carpark
+        for(CarPark cp : carParks) {
+            if (cp.name.equalsIgnoreCase("MultiStory 1") ) {
+                app.dbManager.addCarParkSpace(new CarParkSpace("Space 1", "Space 1", cp.carParkId));
+                app.dbManager.addCarParkSpace(new CarParkSpace("Space 2", "Space 2", cp.carParkId));
+                app.dbManager.addCarParkSpace(new CarParkSpace("Space 3", "Space 3", cp.carParkId));
+                app.dbManager.addCarParkSpace(new CarParkSpace("Space 4", "Space 4", cp.carParkId));
+            }
+            if (cp.name.equalsIgnoreCase("MultiStory 2") ) {
+                app.dbManager.addCarParkSpace(new CarParkSpace("Space 5", "Space 5", cp.carParkId));
+                app.dbManager.addCarParkSpace(new CarParkSpace("Space 6", "Space 6", cp.carParkId));
+                app.dbManager.addCarParkSpace(new CarParkSpace("Space 7", "Space 7", cp.carParkId));
+                app.dbManager.addCarParkSpace(new CarParkSpace("Space 8", "Space 8", cp.carParkId));
+            }
+            if (cp.name.equalsIgnoreCase("MultiStory 3") ) {
+                app.dbManager.addCarParkSpace(new CarParkSpace("Space 9", "Space 9", cp.carParkId));
+                app.dbManager.addCarParkSpace(new CarParkSpace("Space 10", "Space 10", cp.carParkId));
+                app.dbManager.addCarParkSpace(new CarParkSpace("Space 11", "Space 11", cp.carParkId));
+                app.dbManager.addCarParkSpace(new CarParkSpace("Space 12", "Space 12", cp.carParkId));
+            }
+        } // end for
+
+        OrderedRealmCollection<CarParkSpace> carParkSpaces = app.dbManager.getAllCarParkSpaces();
+
+        Log.d("car park spaces", "arr: " + Arrays.toString(new OrderedRealmCollection[]{carParkSpaces}));
+
 
     }
 

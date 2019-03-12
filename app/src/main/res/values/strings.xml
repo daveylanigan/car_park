@@ -16,10 +16,15 @@
     <string name="splash_image_desc">an image</string>
     <string name="car_park_row_name">Car Park Name</string>
     <string name="car_park_row_address">Car Park Address</string>
+    <string name="user_row_name">User Name</string>
+    <string name="user_row_email_address">User Address</string>
+    <string name="user_row_password">Password</string>
     <string name="recentlyViewedLbl">Car Parks</string>
+    <string name="userLbl">Users</string>
     <string name="emptyMessageLbl">You have no Car Park\'s added, go add one you scrub!</string>
     <string name="searchCarParksLbl">Search Car Park\'s</string>
     <string name="deleteCarParksLbl">Delete Car Parks</string>
+    <string name="deleteUsersLbl">Delete Users</string>
 
     <string-array name="carParkTypes">
         <item>All Types</item>

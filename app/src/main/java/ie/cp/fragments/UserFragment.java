@@ -18,30 +18,28 @@ import android.widget.ListView;
 
 import ie.cp.R;
 import ie.cp.activities.Base;
-import ie.cp.adapters.CarParkListAdapter;
-import ie.cp.models.CarPark;
-import ie.cp.models.CarParkSpace;
-import io.realm.RealmResults;
+import ie.cp.adapters.UserListAdapter;
+import ie.cp.models.User;
 
-public class CarParkFragment   extends Fragment implements
+
+public class UserFragment extends Fragment implements
         AdapterView.OnItemClickListener,
         View.OnClickListener,
         AbsListView.MultiChoiceModeListener
 {
     public Base activity;
-    public static CarParkListAdapter listAdapter;
+    public static UserListAdapter listAdapter;
     public ListView listView;
-    public CarParkFilter carParkFilter;
- //   public boolean favourites = false;
+//    public UserFilter userFilter;
 
-    public CarParkFragment() {
+    public UserFragment() {
         // Required empty public constructor
     }
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         Bundle activityInfo = new Bundle(); // Creates a new Bundle object
-        activityInfo.putString("carParkId", (String) view.getTag());
+        activityInfo.putString("userId", (String) view.getTag());
 
  //       Fragment fragment = EditFragment.newInstance(activityInfo);
  //       getActivity().setTitle(R.string.editCoffeeLbl);
@@ -53,8 +51,8 @@ public class CarParkFragment   extends Fragment implements
     }
 
 
-    public static CarParkFragment newInstance() {
-        CarParkFragment fragment = new CarParkFragment();
+    public static UserFragment newInstance() {
+        UserFragment fragment = new UserFragment();
         return fragment;
     }
 
@@ -77,9 +75,7 @@ public class CarParkFragment   extends Fragment implements
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home, parent, false);
 
-  //      RealmResults<CarParkSpace> cps = activity.app.dbManager.getAllCarParkSpaces();
-
-        listAdapter = new CarParkListAdapter(activity, this, activity.app.dbManager.getAllCarParks());
+        listAdapter = new UserListAdapter(activity, this, activity.app.dbManager.getAllUsers());
  ////       carParkFilter = new CarParkFilter(activity.app.dbManager, listAdapter);
 
  //       if (favourites) {
@@ -91,10 +87,7 @@ public class CarParkFragment   extends Fragment implements
         listView = v.findViewById(R.id.homeList);
         setListView(v);
 
-//        if (!favourites)
-            getActivity().setTitle(R.string.recentlyViewedLbl);
-//        else
-//            getActivity().setTitle(R.string.favouritesCoffeeLbl);
+        getActivity().setTitle(R.string.userLbl);
 
         return v;
     }
@@ -117,24 +110,24 @@ public class CarParkFragment   extends Fragment implements
     @Override
     public void onClick(View view)
     {
-        if (view.getTag() instanceof CarPark)
+        if (view.getTag() instanceof User)
         {
-            onCarParkDelete ((CarPark) view.getTag());
+            onUserDelete ((User) view.getTag());
         }
     }
 
-    public void onCarParkDelete(final CarPark carPark)
+    public void onUserDelete(final User user)
     {
-        String stringName = carPark.name;
+        String stringName = user.userName;
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        builder.setMessage("Are you sure you want to Delete the \'Coffee\' " + stringName + "?");
+        builder.setMessage("Are you sure you want to Delete the \'user\' " + stringName + "?");
         builder.setCancelable(false);
 
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener()
         {
             public void onClick(DialogInterface dialog, int id)
             {
-                activity.app.dbManager.deleteCarPark(carPark.carParkId); // remove from our list
+                activity.app.dbManager.deleteUser(user.userId); // remove from our list
                 listAdapter.notifyDataSetChanged(); // refresh adapter
             }
         }).setNegativeButton("No", new DialogInterface.OnClickListener()
@@ -153,7 +146,7 @@ public class CarParkFragment   extends Fragment implements
     public boolean onCreateActionMode(ActionMode actionMode, Menu menu)
     {
         MenuInflater inflater = actionMode.getMenuInflater();
-        inflater.inflate(R.menu.delete_list_context, menu);
+        inflater.inflate(R.menu.delete_userlist_context, menu);
         return true;
     }
 
@@ -167,29 +160,23 @@ public class CarParkFragment   extends Fragment implements
     {
         switch (menuItem.getItemId())
         {
-            case R.id.menu_item_delete_carpark:
-                deleteCarParks(actionMode);
+            case R.id.menu_item_delete_users:
+                deleteUsers(actionMode);
                 return true;
             default:
                 return false;
         }
     }
 
-    public void deleteCarParks(ActionMode actionMode)
+    public void deleteUsers(ActionMode actionMode)
     {
-        CarPark c = null;
+        User c = null;
         for (int i = listAdapter.getCount() - 1; i >= 0; i--)
             if (listView.isItemChecked(i))
-                activity.app.dbManager.deleteCarPark(listAdapter.getItem(i).carParkId); //delete from DB
+                activity.app.dbManager.deleteUser(listAdapter.getItem(i).userId); //delete from DB
 
         actionMode.finish();
 
- //       if (favourites) {
-            //Update the filters data
- //           coffeeFilter = new CoffeeFilter(activity.app.dbManager,listAdapter);
- //           coffeeFilter.setFilter("favourites");
- //           coffeeFilter.filter(null);
- //       }
         listAdapter.notifyDataSetChanged();
     }
 

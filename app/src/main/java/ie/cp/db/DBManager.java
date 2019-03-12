@@ -9,6 +9,7 @@ import ie.cp.models.Reservation;
 import ie.cp.models.User;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
+import io.realm.RealmQuery;
 import io.realm.RealmResults;
 
 public class DBManager {
@@ -67,7 +68,7 @@ public class DBManager {
         realmDatabase.commitTransaction();
     }
 
-    public void updateCarPark(CarPark c, String name ,String address, String location, int spacesAvailable, int totalSpaces)
+    public void updateCarPark(CarPark c, String name ,String address, String location, String spacesAvailable, String totalSpaces)
     {
         realmDatabase.beginTransaction();
         c.name = name;
@@ -81,7 +82,7 @@ public class DBManager {
     public void updateCarParkSpace(CarParkSpace c, String name ,String description, String carParkId)
     {
         realmDatabase.beginTransaction();
-        c.name = name;
+        c.carParkSpaceName = name;
         c.description = description;
         c.carParkId = carParkId;
         realmDatabase.commitTransaction();
@@ -171,11 +172,26 @@ public class DBManager {
                 .findAll()
                 .first();
     }
-    public CarParkSpace getCarParkSpace(String carParkpaceId) {
+    public CarParkSpace getCarParkSpace(String carParkSpaceId) {
         return realmDatabase.where(CarParkSpace.class)
-                .equalTo("carParkpaceId",carParkpaceId)
+                .equalTo("carParkSpaceId",carParkSpaceId)
                 .findAll()
                 .first();
+    }
+    public CarParkSpace getCarParkSpaceByName(String carParkSpaceName) {
+
+        RealmQuery<CarParkSpace> query = realmDatabase.where(CarParkSpace.class).equalTo("carParkSpaceName", "MultiStory 1");
+        RealmResults<CarParkSpace> result = query.findAll();
+
+        if (result.size()>0) {
+            return result.get(0);
+        }else{
+            return null;
+        }
+   //     return realmDatabase.where(CarParkSpace.class)
+    //            .equalTo("name",carParkSpaceName)
+    //            .findAll()
+    //            .first();
     }
     public Reservation getReservation(String reservationId) {
         return realmDatabase.where(Reservation.class)

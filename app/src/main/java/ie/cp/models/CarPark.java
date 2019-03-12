@@ -14,12 +14,12 @@ public class CarPark extends RealmObject
     public String name;
     public String address;
     public String location;
-    public int spacesAvailable;
-    public int totalSpaces;
+    public String spacesAvailable;
+    public String totalSpaces;
 
     public CarPark() {}
 
-    public CarPark(String name, String address, String location, int spacesAvailable,int totalSpaces)
+    public CarPark(String name, String address, String location, String spacesAvailable,String totalSpaces)
     {
         this.carParkId = UUID.randomUUID().toString();
         this.name = name;
