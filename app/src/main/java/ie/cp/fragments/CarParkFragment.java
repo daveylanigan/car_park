@@ -43,13 +43,13 @@ public class CarParkFragment   extends Fragment implements
         Bundle activityInfo = new Bundle(); // Creates a new Bundle object
         activityInfo.putString("carParkId", (String) view.getTag());
 
- //       Fragment fragment = EditFragment.newInstance(activityInfo);
- //       getActivity().setTitle(R.string.editCoffeeLbl);
-//
- //       getActivity().getSupportFragmentManager().beginTransaction()
- //               .replace(R.id.homeFrame, fragment)
- //               .addToBackStack(null)
- //               .commit();
+        Fragment fragment = EditCarParkFragment.newInstance(activityInfo);
+        getActivity().setTitle(R.string.editCarParkLbl);
+
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.homeFrame, fragment)
+                .addToBackStack(null)
+                .commit();
     }
 
 
@@ -127,7 +127,7 @@ public class CarParkFragment   extends Fragment implements
     {
         String stringName = carPark.name;
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        builder.setMessage("Are you sure you want to Delete the \'Coffee\' " + stringName + "?");
+        builder.setMessage("Are you sure you want to Delete the \'Car Park\' " + stringName + "?");
         builder.setCancelable(false);
 
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener()
@@ -184,12 +184,6 @@ public class CarParkFragment   extends Fragment implements
 
         actionMode.finish();
 
- //       if (favourites) {
-            //Update the filters data
- //           coffeeFilter = new CoffeeFilter(activity.app.dbManager,listAdapter);
- //           coffeeFilter.setFilter("favourites");
- //           coffeeFilter.filter(null);
- //       }
         listAdapter.notifyDataSetChanged();
     }
 

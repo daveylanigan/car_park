@@ -25,6 +25,13 @@
     <string name="searchCarParksLbl">Search Car Park\'s</string>
     <string name="deleteCarParksLbl">Delete Car Parks</string>
     <string name="deleteUsersLbl">Delete Users</string>
+    <string name="carParkNameLbl">Name :</string>
+    <string name="carParkAddressLbl">Address :</string>
+    <string name="carParkLocationLbl">Location :</string>
+    <string name="addCarParkBtnLbl">Add Car Park</string>
+    <string name="saveCarParkBtnlbl">Save Car Park</string>
+    <string name="carParkDetailsLbl">Full Car Park Details</string>
+    <string name="editCarParkLbl">Edit a Car Park</string>
 
     <string-array name="carParkTypes">
         <item>All Types</item>

@@ -17,14 +17,17 @@ import android.view.MenuItem;
 import java.util.Arrays;
 
 import ie.cp.R;
+import ie.cp.fragments.AddCarParkFragment;
 import ie.cp.fragments.CarParkFragment;
+import ie.cp.fragments.EditCarParkFragment;
 import ie.cp.models.CarPark;
 import ie.cp.models.CarParkSpace;
 import ie.cp.models.User;
 import io.realm.OrderedRealmCollection;
 
 public class Home extends Base
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener,
+        EditCarParkFragment.OnFragmentInteractionListener {
 
     FragmentTransaction ft;
 
@@ -63,8 +66,8 @@ public class Home extends Base
         ft.replace(R.id.homeFrame, fragment);
         ft.commit();
 
-        this.setupCarParks();
-        this.setupCarParkSpaces();
+ //       this.setupCarParks();
+ //       this.setupCarParkSpaces();
         this.setTitle(R.string.recentlyViewedLbl);
     }
 
@@ -92,11 +95,18 @@ public class Home extends Base
             ft.replace(R.id.homeFrame, fragment);
             ft.addToBackStack(null);
             ft.commit();
-        } else if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_carpark_add) {
+            fragment = AddCarParkFragment.newInstance();
+            ft.replace(R.id.homeFrame, fragment);
+            ft.addToBackStack(null);
+            ft.commit();
+
+   //     } else if (id == R.id.nav_camera) {
+            // Handle the camera action
+   //     } else if (id == R.id.nav_gallery) {
+
+   //     } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {
 
@@ -163,5 +173,22 @@ public class Home extends Base
     }
 
 
+    @Override
+    public void toggle(View v) {
+        EditCarParkFragment editFrag = (EditCarParkFragment)
+                getSupportFragmentManager().findFragmentById(R.id.homeFrame);
+        if (editFrag != null) {
+            editFrag.toggle(v);
+        }
+    }
+
+    @Override
+    public void saveCarPark(View v) {
+        EditCarParkFragment editFrag = (EditCarParkFragment)
+                getSupportFragmentManager().findFragmentById(R.id.homeFrame);
+        if (editFrag != null) {
+            editFrag.saveCarPark(v);
+        }
+    }
 
 }
