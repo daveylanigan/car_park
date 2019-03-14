@@ -79,11 +79,11 @@ public class DBManager {
         realmDatabase.commitTransaction();
     }
 
-    public void updateCarParkSpace(CarParkSpace c, String name ,String description, String carParkId)
+    public void updateCarParkSpace(CarParkSpace c, String name ,String carParkSpaceDescription, String carParkId)
     {
         realmDatabase.beginTransaction();
         c.carParkSpaceName = name;
-        c.description = description;
+        c.carParkSpaceDescription = carParkSpaceDescription;
         c.carParkId = carParkId;
         realmDatabase.commitTransaction();
     }

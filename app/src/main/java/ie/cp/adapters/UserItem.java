@@ -30,12 +30,8 @@ public class UserItem {
 
     private void updateControls(User user) {
         ((TextView) view.findViewById(R.id.rowUserName)).setText(user.userName);
-
         ((TextView) view.findViewById(R.id.rowUserEmailAddress)).setText(user.emailAddress);
         ((TextView) view.findViewById(R.id.rowUserSpacesBooked)).setText(user.password);
-
-        ImageView imgIcon = view.findViewById(R.id.rowFavouriteImg);
-
 
     }
 }

@@ -18,7 +18,9 @@ import java.util.Arrays;
 
 import ie.cp.R;
 import ie.cp.fragments.AddCarParkFragment;
+import ie.cp.fragments.AddCarParkSpaceFragment;
 import ie.cp.fragments.CarParkFragment;
+import ie.cp.fragments.CarParkSpaceFragment;
 import ie.cp.fragments.EditCarParkFragment;
 import ie.cp.models.CarPark;
 import ie.cp.models.CarParkSpace;
@@ -62,12 +64,16 @@ public class Home extends Base
         navigationView.setNavigationItemSelectedListener(this);
         ft = getSupportFragmentManager().beginTransaction();
 
-        CarParkFragment fragment = CarParkFragment.newInstance();
+   //     CarParkFragment fragment = CarParkFragment.newInstance();
+   //     ft.replace(R.id.homeFrame, fragment);
+   //     ft.commit();
+        CarParkSpaceFragment fragment = CarParkSpaceFragment.newInstance();
         ft.replace(R.id.homeFrame, fragment);
         ft.commit();
 
  //       this.setupCarParks();
  //       this.setupCarParkSpaces();
+ //       this.setTitle(R.string.recentlyViewedLbl);
         this.setTitle(R.string.recentlyViewedLbl);
     }
 
@@ -102,7 +108,13 @@ public class Home extends Base
             ft.addToBackStack(null);
             ft.commit();
 
-   //     } else if (id == R.id.nav_camera) {
+        } else if (id == R.id.nav_space_add) {
+            fragment = AddCarParkSpaceFragment.newInstance();
+            ft.replace(R.id.homeFrame, fragment);
+            ft.addToBackStack(null);
+            ft.commit();
+
+            //     } else if (id == R.id.nav_camera) {
             // Handle the camera action
    //     } else if (id == R.id.nav_gallery) {
 

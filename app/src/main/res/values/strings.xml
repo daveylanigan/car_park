@@ -24,14 +24,24 @@
     <string name="emptyMessageLbl">You have no Car Park\'s added, go add one you scrub!</string>
     <string name="searchCarParksLbl">Search Car Park\'s</string>
     <string name="deleteCarParksLbl">Delete Car Parks</string>
+    <string name="deleteCarParkSpacesLbl">Delete Car Park Spaces</string>
     <string name="deleteUsersLbl">Delete Users</string>
     <string name="carParkNameLbl">Name :</string>
     <string name="carParkAddressLbl">Address :</string>
+    <string name="carParkSpacesLbl">Car Park Spaces</string>
     <string name="carParkLocationLbl">Location :</string>
     <string name="addCarParkBtnLbl">Add Car Park</string>
     <string name="saveCarParkBtnlbl">Save Car Park</string>
     <string name="carParkDetailsLbl">Full Car Park Details</string>
     <string name="editCarParkLbl">Edit a Car Park</string>
+    <string name="car_park_space_row_name">Space Name</string>
+    <string name="car_park_space_row_description">Space Description</string>
+    <string name="car_park_space_row_carpark">Car Park</string>
+
+    <string name="carParkSpaceDescriptionLbl">Description :</string>
+    <string name="carParkSpaceLocationLbl">Location :</string>
+    <string name="carParkSpaceCarParkLbl">Car Park :</string>
+    <string name="addCarParkSpaceBtnLbl">Add Car Park</string>
 
     <string-array name="carParkTypes">
         <item>All Types</item>

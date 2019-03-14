@@ -30,17 +30,9 @@ public class CarParkItem  {
 
     private void updateControls(CarPark carpark) {
         ((TextView) view.findViewById(R.id.rowCarParkName)).setText(carpark.name);
-
         ((TextView) view.findViewById(R.id.rowCarParkAddress)).setText(carpark.address);
         ((TextView) view.findViewById(R.id.rowTotalSpaces)).setText(carpark.totalSpaces);
         ((TextView) view.findViewById(R.id.rowSpacesAvailable)).setText(carpark.spacesAvailable);
-
-        ImageView imgIcon = view.findViewById(R.id.rowFavouriteImg);
-
- //       if (carpark.favourite == true)
-  //          imgIcon.setImageResource(R.drawable.favourites_72_on);
-  //      else
-  //          imgIcon.setImageResource(R.drawable.favourites_72);
 
     }
 }

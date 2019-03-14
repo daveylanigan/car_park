@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/carparkcardview"
+    android:id="@+id/carparkspacecardview"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:elevation="50dp"
@@ -43,32 +43,32 @@
             android:src="@android:drawable/ic_delete" />
 
         <TextView
-            android:id="@+id/rowCarParkName"
+            android:id="@+id/rowCarParkSpaceName"
             android:layout_width="130dp"
             android:layout_height="20dp"
             android:layout_alignTop="@+id/rowFavouriteImg"
             android:layout_alignParentStart="true"
             android:layout_marginStart="68dp"
             android:gravity="center_vertical"
-            android:text="@string/car_park_row_name"
+            android:text="@string/car_park_space_row_name"
             android:textColor="@color/colorPrimary"
             android:textSize="14sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/rowCarParkAddress"
+            android:id="@+id/rowCarParkSpaceDescription"
             android:layout_width="130dp"
             android:layout_height="16dp"
-            android:layout_alignStart="@+id/rowCarParkName"
+            android:layout_alignStart="@+id/rowCarParkSpaceName"
             android:layout_alignBottom="@+id/rowFavouriteImg"
             android:gravity="center_vertical"
-            android:text="@string/car_park_row_address"
+            android:text="@string/car_park_space_row_description"
             android:textColor="@color/colorFontBlack"
             android:textSize="11sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/rowTotalSpaces"
+            android:id="@+id/rowCarParkSpaceCarPark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/rowFavouriteImg"
@@ -80,17 +80,6 @@
             android:textSize="11sp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/rowSpacesAvailable"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/rowTotalSpaces"
-            android:layout_alignTop="@+id/rowCarParkName"
-            android:gravity="center_vertical"
-            android:text="20"
-            android:textColor="@color/colorPrimary"
-            android:textSize="14sp"
-            android:textStyle="bold" />
     </RelativeLayout>
 
 </android.support.v7.widget.CardView>

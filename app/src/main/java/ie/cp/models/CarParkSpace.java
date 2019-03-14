@@ -13,22 +13,22 @@ public class CarParkSpace extends RealmObject
     @PrimaryKey
     public String carParkSpaceId;
     public String carParkSpaceName;
-    public String description;
+    public String carParkSpaceDescription;
     public String carParkId;
 
     public CarParkSpace() {}
 
-    public CarParkSpace(String carParkSpaceName, String description, String carParkId)
+    public CarParkSpace(String carParkSpaceName, String carParkSpaceDescription, String carParkId)
     {
         this.carParkSpaceId = UUID.randomUUID().toString();
         this.carParkSpaceName = carParkSpaceName;
-        this.description = description;
+        this.carParkSpaceDescription = carParkSpaceDescription;
         this.carParkId = carParkId;
     }
 
     @Override
     public String toString() {
         return "CarParkSpace [carParkSpaceName=" + carParkSpaceName
-                + ", description =" + description + ", carParkId=" + carParkId + "]";
+                + ", carParkSpaceDescription =" + carParkSpaceDescription + ", carParkId=" + carParkId + "]";
     }
 }
