@@ -31,7 +31,7 @@ public class CarParkSpaceItem {
     private void updateControls(CarParkSpace carparkSpace) {
         ((TextView) view.findViewById(R.id.rowCarParkSpaceName)).setText(carparkSpace.carParkSpaceName);
         ((TextView) view.findViewById(R.id.rowCarParkSpaceDescription)).setText(carparkSpace.carParkSpaceDescription);
-  //      ((TextView) view.findViewById(R.id.rowCarPark)).setText(carparkSpace.carParkId);
+        ((TextView) view.findViewById(R.id.rowCarParkSpaceCarPark)).setText(carparkSpace.carParkId);
 
     }
 }

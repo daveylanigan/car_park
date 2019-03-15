@@ -31,8 +31,6 @@ public class CarPark extends RealmObject
 
     @Override
     public String toString() {
-        return "CarPark [name=" + name
-                + ", address =" + address + ", location=" + location + ", spacesAvailable=" + spacesAvailable
-                + ", totalSpaces =" + totalSpaces + "]";
+        return name;
     }
 }

@@ -74,18 +74,13 @@ public class CarParkSpaceFragment extends Fragment implements
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home, parent, false);
 
-  //      RealmResults<CarParkSpace> cps = activity.app.dbManager.getAllCarParkSpaces();
-
         listAdapter = new CarParkSpaceListAdapter(activity, this, activity.app.dbManager.getAllCarParkSpaces());
  ////       carParkFilter = new CarParkFilter(activity.app.dbManager, listAdapter);
 
         listView = v.findViewById(R.id.homeList);
         setListView(v);
 
-//        if (!favourites)
-            getActivity().setTitle(R.string.carParkSpacesLbl);
-//        else
-//            getActivity().setTitle(R.string.favouritesCoffeeLbl);
+        getActivity().setTitle(R.string.carParkSpacesLbl);
 
         return v;
     }
