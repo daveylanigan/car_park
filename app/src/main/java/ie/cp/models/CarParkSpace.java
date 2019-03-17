@@ -15,20 +15,23 @@ public class CarParkSpace extends RealmObject
     public String carParkSpaceName;
     public String carParkSpaceDescription;
     public String carParkId;
+    public boolean booked;
 
     public CarParkSpace() {}
 
-    public CarParkSpace(String carParkSpaceName, String carParkSpaceDescription, String carParkId)
+    public CarParkSpace(String carParkSpaceName, String carParkSpaceDescription, String carParkId, boolean booked)
     {
         this.carParkSpaceId = UUID.randomUUID().toString();
         this.carParkSpaceName = carParkSpaceName;
         this.carParkSpaceDescription = carParkSpaceDescription;
         this.carParkId = carParkId;
+        this.booked = booked;
     }
 
     @Override
     public String toString() {
         return "CarParkSpace [carParkSpaceName=" + carParkSpaceName
-                + ", carParkSpaceDescription =" + carParkSpaceDescription + ", carParkId=" + carParkId + "]";
+                + ", carParkSpaceDescription =" + carParkSpaceDescription + ", carParkId=" + carParkId +
+                ", booked=" + booked + "]";
     }
 }

@@ -134,15 +134,9 @@ public class Home extends Base
     }
 
     public void setupCarParks(){
-   //     if (app.dbManager.getCarParkSpaceByName("MultiStory 1") == null) {
             app.dbManager.addCarPark(new CarPark("MultiStory 1", "Newgate Street", "Waterford", "4", "4"));
-    //    }
-    //    if (app.dbManager.getCarParkSpaceByName("MultiStory 2") == null) {
             app.dbManager.addCarPark(new CarPark("MultiStory 2", "City Square","Waterford","4","4"));
-     //   }
-     //   if (app.dbManager.getCarParkSpaceByName("MultiStory 3") == null) {
             app.dbManager.addCarPark(new CarPark("MultiStory 3", "The Quay","New Ross","4","4"));
-     //   }
 
     }
     public void setupUsers(){
@@ -158,22 +152,22 @@ public class Home extends Base
         // add 4 spaces for each carpark
         for(CarPark cp : carParks) {
             if (cp.name.equalsIgnoreCase("MultiStory 1") ) {
-                app.dbManager.addCarParkSpace(new CarParkSpace("Space 1", "Space 1", cp.carParkId));
-                app.dbManager.addCarParkSpace(new CarParkSpace("Space 2", "Space 2", cp.carParkId));
-                app.dbManager.addCarParkSpace(new CarParkSpace("Space 3", "Space 3", cp.carParkId));
-                app.dbManager.addCarParkSpace(new CarParkSpace("Space 4", "Space 4", cp.carParkId));
+                app.dbManager.addCarParkSpace(new CarParkSpace("Space 1", "Space 1", cp.carParkId, false));
+                app.dbManager.addCarParkSpace(new CarParkSpace("Space 2", "Space 2", cp.carParkId, false));
+                app.dbManager.addCarParkSpace(new CarParkSpace("Space 3", "Space 3", cp.carParkId, false));
+                app.dbManager.addCarParkSpace(new CarParkSpace("Space 4", "Space 4", cp.carParkId, false));
             }
             if (cp.name.equalsIgnoreCase("MultiStory 2") ) {
-                app.dbManager.addCarParkSpace(new CarParkSpace("Space 5", "Space 5", cp.carParkId));
-                app.dbManager.addCarParkSpace(new CarParkSpace("Space 6", "Space 6", cp.carParkId));
-                app.dbManager.addCarParkSpace(new CarParkSpace("Space 7", "Space 7", cp.carParkId));
-                app.dbManager.addCarParkSpace(new CarParkSpace("Space 8", "Space 8", cp.carParkId));
+                app.dbManager.addCarParkSpace(new CarParkSpace("Space 5", "Space 5", cp.carParkId, false));
+                app.dbManager.addCarParkSpace(new CarParkSpace("Space 6", "Space 6", cp.carParkId, false));
+                app.dbManager.addCarParkSpace(new CarParkSpace("Space 7", "Space 7", cp.carParkId, false));
+                app.dbManager.addCarParkSpace(new CarParkSpace("Space 8", "Space 8", cp.carParkId, false));
             }
             if (cp.name.equalsIgnoreCase("MultiStory 3") ) {
-                app.dbManager.addCarParkSpace(new CarParkSpace("Space 9", "Space 9", cp.carParkId));
-                app.dbManager.addCarParkSpace(new CarParkSpace("Space 10", "Space 10", cp.carParkId));
-                app.dbManager.addCarParkSpace(new CarParkSpace("Space 11", "Space 11", cp.carParkId));
-                app.dbManager.addCarParkSpace(new CarParkSpace("Space 12", "Space 12", cp.carParkId));
+                app.dbManager.addCarParkSpace(new CarParkSpace("Space 9", "Space 9", cp.carParkId, false));
+                app.dbManager.addCarParkSpace(new CarParkSpace("Space 10", "Space 10", cp.carParkId, false));
+                app.dbManager.addCarParkSpace(new CarParkSpace("Space 11", "Space 11", cp.carParkId, false));
+                app.dbManager.addCarParkSpace(new CarParkSpace("Space 12", "Space 12", cp.carParkId, false));
             }
         } // end for
 

@@ -9,12 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import ie.cp.R;
@@ -22,15 +21,15 @@ import ie.cp.activities.Home;
 import ie.cp.main.CarParkApp;
 import ie.cp.models.CarPark;
 import ie.cp.models.CarParkSpace;
-import io.realm.OrderedRealmCollection;
-import io.realm.Realm;
 import io.realm.RealmResults;
 
 public class AddCarParkSpaceFragment extends Fragment {
 
     private String carParkSpaceName, carParkSpaceDecription, carParkSpaceCarPark;
+    private boolean carParkSpaceBooked;
     private EditText name, description;
     private Spinner carpark;
+    private CheckBox booked;
     private Button saveButton;
     private CarParkApp app;
 
@@ -58,10 +57,7 @@ public class AddCarParkSpaceFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_add_carparkspace, container, false);
         getActivity().setTitle(R.string.addCarParkSpaceBtnLbl);
         // create our dropdown list of carparks
-
-     //   adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-      //  Realm realm = Realm.getDefaultInstance();
+        //  Realm realm = Realm.getDefaultInstance();
         RealmResults<CarPark> realmResults = app.dbManager.getAllCarParks();
 
         List<CarPark> carParks = app.dbManager.realmDatabase.copyFromRealm(realmResults);
@@ -71,7 +67,6 @@ public class AddCarParkSpaceFragment extends Fragment {
 
         Spinner spinner = v.findViewById(R.id.carParkSpaceSpinner);
         spinner.setAdapter(adapter);
-    //    spinner.setOnItemSelectedListener(this);
 
         name = v.findViewById(R.id.addCarParkSpaceNameET);
         description =  v.findViewById(R.id.addCarParkSpaceDescriptionET);
@@ -94,7 +89,7 @@ public class AddCarParkSpaceFragment extends Fragment {
         carParkSpaceCarPark = carpark.getSelectedItem().toString();
 
         if ((carParkSpaceName.length() > 0) && (carParkSpaceDecription.length() > 0) && (carParkSpaceCarPark.length() > 0)) {
-            CarParkSpace c = new CarParkSpace(carParkSpaceName, carParkSpaceDecription, carParkSpaceCarPark);
+            CarParkSpace c = new CarParkSpace(carParkSpaceName, carParkSpaceDecription, carParkSpaceCarPark, false);
 
             app.dbManager.addCarParkSpace(c);
             startActivity(new Intent(this.getActivity(), Home.class));

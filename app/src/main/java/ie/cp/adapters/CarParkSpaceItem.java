@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -32,6 +33,7 @@ public class CarParkSpaceItem {
         ((TextView) view.findViewById(R.id.rowCarParkSpaceName)).setText(carparkSpace.carParkSpaceName);
         ((TextView) view.findViewById(R.id.rowCarParkSpaceDescription)).setText(carparkSpace.carParkSpaceDescription);
         ((TextView) view.findViewById(R.id.rowCarParkSpaceCarPark)).setText(carparkSpace.carParkId);
+        ((CheckBox) view.findViewById(R.id.rowCarParkSpaceBooked)).setChecked(carparkSpace.booked);
 
     }
 }

@@ -40,7 +40,7 @@
 
     <TextView
         android:id="@+id/rowCarParkSpaceName"
-        android:layout_width="130dp"
+        android:layout_width="200dp"
         android:layout_height="16dp"
         android:layout_alignTop="@+id/rowFavouriteImg"
         android:layout_marginEnd="8dp"
@@ -49,7 +49,7 @@
         android:layout_toRightOf="@+id/rowFavouriteImg"
         android:gravity="center_vertical"
         android:text="@string/car_park_space_row_name"
-        android:textAlignment="viewStart"
+
         android:textColor="@color/colorPrimary"
         android:textSize="14sp"
         android:textStyle="bold"
@@ -60,7 +60,7 @@
 
     <TextView
         android:id="@+id/rowCarParkSpaceDescription"
-        android:layout_width="130dp"
+        android:layout_width="200dp"
         android:layout_height="16dp"
         android:layout_alignBottom="@+id/rowFavouriteImg"
         android:layout_alignLeft="@+id/rowCarParkSpaceName"
@@ -69,7 +69,6 @@
         android:layout_marginTop="32dp"
         android:gravity="center_vertical"
         android:text="@string/car_park_space_row_description"
-        android:textAlignment="viewStart"
         android:textColor="@color/colorFontBlack"
         android:textSize="11sp"
         android:textStyle="bold"
@@ -80,7 +79,7 @@
 
     <TextView
         android:id="@+id/rowCarParkSpaceCarPark"
-        android:layout_width="128dp"
+        android:layout_width="200dp"
         android:layout_height="18dp"
         android:layout_alignBottom="@+id/rowDeleteImg"
         android:layout_marginStart="8dp"
@@ -89,7 +88,6 @@
         android:layout_toLeftOf="@+id/rowDeleteImg"
         android:gravity="center_vertical"
         android:text="@string/car_park_space_row_carpark"
-        android:textAlignment="viewStart"
         android:textColor="@color/colorFontBlack"
         android:textSize="11sp"
         android:textStyle="bold"
@@ -97,5 +95,24 @@
         app:layout_constraintHorizontal_bias="0.277"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <CheckBox
+        android:id="@+id/rowCarParkSpaceBooked"
+        android:layout_width="89dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="52dp"
+        android:layout_marginBottom="8dp"
+        android:checked="true"
+        android:text="booked"
+        android:clickable="false"
+        android:textSize="9sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.969"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
 </android.support.constraint.ConstraintLayout>

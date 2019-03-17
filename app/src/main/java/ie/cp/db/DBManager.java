@@ -79,12 +79,13 @@ public class DBManager {
         realmDatabase.commitTransaction();
     }
 
-    public void updateCarParkSpace(CarParkSpace c, String name ,String carParkSpaceDescription, String carParkId)
+    public void updateCarParkSpace(CarParkSpace c, String name ,String carParkSpaceDescription, String carParkId, boolean booked)
     {
         realmDatabase.beginTransaction();
         c.carParkSpaceName = name;
         c.carParkSpaceDescription = carParkSpaceDescription;
         c.carParkId = carParkId;
+        c.booked = booked;
         realmDatabase.commitTransaction();
     }
 

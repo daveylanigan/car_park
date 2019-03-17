@@ -69,8 +69,8 @@
         android:id="@+id/addCarParkSpaceNameTV"
         android:layout_width="99dp"
         android:layout_height="43dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="36dp"
+        android:layout_marginEnd="8dp"
         android:paddingTop="10dp"
         android:text="@string/carParkNameLbl"
         android:textAlignment="textEnd"
@@ -81,7 +81,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.694" />
+        app:layout_constraintVertical_bias="0.69" />
 
     <EditText
         android:id="@+id/addCarParkSpaceNameET"
@@ -90,7 +90,7 @@
         android:layout_marginEnd="40dp"
         android:layout_marginStart="8dp"
         android:ems="10"
-        android:hint="Enter Car Park Space Name"
+        android:hint="Enter Space Name"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -41,7 +41,7 @@ public class CarParkSpaceFragment extends Fragment implements
         activityInfo.putString("carParkSpaceId", (String) view.getTag());
 
         Fragment fragment = EditCarParkFragment.newInstance(activityInfo);
-        getActivity().setTitle(R.string.editCarParkLbl);
+        getActivity().setTitle(R.string.editCarParkSpaceLbl);
 
         getActivity().getSupportFragmentManager().beginTransaction()
                 .replace(R.id.homeFrame, fragment)

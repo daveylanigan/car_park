@@ -34,14 +34,15 @@
     <string name="saveCarParkBtnlbl">Save Car Park</string>
     <string name="carParkDetailsLbl">Full Car Park Details</string>
     <string name="editCarParkLbl">Edit a Car Park</string>
+
+    <string name="editCarParkSpaceLbl">Edit a Car Space</string>
     <string name="car_park_space_row_name">Space Name</string>
     <string name="car_park_space_row_description">Space Description</string>
     <string name="car_park_space_row_carpark">Car Park</string>
-
     <string name="carParkSpaceDescriptionLbl">Description :</string>
     <string name="carParkSpaceLocationLbl">Location :</string>
     <string name="carParkSpaceCarParkLbl">Car Park :</string>
-    <string name="addCarParkSpaceBtnLbl">Add Car Park</string>
+    <string name="addCarParkSpaceBtnLbl">Add Car Space</string>
 
     <string-array name="carParkTypes">
         <item>All Types</item>
