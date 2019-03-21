@@ -125,7 +125,7 @@ public class CarParkFragment   extends Fragment implements
 
     public void onCarParkDelete(final CarPark carPark)
     {
-        String stringName = carPark.name;
+        String stringName = carPark.carParkName;
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setMessage("Are you sure you want to Delete the \'Car Park\' " + stringName + "?");
         builder.setCancelable(false);

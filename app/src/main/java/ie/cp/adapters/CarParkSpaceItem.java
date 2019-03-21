@@ -34,6 +34,12 @@ public class CarParkSpaceItem {
         ((TextView) view.findViewById(R.id.rowCarParkSpaceDescription)).setText(carparkSpace.carParkSpaceDescription);
         ((TextView) view.findViewById(R.id.rowCarParkSpaceCarPark)).setText(carparkSpace.carParkId);
         ((CheckBox) view.findViewById(R.id.rowCarParkSpaceBooked)).setChecked(carparkSpace.booked);
+        if (carparkSpace.booked) {
+            ((CheckBox) view.findViewById(R.id.rowCarParkSpaceBooked)).setText("booked");
+        } else{
+            ((CheckBox) view.findViewById(R.id.rowCarParkSpaceBooked)).setText("available");
+        }
+
 
     }
 }

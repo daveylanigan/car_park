@@ -71,13 +71,44 @@ public class DBManager {
     public void updateCarPark(CarPark c, String name ,String address, String location, String spacesAvailable, String totalSpaces)
     {
         realmDatabase.beginTransaction();
-        c.name = name;
+        c.carParkName = name;
         c.address = address;
         c.location = location;
         c.spacesAvailable = spacesAvailable;
         c.totalSpaces = totalSpaces;
         realmDatabase.commitTransaction();
     }
+
+    public void updateCarParkTotals(String carParkName ,boolean increment, boolean decrement)
+    {
+
+   //      RealmQuery<CarPark> query = realmDatabase.where(CarPark.class).equalTo("name", carParkName);
+ //       RealmResults<CarPark> result = query.findAll();
+        CarPark foundCarPark =  realmDatabase.where(CarPark.class)
+                .equalTo("carParkName",carParkName)
+                .findAll()
+                .first();
+
+        if (foundCarPark.isValid()) {
+            realmDatabase.beginTransaction();
+            if (increment) {
+                foundCarPark.spacesAvailable = Integer.toString(Integer.parseInt(foundCarPark.spacesAvailable) + 1);
+                foundCarPark.totalSpaces = Integer.toString(Integer.parseInt(foundCarPark.totalSpaces) + 1);
+            }
+            else {
+
+                if (decrement && Integer.parseInt(foundCarPark.spacesAvailable) > 0) {
+                    foundCarPark.spacesAvailable = Integer.toString(Integer.parseInt(foundCarPark.spacesAvailable) - 1);
+                }
+                if (decrement && Integer.parseInt(foundCarPark.totalSpaces) > 0) {
+                    foundCarPark.totalSpaces = Integer.toString(Integer.parseInt(foundCarPark.totalSpaces) - 1);
+                }
+            }
+
+            realmDatabase.commitTransaction();
+       }
+
+     }
 
     public void updateCarParkSpace(CarParkSpace c, String name ,String carParkSpaceDescription, String carParkId, boolean booked)
     {
@@ -189,14 +220,11 @@ public class DBManager {
         }else{
             return null;
         }
-   //     return realmDatabase.where(CarParkSpace.class)
-    //            .equalTo("name",carParkSpaceName)
-    //            .findAll()
-    //            .first();
+
     }
     public Reservation getReservation(String reservationId) {
         return realmDatabase.where(Reservation.class)
-                .equalTo("rservationId",reservationId)
+                .equalTo("reservationId",reservationId)
                 .findAll()
                 .first();
     }
@@ -220,12 +248,26 @@ public class DBManager {
     }
 
     public void deleteCarParkSpace(String carParkSpaceId) {
-        realmDatabase.beginTransaction();
-        realmDatabase.where(CarParkSpace.class)
+        // use the carpark space to find the car park
+        CarParkSpace c = realmDatabase.where(CarParkSpace.class)
                 .equalTo("carParkSpaceId",carParkSpaceId)
                 .findAll()
-                .deleteAllFromRealm();
+                .first();
+        // find the car park
+        CarPark cp = realmDatabase.where(CarPark.class)
+                .equalTo("carParkName",c.carParkId)
+                .findAll()
+                .first();
+        realmDatabase.beginTransaction();
+
+            realmDatabase.where(CarParkSpace.class)
+                    .equalTo("carParkSpaceId",carParkSpaceId)
+                    .findAll()
+                    .deleteAllFromRealm();
+
         realmDatabase.commitTransaction();
+        // update the car park space (by name because of the dropdown having name only) available totals
+        updateCarParkTotals(cp.carParkName,false,true);
     }
 
     public void deleteReservation(String reservationId) {

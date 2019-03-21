@@ -49,13 +49,13 @@ public class EditCarParkFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_carpark_edit, container, false);
 
-        ((TextView)v.findViewById(R.id.editCarParkTitleTV)).setText(aCarPark.name);
+        ((TextView)v.findViewById(R.id.editCarParkTitleTV)).setText(aCarPark.carParkName);
 
         name = v.findViewById(R.id.editCarParkNameET);
         address = v.findViewById(R.id.editCarParkAddressET);
         location = v.findViewById(R.id.editCarParkLocationET);
 
-        name.setText(aCarPark.name);
+        name.setText(aCarPark.carParkName);
         location.setText(aCarPark.location);
         address.setText(""+aCarPark.address);
 

@@ -90,8 +90,10 @@ public class AddCarParkSpaceFragment extends Fragment {
 
         if ((carParkSpaceName.length() > 0) && (carParkSpaceDecription.length() > 0) && (carParkSpaceCarPark.length() > 0)) {
             CarParkSpace c = new CarParkSpace(carParkSpaceName, carParkSpaceDecription, carParkSpaceCarPark, false);
-
+            // add the car park space
             app.dbManager.addCarParkSpace(c);
+            // now we need to update the amount of spaces in the related car park
+            app.dbManager.updateCarParkTotals(carParkSpaceCarPark, true, false);
             startActivity(new Intent(this.getActivity(), Home.class));
         } else {
 

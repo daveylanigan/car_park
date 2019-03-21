@@ -11,7 +11,7 @@ public class CarPark extends RealmObject
 {
     @PrimaryKey
     public String carParkId;
-    public String name;
+    public String carParkName;
     public String address;
     public String location;
     public String spacesAvailable;
@@ -22,7 +22,7 @@ public class CarPark extends RealmObject
     public CarPark(String name, String address, String location, String spacesAvailable,String totalSpaces)
     {
         this.carParkId = UUID.randomUUID().toString();
-        this.name = name;
+        this.carParkName = name;
         this.address = address;
         this.location = location;
         this.spacesAvailable = spacesAvailable;
@@ -31,6 +31,6 @@ public class CarPark extends RealmObject
 
     @Override
     public String toString() {
-        return name;
+        return carParkName;
     }
 }

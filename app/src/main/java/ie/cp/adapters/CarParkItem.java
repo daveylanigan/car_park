@@ -29,8 +29,9 @@ public class CarParkItem  {
     }
 
     private void updateControls(CarPark carpark) {
-        ((TextView) view.findViewById(R.id.rowCarParkName)).setText(carpark.name);
+        ((TextView) view.findViewById(R.id.rowCarParkName)).setText(carpark.carParkName);
         ((TextView) view.findViewById(R.id.rowCarParkAddress)).setText(carpark.address);
+        // get the number of car park spaces
         ((TextView) view.findViewById(R.id.rowTotalSpaces)).setText(carpark.totalSpaces);
         ((TextView) view.findViewById(R.id.rowSpacesAvailable)).setText(carpark.spacesAvailable);
 
