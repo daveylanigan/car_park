@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/addLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.AddCarParkFragment">
+
+    <TextView
+        android:id="@+id/addreservationfooter"
+        android:layout_width="0dp"
+        android:layout_height="36dp"
+        android:background="@color/colorPrimary"
+        android:paddingTop="5dp"
+        android:text="@string/appWebsite"
+        android:textAlignment="center"
+        android:textColor="@color/colorFontWhite"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.523"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/addCarParkSpaceCarParkTV"
+        android:layout_width="99dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:paddingTop="10dp"
+        android:text="@string/carParkSpaceCarParkLbl"
+        android:textAlignment="textEnd"
+        android:textColor="@color/colorFontBlack"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/reservationCarParkSpinner"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.285" />
+
+    <Spinner
+        android:id="@+id/reservationCarParkSpinner"
+        android:layout_width="193dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.841"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.284" />
+
+    <Button
+        android:id="@+id/addReservationBtn"
+        android:layout_width="79dp"
+        android:layout_height="84dp"
+        android:layout_marginBottom="64dp"
+        android:background="@color/colorFontOffWhite"
+        android:drawableTop="@drawable/blue_add_48"
+        android:elevation="5dp"
+        android:text="@string/addReservationBtnLbl"
+        app:layout_constraintBottom_toTopOf="@+id/addreservationfooter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/addReservationCarParkSpaceTV"
+        android:layout_width="99dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:paddingTop="10dp"
+        android:text="@string/carParkSpaceLbl"
+        android:textAlignment="textEnd"
+        android:textColor="@color/colorFontBlack"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/reservationCarParkSpaceSpinner"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.394" />
+
+    <Spinner
+        android:id="@+id/reservationCarParkSpaceSpinner"
+        android:layout_width="193dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.841"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.392" />
+
+
+</android.support.constraint.ConstraintLayout>

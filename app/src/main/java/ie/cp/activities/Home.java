@@ -19,6 +19,7 @@ import java.util.Arrays;
 import ie.cp.R;
 import ie.cp.fragments.AddCarParkFragment;
 import ie.cp.fragments.AddCarParkSpaceFragment;
+import ie.cp.fragments.AddReservationFragment;
 import ie.cp.fragments.CarParkFragment;
 import ie.cp.fragments.CarParkSpaceFragment;
 import ie.cp.fragments.EditCarParkFragment;
@@ -110,6 +111,12 @@ public class Home extends Base
 
         } else if (id == R.id.nav_space_add) {
             fragment = AddCarParkSpaceFragment.newInstance();
+            ft.replace(R.id.homeFrame, fragment);
+            ft.addToBackStack(null);
+            ft.commit();
+
+        } else if (id == R.id.nav_reservation_add) {
+            fragment = AddReservationFragment.newInstance();
             ft.replace(R.id.homeFrame, fragment);
             ft.addToBackStack(null);
             ft.commit();

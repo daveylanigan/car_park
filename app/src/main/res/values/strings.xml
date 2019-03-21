@@ -41,8 +41,10 @@
     <string name="car_park_space_row_carpark">Car Park</string>
     <string name="carParkSpaceDescriptionLbl">Description :</string>
     <string name="carParkSpaceLocationLbl">Location :</string>
+    <string name="carParkSpaceLbl">Car Space :</string>
     <string name="carParkSpaceCarParkLbl">Car Park :</string>
     <string name="addCarParkSpaceBtnLbl">Add Car Space</string>
+    <string name="addReservationBtnLbl">Reserve</string>
 
     <string-array name="carParkTypes">
         <item>All Types</item>

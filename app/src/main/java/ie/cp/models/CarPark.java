@@ -19,10 +19,10 @@ public class CarPark extends RealmObject
 
     public CarPark() {}
 
-    public CarPark(String name, String address, String location, String spacesAvailable,String totalSpaces)
+    public CarPark(String carParkName, String address, String location, String spacesAvailable,String totalSpaces)
     {
         this.carParkId = UUID.randomUUID().toString();
-        this.carParkName = name;
+        this.carParkName = carParkName;
         this.address = address;
         this.location = location;
         this.spacesAvailable = spacesAvailable;

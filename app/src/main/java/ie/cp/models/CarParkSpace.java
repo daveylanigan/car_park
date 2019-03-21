@@ -30,8 +30,6 @@ public class CarParkSpace extends RealmObject
 
     @Override
     public String toString() {
-        return "CarParkSpace [carParkSpaceName=" + carParkSpaceName
-                + ", carParkSpaceDescription =" + carParkSpaceDescription + ", carParkId=" + carParkId +
-                ", booked=" + booked + "]";
+        return carParkSpaceName;
     }
 }

@@ -82,8 +82,6 @@ public class DBManager {
     public void updateCarParkTotals(String carParkName ,boolean increment, boolean decrement)
     {
 
-   //      RealmQuery<CarPark> query = realmDatabase.where(CarPark.class).equalTo("name", carParkName);
- //       RealmResults<CarPark> result = query.findAll();
         CarPark foundCarPark =  realmDatabase.where(CarPark.class)
                 .equalTo("carParkName",carParkName)
                 .findAll()
@@ -106,9 +104,34 @@ public class DBManager {
             }
 
             realmDatabase.commitTransaction();
-       }
+        }
 
-     }
+    }
+
+    public void updateCarParkBookedSpace(String carParkName ,boolean increment, boolean decrement)
+    {
+
+        CarPark foundCarPark =  realmDatabase.where(CarPark.class)
+                .equalTo("carParkName",carParkName)
+                .findAll()
+                .first();
+
+        if (foundCarPark.isValid()) {
+            realmDatabase.beginTransaction();
+            if (increment) {
+                foundCarPark.spacesAvailable = Integer.toString(Integer.parseInt(foundCarPark.spacesAvailable) + 1);
+            }
+            else {
+
+                if (decrement && Integer.parseInt(foundCarPark.spacesAvailable) > 0) {
+                    foundCarPark.spacesAvailable = Integer.toString(Integer.parseInt(foundCarPark.spacesAvailable) - 1);
+                }
+            }
+
+            realmDatabase.commitTransaction();
+        }
+
+    }
 
     public void updateCarParkSpace(CarParkSpace c, String name ,String carParkSpaceDescription, String carParkId, boolean booked)
     {
@@ -185,6 +208,15 @@ public class DBManager {
         return result;
     }
 
+    public RealmResults<CarParkSpace> getCarParkSpaces(String carParkId) {
+        // get available spaces for a particular car park
+        RealmResults<CarParkSpace> result = realmDatabase.where(CarParkSpace.class)
+                .equalTo("carParkId",carParkId)
+                .equalTo("booked",false)
+                .findAll();
+        return result;
+    }
+
     public RealmResults<Reservation> getAllReservations() {
         RealmResults<Reservation> result = realmDatabase.where(Reservation.class)
                 .findAll();
@@ -238,6 +270,17 @@ public class DBManager {
         realmDatabase.commitTransaction();
     }
 
+    public void ReserveSpace(CarParkSpace c) {
+        realmDatabase.beginTransaction();
+        realmDatabase.where(CarParkSpace.class)
+                .equalTo("carParkSpaceId",c.carParkSpaceId)
+                .findAll()
+                .setBoolean("booked", true);
+        realmDatabase.commitTransaction();
+
+        // now update the car park with the number of spaces available
+        updateCarParkBookedSpace(c.carParkId ,false, true);
+    }
     public void deleteCarPark(String carParkId) {
         realmDatabase.beginTransaction();
         realmDatabase.where(CarPark.class)
