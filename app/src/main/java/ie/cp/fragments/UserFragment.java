@@ -78,12 +78,6 @@ public class UserFragment extends Fragment implements
         listAdapter = new UserListAdapter(activity, this, activity.app.dbManager.getAllUsers());
  ////       carParkFilter = new CarParkFilter(activity.app.dbManager, listAdapter);
 
- //       if (favourites) {
- //           coffeeFilter.setFilter("favourites"); // Set the filter text field from 'all' to 'favourites'
- //           coffeeFilter.filter(null); // Filter the data, but don't use any prefix
- //           listAdapter.notifyDataSetChanged(); // Update the adapter
-  //      }
-
         listView = v.findViewById(R.id.homeList);
         setListView(v);
 

@@ -21,6 +21,7 @@ import ie.cp.activities.Home;
 import ie.cp.main.CarParkApp;
 import ie.cp.models.CarPark;
 import ie.cp.models.CarParkSpace;
+import ie.cp.models.Reservation;
 import io.realm.RealmResults;
 
 public class AddReservationFragment extends Fragment {
@@ -111,18 +112,20 @@ public class AddReservationFragment extends Fragment {
     public void addReservation() {
 
         reservationCarParkSpace = ((CarParkSpace) carParkSpace.getSelectedItem());
+        reservationCarPark = ((CarPark) carpark.getSelectedItem());
 
-        //     if ((carParkSpaceName.length() > 0) && (carParkSpaceDecription.length() > 0) && (carParkSpaceCarPark.length() > 0)) {
-   //         CarParkSpace c = new CarParkSpace(carParkSpaceName, carParkSpaceDecription, carParkSpaceCarPark, false);
-            // add the car park space
-            app.dbManager.ReserveSpace(reservationCarParkSpace);
+        // reserve the space
+        app.dbManager.ReserveSpace(reservationCarParkSpace);
 
-            // now we need to update the amount of spaces in the related car park
-   //         app.dbManager.updateCarParkTotals(carParkSpaceCarPark, true, false);
-   //         startActivity(new Intent(this.getActivity(), Home.class));
+        Reservation r = new Reservation("David",reservationCarPark.carParkName, reservationCarParkSpace.carParkSpaceName );
+        // add the reservation
+        app.dbManager.addReservation(r);
+
+
+        startActivity(new Intent(this.getActivity(), Home.class));
    //     } else {
 
-            Toast.makeText(this.getActivity(), "yay ", Toast.LENGTH_SHORT).show();
+  //          Toast.makeText(this.getActivity(), "yay ", Toast.LENGTH_SHORT).show();
    //     }
     }
 }

@@ -133,6 +133,32 @@ public class DBManager {
 
     }
 
+    public void unbookCarParkSpace(String carParkSpaceName)
+    {
+        CarParkSpace foundCarParkSpace =  realmDatabase.where(CarParkSpace.class)
+                .equalTo("carParkSpaceName",carParkSpaceName)
+                .findAll()
+                .first();
+
+        CarPark foundCarPark =  realmDatabase.where(CarPark.class)
+                .equalTo("carParkName",foundCarParkSpace.carParkId)
+                .findAll()
+                .first();
+
+        if (foundCarParkSpace.isValid()) {
+            realmDatabase.beginTransaction();
+                foundCarParkSpace.booked = false;
+            realmDatabase.commitTransaction();
+        }
+
+        if (foundCarPark.isValid()) {
+            realmDatabase.beginTransaction();
+                foundCarPark.spacesAvailable = Integer.toString(Integer.parseInt(foundCarPark.spacesAvailable) + 1);
+            realmDatabase.commitTransaction();
+        }
+
+    }
+
     public void updateCarParkSpace(CarParkSpace c, String name ,String carParkSpaceDescription, String carParkId, boolean booked)
     {
         realmDatabase.beginTransaction();
@@ -291,14 +317,17 @@ public class DBManager {
     }
 
     public void deleteCarParkSpace(String carParkSpaceId) {
+        String carParkId = "";
         // use the carpark space to find the car park
         CarParkSpace c = realmDatabase.where(CarParkSpace.class)
                 .equalTo("carParkSpaceId",carParkSpaceId)
                 .findAll()
                 .first();
+
+        carParkId = c.carParkId;
         // find the car park
         CarPark cp = realmDatabase.where(CarPark.class)
-                .equalTo("carParkName",c.carParkId)
+                .equalTo("carParkName",carParkId)
                 .findAll()
                 .first();
         realmDatabase.beginTransaction();
@@ -309,17 +338,30 @@ public class DBManager {
                     .deleteAllFromRealm();
 
         realmDatabase.commitTransaction();
-        // update the car park space (by name because of the dropdown having name only) available totals
-        updateCarParkTotals(cp.carParkName,false,true);
+        // now update the car park with the number of spaces available
+      //  updateCarParkBookedSpace(cp.carParkId ,false, true);
+        cp.totalSpaces = Integer.toString(Integer.parseInt(cp.totalSpaces) - 1);
+        cp.spacesAvailable = Integer.toString(Integer.parseInt(cp.spacesAvailable) - 1);
+
     }
 
     public void deleteReservation(String reservationId) {
-        realmDatabase.beginTransaction();
-        realmDatabase.where(Reservation.class)
+        Reservation r = realmDatabase.where(Reservation.class)
                 .equalTo("reservationId",reservationId)
                 .findAll()
-                .deleteAllFromRealm();
+                .first();
+
+        // now update the car park with the number of spaces available
+        unbookCarParkSpace(r.carParkSpaceId);
+
+        realmDatabase.beginTransaction();
+            realmDatabase.where(Reservation.class)
+                    .equalTo("reservationId",reservationId)
+                    .findAll()
+                    .deleteAllFromRealm();
         realmDatabase.commitTransaction();
+
+
     }
 
 

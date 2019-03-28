@@ -41,16 +41,16 @@ public class CarParkSearchFragment extends CarParkFragment
         View v = inflater.inflate(R.layout.fragment_car_park_search, container, false);
         listView = v.findViewById(R.id.searchList); //Bind to the list on our Search layout
         setListView(v);
-        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter
-                .createFromResource(getActivity(), R.array.carParkTypes,
-                        android.R.layout.simple_spinner_item);
+      //  ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter
+     //           .createFromResource(getActivity(), R.array.carParkTypes,
+     //                   android.R.layout.simple_spinner_item);
 
-        spinnerAdapter
-                .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+     //   spinnerAdapter
+     ///           .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        Spinner spinner = v.findViewById(R.id.searchSpinner);
-        spinner.setAdapter(spinnerAdapter);
-        spinner.setOnItemSelectedListener(this);
+     //   Spinner spinner = v.findViewById(R.id.searchSpinner);
+     //   spinner.setAdapter(spinnerAdapter);
+      //  spinner.setOnItemSelectedListener(this);
 
         searchView = v.findViewById(R.id.searchView);
         searchView.setQueryHint("Search your Car Parks Here");

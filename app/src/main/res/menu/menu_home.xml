@@ -13,4 +13,10 @@
         android:orderInCategory="100"
         app:showAsAction="never"
         android:onClick="menuInfo"/>
+    <item
+        android:id="@+id/menu_signout"
+        android:title="Logout"
+        android:orderInCategory="100"
+        app:showAsAction="never"
+        android:onClick="menuSignOut"/>
 </menu>

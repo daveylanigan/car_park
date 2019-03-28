@@ -1,11 +1,18 @@
 package ie.cp.activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,6 +20,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 
 import java.util.Arrays;
 
@@ -23,16 +36,21 @@ import ie.cp.fragments.AddReservationFragment;
 import ie.cp.fragments.CarParkFragment;
 import ie.cp.fragments.CarParkSpaceFragment;
 import ie.cp.fragments.EditCarParkFragment;
+import ie.cp.fragments.ReservationFragment;
+import ie.cp.fragments.UserFragment;
+import ie.cp.main.CarParkApp;
 import ie.cp.models.CarPark;
 import ie.cp.models.CarParkSpace;
 import ie.cp.models.User;
 import io.realm.OrderedRealmCollection;
 
-public class Home extends Base
-        implements NavigationView.OnNavigationItemSelectedListener,
+public class Home extends AppCompatActivity
+implements NavigationView.OnNavigationItemSelectedListener,
         EditCarParkFragment.OnFragmentInteractionListener {
 
     FragmentTransaction ft;
+    public static CarParkApp app = CarParkApp.getInstance();
+    public AlertDialog loader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +90,7 @@ public class Home extends Base
         ft.replace(R.id.homeFrame, fragment);
         ft.commit();
 
+        this.setupUsers();
  //       this.setupCarParks();
  //       this.setupCarParkSpaces();
  //       this.setTitle(R.string.recentlyViewedLbl);
@@ -117,6 +136,18 @@ public class Home extends Base
 
         } else if (id == R.id.nav_reservation_add) {
             fragment = AddReservationFragment.newInstance();
+            ft.replace(R.id.homeFrame, fragment);
+            ft.addToBackStack(null);
+            ft.commit();
+
+        } else if (id == R.id.nav_reservation_view) {
+            fragment = ReservationFragment.newInstance();
+            ft.replace(R.id.homeFrame, fragment);
+            ft.addToBackStack(null);
+            ft.commit();
+
+        } else if (id == R.id.nav_user_view) {
+            fragment = UserFragment.newInstance();
             ft.replace(R.id.homeFrame, fragment);
             ft.addToBackStack(null);
             ft.commit();
@@ -204,4 +235,71 @@ public class Home extends Base
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_home, menu);
+        return true;
+    }
+
+    public void menuHome(MenuItem m) {
+        startActivity(new Intent(this, Home.class));
+    }
+
+    public void menuInfo(MenuItem m) {
+        new AlertDialog.Builder(this)
+                .setTitle(getString(R.string.app_about))
+                .setMessage(getString(R.string.app_desc)
+                        + "\n\n"
+                        + getString(R.string.app_more_info))
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // we could put some code here too
+                    }
+                })
+                .show();
+    }
+
+    public void createLoader() {
+        AlertDialog.Builder loaderBuilder = new AlertDialog.Builder(this);
+        loaderBuilder.setCancelable(true); // 'false' if you want user to wait
+        loaderBuilder.setView(R.layout.loading);
+        loader = loaderBuilder.create();
+        loader.setTitle(R.string.app_name);
+        //loader.setMessage("Downloading CarParks...");
+        loader.setIcon(R.drawable.favourites_72);
+    }
+
+    // [START signOut]
+    public void menuSignOut(MenuItem m) {
+
+        //https://stackoverflow.com/questions/38039320/googleapiclient-is-not-connected-yet-on-logout-when-using-firebase-auth-with-g
+        app.mGoogleApiClient.connect();
+        app.mGoogleApiClient.registerConnectionCallbacks(new GoogleApiClient.ConnectionCallbacks() {
+            @Override
+            public void onConnected(@Nullable Bundle bundle) {
+
+                //FirebaseAuth.getInstance().signOut();
+                if(app.mGoogleApiClient.isConnected()) {
+                    Auth.GoogleSignInApi.signOut(app.mGoogleApiClient).setResultCallback(new ResultCallback<Status>() {
+                        @Override
+                        public void onResult(@NonNull Status status) {
+                            if (status.isSuccess()) {
+                                //Log.v("carpark", "User Logged out");
+                                Intent intent = new Intent(Home.this, Login.class);
+                                startActivity(intent);
+                                finish();
+                            }
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onConnectionSuspended(int i) {
+                Toast.makeText(Home.this, "Google API Client Connection Suspended",Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    // [END signOut]
 }

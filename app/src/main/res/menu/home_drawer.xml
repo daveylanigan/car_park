@@ -25,8 +25,16 @@
             android:icon="@drawable/ic_menu_reservespace"
             android:title="Reserve a Space" />
         <item
+            android:id="@+id/nav_reservation_view"
+            android:icon="@drawable/ic_menu_view_reservations"
+            android:title="View Reservations" />
+        <item
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_manage"
+            android:title="Log out" />
+        <item
+            android:id="@+id/nav_user_view"
+            android:icon="@drawable/ic_menu_user"
             android:title="Log out" />
     </group>
 

@@ -15,44 +15,42 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import ie.cp.R;
 import ie.cp.activities.Base;
+import ie.cp.adapters.ReservationListAdapter;
+import ie.cp.models.Reservation;
 
-import ie.cp.adapters.CarParkSpaceListAdapter;
-import ie.cp.models.CarParkSpace;
-
-public class CarParkSpaceFragment extends Fragment implements
+public class ReservationFragment extends Fragment implements
         AdapterView.OnItemClickListener,
         View.OnClickListener,
         AbsListView.MultiChoiceModeListener
 {
     public Base activity;
-    public static CarParkSpaceListAdapter listAdapter;
+    public static ReservationListAdapter listAdapter;
     public ListView listView;
 
-    public CarParkSpaceFragment() {
+    public ReservationFragment() {
         // Required empty public constructor
     }
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        Bundle activityInfo = new Bundle(); // Creates a new Bundle object
-        activityInfo.putString("carParkSpaceId", (String) view.getTag());
+  //      Bundle activityInfo = new Bundle(); // Creates a new Bundle object
+  //      activityInfo.putString("reservationId", (String) view.getTag());
+//
+  //      Fragment fragment = EditReservationFragment.newInstance(activityInfo);
+   //     getActivity().setTitle(R.string.editCarParkSpaceLbl);
 
-        Fragment fragment = EditCarParkFragment.newInstance(activityInfo);
-        getActivity().setTitle(R.string.editCarParkSpaceLbl);
-
-        getActivity().getSupportFragmentManager().beginTransaction()
-                .replace(R.id.homeFrame, fragment)
-                .addToBackStack(null)
-                .commit();
+   //     getActivity().getSupportFragmentManager().beginTransaction()
+   //             .replace(R.id.homeFrame, fragment)
+   //             .addToBackStack(null)
+   //             .commit();
     }
 
 
-    public static CarParkSpaceFragment newInstance() {
-        CarParkSpaceFragment fragment = new CarParkSpaceFragment();
+    public static ReservationFragment newInstance() {
+        ReservationFragment fragment = new ReservationFragment();
         return fragment;
     }
 
@@ -75,13 +73,12 @@ public class CarParkSpaceFragment extends Fragment implements
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home, parent, false);
 
-        listAdapter = new CarParkSpaceListAdapter(activity, this, activity.app.dbManager.getAllCarParkSpaces());
- ////       carParkFilter = new CarParkFilter(activity.app.dbManager, listAdapter);
+        listAdapter = new ReservationListAdapter(activity, this, activity.app.dbManager.getAllReservations());
 
         listView = v.findViewById(R.id.homeList);
         setListView(v);
 
-        getActivity().setTitle(R.string.carParkSpacesLbl);
+        getActivity().setTitle(R.string.reservationsLbl);
 
         return v;
     }
@@ -104,26 +101,24 @@ public class CarParkSpaceFragment extends Fragment implements
     @Override
     public void onClick(View view)
     {
-        if (view.getTag() instanceof CarParkSpace)
+        if (view.getTag() instanceof Reservation)
         {
-            onCarParkSpaceDelete ((CarParkSpace) view.getTag());
+            onReservationDelete ((Reservation) view.getTag());
         }
     }
 
-    public void onCarParkSpaceDelete(final CarParkSpace carParkSpace)
+    public void onReservationDelete(final Reservation reservation)
     {
-        if (carParkSpace.booked) return;
-        String stringName = carParkSpace.carParkSpaceName;
+        String stringName = reservation.carParkSpaceId;
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        builder.setMessage("Are you sure you want to Delete the \'Car Park Space\' " + stringName + "?");
+        builder.setMessage("Are you sure you want to Delete the \'Reservation\' " + stringName + "?");
         builder.setCancelable(false);
 
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener()
         {
             public void onClick(DialogInterface dialog, int id)
             {
-                activity.app.dbManager.deleteCarParkSpace(carParkSpace.carParkSpaceId);
-                // remove from our list
+                activity.app.dbManager.deleteReservation(reservation.reservationId); // remove from our list
                 listAdapter.notifyDataSetChanged(); // refresh adapter
             }
         }).setNegativeButton("No", new DialogInterface.OnClickListener()
@@ -142,7 +137,7 @@ public class CarParkSpaceFragment extends Fragment implements
     public boolean onCreateActionMode(ActionMode actionMode, Menu menu)
     {
         MenuInflater inflater = actionMode.getMenuInflater();
-        inflater.inflate(R.menu.delete_carparkspacelist_context, menu);
+        inflater.inflate(R.menu.delete_reservation_context, menu);
         return true;
     }
 
@@ -156,28 +151,24 @@ public class CarParkSpaceFragment extends Fragment implements
     {
         switch (menuItem.getItemId())
         {
-            case R.id.menu_item_delete_carparkspace:
-                deleteCarParkSpace(actionMode);
+            case R.id.menu_item_delete_reservations:
+                deleteReservation(actionMode);
                 return true;
             default:
                 return false;
         }
     }
 
-    public void deleteCarParkSpace(ActionMode actionMode)
+    public void deleteReservation(ActionMode actionMode)
     {
-        CarParkSpace c = null;
+        Reservation c = null;
         for (int i = listAdapter.getCount() - 1; i >= 0; i--)
             if (listView.isItemChecked(i))
-       //         if (activity.app.dbManager.deleteCarParkSpace(listAdapter.getItem(i).carParkSpaceId)) {
-       //             actionMode.finish();
-        //            listAdapter.notifyDataSetChanged();
-        //        } else{
-        //            Toast.makeText(this.getActivity(), "This space is already booked. Plaese cancel the booking first ", Toast.LENGTH_SHORT).show();
-        //        }
-        activity.app.dbManager.deleteCarParkSpace(listAdapter.getItem(i).carParkSpaceId);
-            actionMode.finish();
-            listAdapter.notifyDataSetChanged();
+                activity.app.dbManager.deleteReservation(listAdapter.getItem(i).reservationId); //delete from DB
+
+        actionMode.finish();
+
+        listAdapter.notifyDataSetChanged();
     }
 
     @Override
