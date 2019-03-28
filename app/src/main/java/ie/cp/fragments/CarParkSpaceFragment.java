@@ -18,8 +18,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import ie.cp.R;
-import ie.cp.activities.Base;
 
+import ie.cp.activities.Home;
 import ie.cp.adapters.CarParkSpaceListAdapter;
 import ie.cp.models.CarParkSpace;
 
@@ -28,7 +28,7 @@ public class CarParkSpaceFragment extends Fragment implements
         View.OnClickListener,
         AbsListView.MultiChoiceModeListener
 {
-    public Base activity;
+    public Home activity;
     public static CarParkSpaceListAdapter listAdapter;
     public ListView listView;
 
@@ -60,7 +60,7 @@ public class CarParkSpaceFragment extends Fragment implements
     public void onAttach(Context context)
     {
         super.onAttach(context);
-        this.activity = (Base) context;
+        this.activity = (Home) context;
     }
 
     @Override

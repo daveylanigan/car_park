@@ -83,6 +83,15 @@
                 android:textSize="18sp"
                 app:isDarkTheme="true" />
 
+            <com.shobhitpuri.custombuttons.GoogleSignInButton
+                android:id="@+id/google_disconnect_button"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:elevation="9dp"
+                android:text="@string/google_disconnect"
+                android:textSize="18sp"
+                app:isDarkTheme="false" />
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

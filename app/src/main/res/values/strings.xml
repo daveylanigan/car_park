@@ -65,5 +65,6 @@
     </string>
     <string name="google_sign_up">Sign In with Google</string>
     <string name="messageLoading">Please Wait. App is Loading...</string>
+    <string name="google_disconnect">Disconnect Account</string>
 
 </resources>

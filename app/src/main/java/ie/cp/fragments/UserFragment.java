@@ -17,7 +17,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import ie.cp.R;
-import ie.cp.activities.Base;
+import ie.cp.activities.Home;
 import ie.cp.adapters.UserListAdapter;
 import ie.cp.models.User;
 
@@ -27,7 +27,7 @@ public class UserFragment extends Fragment implements
         View.OnClickListener,
         AbsListView.MultiChoiceModeListener
 {
-    public Base activity;
+    public Home activity;
     public static UserListAdapter listAdapter;
     public ListView listView;
 //    public UserFilter userFilter;
@@ -60,7 +60,7 @@ public class UserFragment extends Fragment implements
     public void onAttach(Context context)
     {
         super.onAttach(context);
-        this.activity = (Base) context;
+        this.activity = (Home) context;
     }
 
     @Override

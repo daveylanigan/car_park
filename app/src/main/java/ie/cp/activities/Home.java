@@ -3,6 +3,7 @@ package ie.cp.activities;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -20,10 +21,13 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.Response;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 
@@ -51,6 +55,7 @@ implements NavigationView.OnNavigationItemSelectedListener,
     FragmentTransaction ft;
     public static CarParkApp app = CarParkApp.getInstance();
     public AlertDialog loader;
+    private ImageView googlePhoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +86,18 @@ implements NavigationView.OnNavigationItemSelectedListener,
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //SetUp GooglePhoto and Email for Drawer here
+        googlePhoto = navigationView.getHeaderView(0).findViewById(R.id.googlephoto);
+        getGooglePhoto(app.googlePhotoURL,googlePhoto);
+
+        TextView googleName = navigationView.getHeaderView(0).findViewById(R.id.googlename);
+        googleName.setText(app.googleName);
+
+        TextView googleMail = navigationView.getHeaderView(0).findViewById(R.id.googlemail);
+        googleMail.setText(app.googleMail);
+
+
         ft = getSupportFragmentManager().beginTransaction();
 
    //     CarParkFragment fragment = CarParkFragment.newInstance();
@@ -302,4 +319,26 @@ implements NavigationView.OnNavigationItemSelectedListener,
         });
     }
     // [END signOut]
+
+    public static void getGooglePhoto(String url,final ImageView googlePhoto) {
+        ImageRequest imgRequest = new ImageRequest(url,
+                new Response.Listener<Bitmap>() {
+                    @Override
+                    public void onResponse(Bitmap response) {
+                        Home.app.googlePhoto = response;
+                        googlePhoto.setImageBitmap(Home.app.googlePhoto);
+                    }
+                }, 0, 0, ImageView.ScaleType.FIT_XY, Bitmap.Config.ARGB_8888,
+
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        System.out.println("Something went wrong!");
+                        error.printStackTrace();
+                    }
+                });
+        // Add the request to the queue
+        Home.app.add(imgRequest);
+    }
+
 }

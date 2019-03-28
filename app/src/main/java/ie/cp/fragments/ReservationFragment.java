@@ -17,7 +17,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import ie.cp.R;
-import ie.cp.activities.Base;
+import ie.cp.activities.Home;
 import ie.cp.adapters.ReservationListAdapter;
 import ie.cp.models.Reservation;
 
@@ -26,7 +26,7 @@ public class ReservationFragment extends Fragment implements
         View.OnClickListener,
         AbsListView.MultiChoiceModeListener
 {
-    public Base activity;
+    public Home activity;
     public static ReservationListAdapter listAdapter;
     public ListView listView;
 
@@ -58,7 +58,7 @@ public class ReservationFragment extends Fragment implements
     public void onAttach(Context context)
     {
         super.onAttach(context);
-        this.activity = (Base) context;
+        this.activity = (Home) context;
     }
 
     @Override
