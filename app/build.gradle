@@ -31,4 +31,6 @@ dependencies {
     implementation 'io.realm:android-adapters:2.1.1'
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
     implementation 'com.shobhitpuri.custombuttons:google-signin:1.0.0'
+    implementation 'com.android.volley:volley:1.1.1'
+    implementation 'com.google.code.gson:gson:2.8.5' // for Googles Gson JSON Parser
 }

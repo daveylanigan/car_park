@@ -25,6 +25,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageRequest;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Response;
@@ -34,6 +36,7 @@ import com.google.android.gms.common.api.Status;
 import java.util.Arrays;
 
 import ie.cp.R;
+import ie.cp.api.CarParkApi;
 import ie.cp.fragments.AddCarParkFragment;
 import ie.cp.fragments.AddCarParkSpaceFragment;
 import ie.cp.fragments.AddReservationFragment;
@@ -89,7 +92,7 @@ implements NavigationView.OnNavigationItemSelectedListener,
 
         //SetUp GooglePhoto and Email for Drawer here
         googlePhoto = navigationView.getHeaderView(0).findViewById(R.id.googlephoto);
-        getGooglePhoto(app.googlePhotoURL,googlePhoto);
+        CarParkApi.getGooglePhoto(app.googlePhotoURL,googlePhoto);
 
         TextView googleName = navigationView.getHeaderView(0).findViewById(R.id.googlename);
         googleName.setText(app.googleName);
@@ -100,14 +103,11 @@ implements NavigationView.OnNavigationItemSelectedListener,
 
         ft = getSupportFragmentManager().beginTransaction();
 
-   //     CarParkFragment fragment = CarParkFragment.newInstance();
-   //     ft.replace(R.id.homeFrame, fragment);
-   //     ft.commit();
         CarParkSpaceFragment fragment = CarParkSpaceFragment.newInstance();
         ft.replace(R.id.homeFrame, fragment);
         ft.commit();
 
-        this.setupUsers();
+//        this.setupUsers();
  //       this.setupCarParks();
  //       this.setupCarParkSpaces();
  //       this.setTitle(R.string.recentlyViewedLbl);
@@ -319,26 +319,5 @@ implements NavigationView.OnNavigationItemSelectedListener,
         });
     }
     // [END signOut]
-
-    public static void getGooglePhoto(String url,final ImageView googlePhoto) {
-        ImageRequest imgRequest = new ImageRequest(url,
-                new Response.Listener<Bitmap>() {
-                    @Override
-                    public void onResponse(Bitmap response) {
-                        Home.app.googlePhoto = response;
-                        googlePhoto.setImageBitmap(Home.app.googlePhoto);
-                    }
-                }, 0, 0, ImageView.ScaleType.FIT_XY, Bitmap.Config.ARGB_8888,
-
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        System.out.println("Something went wrong!");
-                        error.printStackTrace();
-                    }
-                });
-        // Add the request to the queue
-        Home.app.add(imgRequest);
-    }
 
 }

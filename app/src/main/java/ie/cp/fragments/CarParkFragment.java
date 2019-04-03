@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,9 +17,13 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import java.util.List;
+
 import ie.cp.R;
 import ie.cp.activities.Home;
 import ie.cp.adapters.CarParkListAdapter;
+import ie.cp.api.CarParkApi;
+import ie.cp.api.VolleyListener;
 import ie.cp.models.CarPark;
 import ie.cp.models.CarParkSpace;
 import io.realm.RealmResults;
@@ -26,13 +31,14 @@ import io.realm.RealmResults;
 public class CarParkFragment   extends Fragment implements
         AdapterView.OnItemClickListener,
         View.OnClickListener,
-        AbsListView.MultiChoiceModeListener
+        AbsListView.MultiChoiceModeListener,
+        VolleyListener
 {
     public Home activity;
     public static CarParkListAdapter listAdapter;
     public ListView listView;
     public CarParkFilter carParkFilter;
- //   public boolean favourites = false;
+    public View v;
 
     public CarParkFragment() {
         // Required empty public constructor
@@ -63,12 +69,29 @@ public class CarParkFragment   extends Fragment implements
     {
         super.onAttach(context);
         this.activity = (Home) context;
+        CarParkApi.attachListener(this);
     }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        CarParkApi.detachListener();
+    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
+
         super.onCreate(savedInstanceState);
+ //       CarParkApi.get("/carparks");
+
+        // create our dropdown list of carparks
+        RealmResults<CarPark> realmResults = activity.app.dbManager.getAllCarParks();
+
+        List<CarPark> carParks = activity.app.dbManager.realmDatabase.copyFromRealm(realmResults);
+        setList(carParks);
+
     }
 
     @Override
@@ -77,24 +100,14 @@ public class CarParkFragment   extends Fragment implements
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home, parent, false);
 
-  //      RealmResults<CarParkSpace> cps = activity.app.dbManager.getAllCarParkSpaces();
-
-        listAdapter = new CarParkListAdapter(activity, this, activity.app.dbManager.getAllCarParks());
- ////       carParkFilter = new CarParkFilter(activity.app.dbManager, listAdapter);
-
- //       if (favourites) {
- //           coffeeFilter.setFilter("favourites"); // Set the filter text field from 'all' to 'favourites'
- //           coffeeFilter.filter(null); // Filter the data, but don't use any prefix
- //           listAdapter.notifyDataSetChanged(); // Update the adapter
-  //      }
+ //       listAdapter = new CarParkListAdapter(activity, this, activity.app.dbManager.getAllCarParks());
 
         listView = v.findViewById(R.id.homeList);
-        setListView(v);
+        updateView();
+  //      setListView(v);
 
-//        if (!favourites)
-            getActivity().setTitle(R.string.recentlyViewedLbl);
-//        else
-//            getActivity().setTitle(R.string.favouritesCoffeeLbl);
+
+ //       getActivity().setTitle(R.string.recentlyViewedLbl);
 
         return v;
     }
@@ -106,6 +119,19 @@ public class CarParkFragment   extends Fragment implements
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
         listView.setMultiChoiceModeListener(this);
         listView.setEmptyView(view.findViewById(R.id.emptyList));
+    }
+    @Override
+    public void setList(List list) {
+        activity.app.carparkList = list;
+    }
+
+    @Override
+    public void setCarPark(CarPark carpark) {
+    }
+
+    @Override
+    public void updateUI(Fragment fragment) {
+        fragment.onResume();
     }
 
     @Override
@@ -123,6 +149,11 @@ public class CarParkFragment   extends Fragment implements
         }
     }
 
+    public void onResume() {
+        super.onResume();
+        CarParkApi.attachListener(this);
+        updateView();
+    }
     public void onCarParkDelete(final CarPark carPark)
     {
         String stringName = carPark.carParkName;
@@ -196,4 +227,15 @@ public class CarParkFragment   extends Fragment implements
     }
 
     /* ************ MultiChoiceModeListener methods (end) *********** */
+
+    public void updateView() {
+        listAdapter = new CarParkListAdapter(activity, this, activity.app.carparkList);
+
+        setListView(v);
+
+        getActivity().setTitle(R.string.recentlyViewedLbl);
+
+        listAdapter.notifyDataSetChanged(); // Update the adapter
+    }
+
 }
