@@ -1,5 +1,6 @@
 package ie.cp.activities;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.ImageDecoder;
@@ -16,6 +17,7 @@ public class Splash extends Activity {
     private boolean 			mIsBackButtonPressed;
     private static final int 	SPLASH_DURATION = 3000; // 3 seconds
 
+    @SuppressLint("WrongThread")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

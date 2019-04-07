@@ -270,7 +270,7 @@ public class DBManager {
     }
     public CarParkSpace getCarParkSpaceByName(String carParkSpaceName) {
 
-        RealmQuery<CarParkSpace> query = realmDatabase.where(CarParkSpace.class).equalTo("carParkSpaceName", "MultiStory 1");
+        RealmQuery<CarParkSpace> query = realmDatabase.where(CarParkSpace.class).equalTo("carParkSpaceName", carParkSpaceName);
         RealmResults<CarParkSpace> result = query.findAll();
 
         if (result.size()>0) {
@@ -344,7 +344,17 @@ public class DBManager {
         cp.spacesAvailable = Integer.toString(Integer.parseInt(cp.spacesAvailable) - 1);
 
     }
+    public boolean emailAddressExists(String emailAddress) {
 
+        RealmQuery<User> query = realmDatabase.where(User.class).equalTo("emailAddress",emailAddress);
+        RealmResults<User> result = query.findAll();
+
+        if (result.size()>0) {
+            return true;
+        }else{
+            return false;
+        }
+    }
     public void deleteReservation(String reservationId) {
         Reservation r = realmDatabase.where(Reservation.class)
                 .equalTo("reservationId",reservationId)

@@ -44,7 +44,6 @@ import ie.cp.fragments.CarParkFragment;
 import ie.cp.fragments.CarParkSpaceFragment;
 import ie.cp.fragments.EditCarParkFragment;
 import ie.cp.fragments.ReservationFragment;
-import ie.cp.fragments.UserFragment;
 import ie.cp.main.CarParkApp;
 import ie.cp.models.CarPark;
 import ie.cp.models.CarParkSpace;
@@ -163,11 +162,11 @@ implements NavigationView.OnNavigationItemSelectedListener,
             ft.addToBackStack(null);
             ft.commit();
 
-        } else if (id == R.id.nav_user_view) {
-            fragment = UserFragment.newInstance();
-            ft.replace(R.id.homeFrame, fragment);
-            ft.addToBackStack(null);
-            ft.commit();
+    //    } else if (id == R.id.nav_user_view) {
+    //        fragment = UserFragment.newInstance();
+    //        ft.replace(R.id.homeFrame, fragment);
+    //        ft.addToBackStack(null);
+    //        ft.commit();
 
             //     } else if (id == R.id.nav_camera) {
             // Handle the camera action

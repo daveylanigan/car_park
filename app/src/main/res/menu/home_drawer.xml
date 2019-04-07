@@ -8,19 +8,7 @@
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_menu_home"
             android:title="Home" />
-        <item
-            android:id="@+id/nav_carpark_add"
-            android:icon="@drawable/ic_menu_addcarpark"
-            android:title="Add a Car Park" />
-        <item
-            android:id="@+id/nav_space_add"
-            android:icon="@drawable/ic_menu_addspace"
-            android:title="Add a Car Park Space" />
-        <item
-            android:id="@+id/nav_user_add"
-            android:icon="@drawable/ic_menu_adduser"
-            android:title="Add a User" />
-        <item
+         <item
             android:id="@+id/nav_reservation_add"
             android:icon="@drawable/ic_menu_reservespace"
             android:title="Reserve a Space" />
@@ -31,12 +19,28 @@
         <item
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Log out" />
+            android:title="Manage Reservations" />
         <item
             android:id="@+id/nav_user_view"
             android:icon="@drawable/ic_menu_user"
             android:title="Log out" />
     </group>
+    <item android:title="Admin" >
+        <menu>
+            <item
+                android:id="@+id/nav_carpark_add"
+                android:icon="@drawable/ic_menu_addcarpark"
+                android:title="Add a Car Park" />
+            <item
+                android:id="@+id/nav_space_add"
+                android:icon="@drawable/ic_menu_addspace"
+                android:title="Add a Car Park Space" />
+            <item
+                android:id="@+id/nav_user_add"
+                android:icon="@drawable/ic_menu_adduser"
+                android:title="Add a User" />
+        </menu>
+    </item>
 
     <item android:title="Communicate">
         <menu>

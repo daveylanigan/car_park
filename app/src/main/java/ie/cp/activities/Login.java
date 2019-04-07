@@ -47,6 +47,7 @@ import java.util.List;
 
 import ie.cp.R;
 import ie.cp.main.CarParkApp;
+import ie.cp.models.User;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -136,12 +137,23 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor>,
         findViewById(R.id.google_disconnect_button).setOnClickListener(this);
     }
 
-    // [START signIn]
     private void signIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(app.mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
-    // [END signIn]
+
+    private void normalSignIn() {
+//        User user_object = new User("test",email.getText().toString(),password.getText().toString());
+
+//        app.dbManager.addUser(user_object);
+      //  if(email.getText().toString().equals("admin") && password.getText().toString().equals("admin")){
+//
+            //correct password
+      //  }else{
+
+      //  }
+            //wrong password
+    }
 
     // [START revokeAccess]
     private void revokeAccess() {
@@ -158,7 +170,8 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor>,
     // [END revokeAccess]
 
     private void startHomeScreen() {
-        Intent intent = new Intent(this, Home.class);
+   //     Intent intent = new Intent(this, Home.class);
+        Intent intent = new Intent(this, UserActivity.class);
         startActivity(intent);
     }
 
@@ -258,8 +271,17 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor>,
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-            mAuthTask = new UserLoginTask(email, password);
-            mAuthTask.execute((Void) null);
+
+
+            User user = new User("test", email,password);
+            if (!app.dbManager.emailAddressExists(email)){
+                // add the new user
+                app.dbManager.addUser(user);
+            }
+            startHomeScreen();
+
+            //      mAuthTask = new UserLoginTask(email, password);
+      //      mAuthTask.execute((Void) null);
         }
     }
 
@@ -358,8 +380,7 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor>,
         if (v.getId() == R.id.google_sigin_button) {
             signIn();
         }
-        else
-        if (v.getId() == R.id.google_disconnect_button) {
+        else if (v.getId() == R.id.google_disconnect_button) {
             revokeAccess();
         }
     }

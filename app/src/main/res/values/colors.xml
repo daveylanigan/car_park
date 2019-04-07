@@ -9,5 +9,9 @@
     <color name="colorCardShadow">#1616c8</color>
     <color name="colorFontWhite">#ffffff</color>
     <color name="colorFontOffWhite">#f7f7f7</color>
+    <color name="graylight">#BEBEBE</color>
+    <color name="startblue">#2F4F4F</color>
+    <color name="endblue">#32CD32</color>
+
 </resources>
 
