@@ -57,6 +57,7 @@ public class DBManager {
         realmDatabase.beginTransaction();
         realmDatabase.copyToRealm(c);
         realmDatabase.commitTransaction();
+
     }
 
     public void updateUser(User c, String userName ,String emailAddress, String password)
@@ -234,39 +235,38 @@ public class DBManager {
         return result;
     }
 
-    public RealmResults<CarParkSpace> getCarParkSpaces(String carParkId) {
+    public RealmResults<CarParkSpace> getCarParkSpaces(String carParkName) {
         // get available spaces for a particular car park
         RealmResults<CarParkSpace> result = realmDatabase.where(CarParkSpace.class)
-                .equalTo("carParkId",carParkId)
+                .equalTo("carParkId",carParkName)
                 .equalTo("booked",false)
                 .findAll();
         return result;
     }
 
-    public RealmResults<Reservation> getAllReservations() {
+    public RealmResults<Reservation> getAllReservations(String userEmail) {
         RealmResults<Reservation> result = realmDatabase.where(Reservation.class)
+                .equalTo("userId",userEmail)
                 .findAll();
         return result;
     }
 
-    public User getUser(String userId) {
+    public User getUser(String emailAddress) {
         return realmDatabase.where(User.class)
-                .equalTo("userId",userId)
+                .equalTo("emailAddress",emailAddress)
                 .findAll()
                 .first();
     }
 
-    public CarPark getCarPark(String carParkId) {
+    public RealmResults getCarPark(String carParkName) {
         return realmDatabase.where(CarPark.class)
-                .equalTo("carParkId",carParkId)
-                .findAll()
-                .first();
+                .equalTo("carParkName",carParkName)
+                .findAll();
     }
-    public CarParkSpace getCarParkSpace(String carParkSpaceId) {
+    public RealmResults getCarParkSpace(String carParkSpaceName) {
         return realmDatabase.where(CarParkSpace.class)
-                .equalTo("carParkSpaceId",carParkSpaceId)
-                .findAll()
-                .first();
+                .equalTo("carParkSpaceName",carParkSpaceName)
+                .findAll();
     }
     public CarParkSpace getCarParkSpaceByName(String carParkSpaceName) {
 
@@ -285,6 +285,12 @@ public class DBManager {
                 .equalTo("reservationId",reservationId)
                 .findAll()
                 .first();
+    }
+
+    public RealmResults<Reservation> getReservationsByUser(String userEmail) {
+        return realmDatabase.where(Reservation.class)
+                .equalTo("userId",userEmail)
+                .findAll();
     }
 
     public void deleteUser(String userId) {
@@ -344,15 +350,22 @@ public class DBManager {
         cp.spacesAvailable = Integer.toString(Integer.parseInt(cp.spacesAvailable) - 1);
 
     }
-    public boolean emailAddressExists(String emailAddress) {
+    public int isValidUser(String emailAddress, String password) {
 
         RealmQuery<User> query = realmDatabase.where(User.class).equalTo("emailAddress",emailAddress);
         RealmResults<User> result = query.findAll();
 
-        if (result.size()>0) {
-            return true;
-        }else{
-            return false;
+        if ((result.size()>0) && (result.first().password.equals(password))) {
+            // all is good
+            return 2;
+        }
+        else if ((result.size()>0) && (!result.first().password.equals(password))) {
+            // wrong password
+            return 1;
+        }
+        else{
+            // user does not exist
+            return 0;
         }
     }
     public void deleteReservation(String reservationId) {

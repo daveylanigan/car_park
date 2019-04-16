@@ -62,7 +62,6 @@ public class AddReservationFragment extends Fragment {
         getActivity().setTitle(R.string.addReservationBtnLbl);
         // create our dropdown list of carparks
         RealmResults<CarPark> realmResults = app.dbManager.getAllCarParks();
-
         List<CarPark> carParks = app.dbManager.realmDatabase.copyFromRealm(realmResults);
 
         ArrayAdapter<CarPark> adapter = new ArrayAdapter<>(this.getContext(), android.R.layout.simple_list_item_1, carParks);
@@ -77,10 +76,9 @@ public class AddReservationFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                String restaurantname = spinner.getSelectedItem().toString();
+                String selectedCarPark = spinner.getSelectedItem().toString();
 
-                RealmResults<CarParkSpace> realmResults2 = app.dbManager.getCarParkSpaces(restaurantname);
-
+                RealmResults<CarParkSpace> realmResults2 = app.dbManager.getCarParkSpaces(selectedCarPark);
                 List<CarParkSpace> carParkSpaces = app.dbManager.realmDatabase.copyFromRealm(realmResults2);
 
                 ArrayAdapter<CarParkSpace> adapter2 = new ArrayAdapter<>(view.getContext(), android.R.layout.simple_list_item_1, carParkSpaces);
@@ -117,15 +115,15 @@ public class AddReservationFragment extends Fragment {
         // reserve the space
         app.dbManager.ReserveSpace(reservationCarParkSpace);
 
-        Reservation r = new Reservation("David",reservationCarPark.carParkName, reservationCarParkSpace.carParkSpaceName );
+        Reservation r = new Reservation(app.googleMail,reservationCarPark.carParkName, reservationCarParkSpace.carParkSpaceName );
         // add the reservation
         app.dbManager.addReservation(r);
 
+        // update the spacesbooked amount
+        int count = Integer.parseInt(app.spacesBooked);
+        count = count + 1;
+        app.spacesBooked = Integer.toString(count);
 
         startActivity(new Intent(this.getActivity(), Home.class));
-   //     } else {
-
-  //          Toast.makeText(this.getActivity(), "yay ", Toast.LENGTH_SHORT).show();
-   //     }
     }
 }

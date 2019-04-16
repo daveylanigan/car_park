@@ -5,6 +5,8 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -46,8 +48,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ie.cp.R;
+import ie.cp.api.CarParkApi;
 import ie.cp.main.CarParkApp;
+import ie.cp.models.Reservation;
 import ie.cp.models.User;
+import io.realm.OrderedRealmCollection;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -76,12 +81,15 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor>,
     // UI references.
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
+    private EditText mUserNameView;
     private View mProgressView;
     private View mLoginFormView;
     public CarParkApp app = CarParkApp.getInstance();
     /* Request code used to invoke sign in user interactions. */
     private static final int RC_SIGN_IN = 0;
     private static final String TAG = "carpark";
+    private OrderedRealmCollection<Reservation> reservations;
+    private Bitmap bitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +98,7 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor>,
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
-
+        mUserNameView = (EditText) findViewById(R.id.userName);
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -142,20 +150,7 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor>,
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
-    private void normalSignIn() {
-//        User user_object = new User("test",email.getText().toString(),password.getText().toString());
-
-//        app.dbManager.addUser(user_object);
-      //  if(email.getText().toString().equals("admin") && password.getText().toString().equals("admin")){
-//
-            //correct password
-      //  }else{
-
-      //  }
-            //wrong password
-    }
-
-    // [START revokeAccess]
+   // [START revokeAccess]
     private void revokeAccess() {
         Auth.GoogleSignInApi.revokeAccess(app.mGoogleApiClient).setResultCallback(
                 new ResultCallback<Status>() {
@@ -170,8 +165,7 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor>,
     // [END revokeAccess]
 
     private void startHomeScreen() {
-   //     Intent intent = new Intent(this, Home.class);
-        Intent intent = new Intent(this, UserActivity.class);
+        Intent intent = new Intent(this, Home.class);
         startActivity(intent);
     }
 
@@ -230,17 +224,21 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor>,
      * errors are presented and no actual login attempt is made.
      */
     private void attemptLogin() {
+
+
         if (mAuthTask != null) {
             return;
         }
-
+        User user = null;
         // Reset errors.
         mEmailView.setError(null);
         mPasswordView.setError(null);
+        mUserNameView.setError(null);
 
         // Store values at the time of the login attempt.
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
+        String userName = mUserNameView.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
@@ -263,25 +261,60 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor>,
             cancel = true;
         }
 
+        int result = app.dbManager.isValidUser(email, password);
+
+        if (result== 0){
+            // user doesn't exist so they need to fill in all the details
+            // Check for blank user name.
+            if (TextUtils.isEmpty(userName)) {
+                mUserNameView.setError(getString(R.string.error_field_required));
+                focusView = mUserNameView;
+                cancel = true;
+            }
+            // Check for blank password.
+            if (TextUtils.isEmpty(password)) {
+                mPasswordView.setError(getString(R.string.error_field_required));
+                focusView = mPasswordView;
+                cancel = true;
+            }
+            if (!cancel){
+                // add the new user
+                user = new User(userName, email,password);
+                app.dbManager.addUser(user);
+            }
+        } else if (result== 1) {
+            // user exists but wrong password
+            mPasswordView.setError(getString(R.string.error_incorrect_password));
+            focusView = mPasswordView;
+            cancel = true;
+        } else if (result== 2) {
+            // user exists
+            user = app.dbManager.getUser(email);
+        }
+
+
         if (cancel) {
             // There was an error; don't attempt login and focus the first
             // form field with an error.
             focusView.requestFocus();
         } else {
-            // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
+            if (user.isValid()){
+                app.googleName = user.userName;
+                app.googleMail = user.emailAddress;
+                // we have no picture so use android one instead
+                bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.android);
+                app.googlePhoto = bitmap;
+
+                reservations = app.dbManager.getReservationsByUser(user.emailAddress);
+      //          reservations = CarParkApi.getReservations("/reservations/" + user.emailAddress);
 
 
-            User user = new User("test", email,password);
-            if (!app.dbManager.emailAddressExists(email)){
-                // add the new user
-                app.dbManager.addUser(user);
+                app.spacesBooked = Integer.toString(reservations.size());
             }
             startHomeScreen();
 
-            //      mAuthTask = new UserLoginTask(email, password);
-      //      mAuthTask.execute((Void) null);
         }
     }
 
@@ -514,10 +547,17 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor>,
             app.googleToken = acct.getId();
             app.signedIn = true;
             app.googleMail = acct.getEmail();
-            if(acct.getPhotoUrl() == null)
-                ; //New Account may not have Google+ photo
-            else app.googlePhotoURL = acct.getPhotoUrl().toString();
-
+            if(acct.getPhotoUrl() == null) {
+                //New Account may not have Google+ photo
+                bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.android);
+                app.googlePhoto = bitmap;
+            }
+            else {
+                app.googlePhotoURL = acct.getPhotoUrl().toString();
+            }
+            // show the car park reservations also
+            reservations = app.dbManager.getReservationsByUser(acct.getEmail());
+            app.spacesBooked = Integer.toString(reservations.size());
             // Show a message to the user that we are signing in.
             Toast.makeText(this, "Signing in " + app.googleName +" with " + app.googleMail , Toast.LENGTH_SHORT).show();
             startHomeScreen();

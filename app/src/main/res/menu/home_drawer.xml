@@ -8,21 +8,9 @@
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_menu_home"
             android:title="Home" />
-         <item
-            android:id="@+id/nav_reservation_add"
-            android:icon="@drawable/ic_menu_reservespace"
-            android:title="Reserve a Space" />
         <item
-            android:id="@+id/nav_reservation_view"
-            android:icon="@drawable/ic_menu_view_reservations"
-            android:title="View Reservations" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Manage Reservations" />
-        <item
-            android:id="@+id/nav_user_view"
-            android:icon="@drawable/ic_menu_user"
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_menu_send"
             android:title="Log out" />
     </group>
     <item android:title="Admin" >
@@ -35,23 +23,6 @@
                 android:id="@+id/nav_space_add"
                 android:icon="@drawable/ic_menu_addspace"
                 android:title="Add a Car Park Space" />
-            <item
-                android:id="@+id/nav_user_add"
-                android:icon="@drawable/ic_menu_adduser"
-                android:title="Add a User" />
-        </menu>
-    </item>
-
-    <item android:title="Communicate">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
         </menu>
     </item>
 

@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import ie.cp.R;
 import ie.cp.activities.Home;
+import ie.cp.api.CarParkApi;
 import ie.cp.main.CarParkApp;
 import ie.cp.models.CarPark;
 
@@ -66,10 +67,18 @@ public class AddCarParkFragment extends Fragment {
         carParkLocation = location.getText().toString();
 
         if ((carParkName.length() > 0) && (carParkAddress.length() > 0) && (carParkLocation.length() > 0)) {
-            CarPark c = new CarPark(carParkName, carParkAddress, carParkLocation, "0", "0");
+            //car park id will be added by mongo
+            CarPark c = new CarPark("",carParkName, carParkAddress, carParkLocation, "0", "0");
 
-            app.dbManager.addCarPark(c);
-            startActivity(new Intent(this.getActivity(), Home.class));
+         //   app.dbManager.addCarPark(c);
+            CarParkApi.putCarPark("/carpark",c);
+         //   startActivity(new Intent(this.getActivity(), Home.class));
+            CarParkFragment nextFrag = CarParkFragment.newInstance();
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.homeFrame, nextFrag)
+                    .addToBackStack(null)
+                    .commit();
+
         } else {
 
             Toast.makeText(

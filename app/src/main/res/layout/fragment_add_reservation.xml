@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".fragments.AddCarParkFragment">
 
+
     <TextView
         android:id="@+id/addreservationfooter"
         android:layout_width="0dp"
@@ -35,7 +36,7 @@
         android:layout_marginBottom="8dp"
         android:paddingTop="10dp"
         android:text="@string/carParkSpaceCarParkLbl"
-        android:textAlignment="textEnd"
+        android:textAlignment="textStart"
         android:textColor="@color/colorFontBlack"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -47,12 +48,13 @@
 
     <Spinner
         android:id="@+id/reservationCarParkSpinner"
-        android:layout_width="193dp"
+        android:layout_width="215dp"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:textAlignment="textStart"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.841"
@@ -62,15 +64,16 @@
 
     <Button
         android:id="@+id/addReservationBtn"
-        android:layout_width="79dp"
-        android:layout_height="84dp"
-        android:layout_marginBottom="64dp"
-        android:background="@color/colorFontOffWhite"
-        android:drawableTop="@drawable/blue_add_48"
-        android:elevation="5dp"
+        android:layout_width="220dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="184dp"
+        android:background="@drawable/buttonstylewithgradient"
         android:text="@string/addReservationBtnLbl"
+        android:textColor="#fff"
         app:layout_constraintBottom_toTopOf="@+id/addreservationfooter"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -83,7 +86,7 @@
         android:layout_marginBottom="8dp"
         android:paddingTop="10dp"
         android:text="@string/carParkSpaceLbl"
-        android:textAlignment="textEnd"
+        android:textAlignment="textStart"
         android:textColor="@color/colorFontBlack"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -95,12 +98,13 @@
 
     <Spinner
         android:id="@+id/reservationCarParkSpaceSpinner"
-        android:layout_width="193dp"
+        android:layout_width="211dp"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:textAlignment="textStart"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.841"
@@ -108,5 +112,40 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.392" />
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="21dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="To reserve a space, select a car park"
+        android:textColor="@color/colorFontBlack"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.038"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.079" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="37dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="then select a space and tap the reserve button"
+        android:textColor="@color/colorFontBlack"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.137"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.109" />
 
 </android.support.constraint.ConstraintLayout>

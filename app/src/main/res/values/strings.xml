@@ -1,6 +1,7 @@
 <resources>
     <string name="menu_home">Home</string>
     <string name="menu_info">Info</string>
+    <string name="menu_logout">Logout</string>
     <string name="app_name">Car Park Application</string>
     <string name="appWebsite">www.somewebsite.com</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -10,8 +11,8 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
     <string name="app_about">Car Park Application 1.0</string>
-    <string name="app_desc">This application allows a user to book car park spaces at their chosen car park</string>
-    <string name="app_more_info">The chosen database is maybe SQLite or perhaps Firebase</string>
+    <string name="app_desc">This app allows a user to book car park spaces at their chosen Car Park</string>
+    <string name="app_more_info">The chosen database is Realm</string>
     <string name="splash_title">Car Park Booking System</string>
     <string name="splash_image_desc">an image</string>
     <string name="car_park_row_name">Car Park Name</string>
@@ -19,11 +20,12 @@
     <string name="user_row_name">User Name</string>
     <string name="user_row_email_address">User Address</string>
     <string name="user_row_password">Password</string>
-    <string name="recentlyViewedLbl">Car Parks</string>
+    <string name="recentlyViewedLbl">User Profile</string>
     <string name="userLbl">Users</string>
-    <string name="emptyMessageLbl">You have no Car Park\'s added, go add one you scrub!</string>
+    <string name="emptyMessageLbl">No items to display</string>
     <string name="searchCarParksLbl">Search Car Park\'s</string>
     <string name="deleteCarParksLbl">Delete Car Parks</string>
+    <string name="carParksLbl">Car Parks</string>
     <string name="deleteCarParkSpacesLbl">Delete Car Park Spaces</string>
     <string name="deleteUsersLbl">Delete Users</string>
     <string name="carParkNameLbl">Name :</string>
@@ -42,7 +44,7 @@
     <string name="carParkSpaceDescriptionLbl">Description :</string>
     <string name="carParkSpaceLocationLbl">Location :</string>
     <string name="carParkSpaceLbl">Car Space :</string>
-    <string name="carParkSpaceCarParkLbl">Car Park :</string>
+    <string name="carParkSpaceCarParkLbl">Car Park  :</string>
     <string name="addCarParkSpaceBtnLbl">Add Car Space</string>
     <string name="addReservationBtnLbl">Reserve</string>
 
@@ -52,8 +54,9 @@
     <string name="deleteReservationsLbl">Delete Reservations</string>
     <string name="title_activity_login">Sign in</string>
     <!-- Strings related to login -->
+    <string name="prompt_name">Name</string>
     <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password (optional)</string>
+    <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_email">This email address is invalid</string>
@@ -66,5 +69,8 @@
     <string name="google_sign_up">Sign In with Google</string>
     <string name="messageLoading">Please Wait. App is Loading...</string>
     <string name="google_disconnect">Disconnect Account</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

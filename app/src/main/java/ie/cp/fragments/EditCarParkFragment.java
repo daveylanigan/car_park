@@ -10,16 +10,22 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
 import ie.cp.R;
+import ie.cp.api.CarParkApi;
+import ie.cp.api.VolleyListener;
 import ie.cp.main.CarParkApp;
 import ie.cp.models.CarPark;
+import io.realm.RealmResults;
 
-public class EditCarParkFragment extends Fragment {
+public class EditCarParkFragment extends Fragment   implements VolleyListener {
 
     public boolean isFavourite;
     public CarPark aCarPark;
     private EditText name, address, location;
     public CarParkApp app;
+    public View v;
 
     private OnFragmentInteractionListener mListener;
 
@@ -38,9 +44,16 @@ public class EditCarParkFragment extends Fragment {
     {
         super.onCreate(savedInstanceState);
         app = (CarParkApp) getActivity().getApplication();
+      //  RealmResults<CarPark> res = null;
 
         if(getArguments() != null)
-            aCarPark = app.dbManager.getCarPark(getArguments().getString("carParkId"));
+         //   res = app.dbManager.getCarPark(getArguments().getString("carParkId"));
+         //   if (res.size()>0) {
+         //       aCarPark = res.first();
+         //  }
+    //        CarParkApi.getCarParks("/carpark/" + getArguments().getString("carParkId"));
+        CarParkApi.getCarParks("/carpark");
+
     }
 
     @Override
@@ -48,16 +61,6 @@ public class EditCarParkFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_carpark_edit, container, false);
-
-        ((TextView)v.findViewById(R.id.editCarParkTitleTV)).setText(aCarPark.carParkName);
-
-        name = v.findViewById(R.id.editCarParkNameET);
-        address = v.findViewById(R.id.editCarParkAddressET);
-        location = v.findViewById(R.id.editCarParkLocationET);
-
-        name.setText(aCarPark.carParkName);
-        location.setText(aCarPark.location);
-        address.setText(""+aCarPark.address);
 
         return v;
     }
@@ -100,6 +103,35 @@ public class EditCarParkFragment extends Fragment {
         super.onDetach();
         mListener = null;
     }
+
+    @Override
+    public void setList(List list) {
+        app.carparkList = list;
+    }
+
+    @Override
+    public void setCarPark(CarPark carPark) {
+
+        aCarPark = carPark;
+    }
+
+
+    @Override
+    public void updateUI(Fragment fragment) {
+
+        ((TextView)v.findViewById(R.id.editCarParkTitleTV)).setText(aCarPark.carParkName);
+
+        name = v.findViewById(R.id.editCarParkNameET);
+        address = v.findViewById(R.id.editCarParkAddressET);
+        location = v.findViewById(R.id.editCarParkLocationET);
+
+        name.setText(aCarPark.carParkName);
+        location.setText(aCarPark.location);
+        address.setText(""+aCarPark.address);
+
+    }
+
+
 
     public interface OnFragmentInteractionListener {
         void toggle(View v);

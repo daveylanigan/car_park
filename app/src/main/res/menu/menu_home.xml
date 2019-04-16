@@ -15,7 +15,7 @@
         android:onClick="menuInfo"/>
     <item
         android:id="@+id/menu_signout"
-        android:title="Logout"
+        android:title="@string/menu_logout"
         android:orderInCategory="100"
         app:showAsAction="never"
         android:onClick="menuSignOut"/>

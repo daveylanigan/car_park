@@ -40,7 +40,7 @@
 
     <TextView
         android:id="@+id/rowReservationUser"
-        android:layout_width="200dp"
+        android:layout_width="400dp"
         android:layout_height="16dp"
         android:layout_alignTop="@+id/rowFavouriteImg"
         android:layout_marginEnd="8dp"
@@ -60,7 +60,7 @@
 
     <TextView
         android:id="@+id/rowReservationCarParkSpace"
-        android:layout_width="200dp"
+        android:layout_width="400dp"
         android:layout_height="16dp"
         android:layout_alignBottom="@+id/rowFavouriteImg"
         android:layout_alignLeft="@+id/rowReservationUser"
@@ -79,7 +79,7 @@
 
     <TextView
         android:id="@+id/rowReservationCarPark"
-        android:layout_width="200dp"
+        android:layout_width="400dp"
         android:layout_height="18dp"
         android:layout_alignBottom="@+id/rowDeleteImg"
         android:layout_marginStart="8dp"

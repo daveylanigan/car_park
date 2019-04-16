@@ -19,6 +19,7 @@ import android.widget.ListView;
 import ie.cp.R;
 import ie.cp.activities.Home;
 import ie.cp.adapters.ReservationListAdapter;
+import ie.cp.main.CarParkApp;
 import ie.cp.models.Reservation;
 
 public class ReservationFragment extends Fragment implements
@@ -29,6 +30,7 @@ public class ReservationFragment extends Fragment implements
     public Home activity;
     public static ReservationListAdapter listAdapter;
     public ListView listView;
+    private CarParkApp app;
 
     public ReservationFragment() {
         // Required empty public constructor
@@ -64,7 +66,9 @@ public class ReservationFragment extends Fragment implements
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
+
         super.onCreate(savedInstanceState);
+        app = (CarParkApp) getActivity().getApplication();
     }
 
     @Override
@@ -73,7 +77,7 @@ public class ReservationFragment extends Fragment implements
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home, parent, false);
 
-        listAdapter = new ReservationListAdapter(activity, this, activity.app.dbManager.getAllReservations());
+        listAdapter = new ReservationListAdapter(activity, this, app.dbManager.getAllReservations(app.googleMail));
 
         listView = v.findViewById(R.id.homeList);
         setListView(v);
@@ -118,7 +122,7 @@ public class ReservationFragment extends Fragment implements
         {
             public void onClick(DialogInterface dialog, int id)
             {
-                activity.app.dbManager.deleteReservation(reservation.reservationId); // remove from our list
+                app.dbManager.deleteReservation(reservation.reservationId); // remove from our list
                 listAdapter.notifyDataSetChanged(); // refresh adapter
             }
         }).setNegativeButton("No", new DialogInterface.OnClickListener()
@@ -130,6 +134,11 @@ public class ReservationFragment extends Fragment implements
         });
         AlertDialog alert = builder.create();
         alert.show();
+        // update the spacesbooked amount
+        int count = Integer.parseInt(app.spacesBooked);
+        if (count > 0) count = count - 1;
+        app.spacesBooked = Integer.toString(count);
+
     }
 
     /* ************ MultiChoiceModeListener methods (begin) *********** */
@@ -164,11 +173,16 @@ public class ReservationFragment extends Fragment implements
         Reservation c = null;
         for (int i = listAdapter.getCount() - 1; i >= 0; i--)
             if (listView.isItemChecked(i))
-                activity.app.dbManager.deleteReservation(listAdapter.getItem(i).reservationId); //delete from DB
+                app.dbManager.deleteReservation(listAdapter.getItem(i).reservationId); //delete from DB
 
         actionMode.finish();
 
         listAdapter.notifyDataSetChanged();
+        // update the spacesbooked amount
+        int count = Integer.parseInt(app.spacesBooked);
+        if (count > 0) count = count - 1;
+        app.spacesBooked = Integer.toString(count);
+
     }
 
     @Override

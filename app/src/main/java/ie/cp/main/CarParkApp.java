@@ -33,6 +33,7 @@ public class CarParkApp extends Application {
     public String googleMail;
     public String googlePhotoURL;
     public Bitmap googlePhoto;
+    public String spacesBooked;
     public DBManager dbManager;
 
     @Override
