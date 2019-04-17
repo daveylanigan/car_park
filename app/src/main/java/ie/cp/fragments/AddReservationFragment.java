@@ -115,7 +115,7 @@ public class AddReservationFragment extends Fragment {
         // reserve the space
         app.dbManager.ReserveSpace(reservationCarParkSpace);
 
-        Reservation r = new Reservation(app.googleMail,reservationCarPark.carParkName, reservationCarParkSpace.carParkSpaceName );
+        Reservation r = new Reservation("",app.googleMail,reservationCarPark.carParkName, reservationCarParkSpace.carParkSpaceName );
         // add the reservation
         app.dbManager.addReservation(r);
 

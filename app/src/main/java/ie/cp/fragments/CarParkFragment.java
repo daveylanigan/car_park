@@ -25,6 +25,7 @@ import ie.cp.api.CarParkApi;
 import ie.cp.api.VolleyListener;
 import ie.cp.models.CarPark;
 import ie.cp.models.CarParkSpace;
+import ie.cp.models.Reservation;
 import io.realm.RealmResults;
 
 public class CarParkFragment   extends Fragment implements
@@ -70,6 +71,7 @@ public class CarParkFragment   extends Fragment implements
         super.onAttach(context);
         this.activity = (Home) context;
         CarParkApi.attachListener(this);
+        CarParkApi.attachDialog(activity.loader);
     }
 
     @Override
@@ -84,13 +86,13 @@ public class CarParkFragment   extends Fragment implements
     {
 
         super.onCreate(savedInstanceState);
-        CarParkApi.getCarParks("/carpark");
+      //  CarParkApi.getCarParks("/carpark");
 
         // create our dropdown list of carparks
-      //  RealmResults<CarPark> realmResults = activity.app.dbManager.getAllCarParks();
+        RealmResults<CarPark> realmResults = activity.app.dbManager.getAllCarParks();
 
-      //  List<CarPark> carParks = activity.app.dbManager.realmDatabase.copyFromRealm(realmResults);
-      //  setList(carParks);
+        List<CarPark> carParks = activity.app.dbManager.realmDatabase.copyFromRealm(realmResults);
+        setList(carParks);
 
     }
 
@@ -118,7 +120,7 @@ public class CarParkFragment   extends Fragment implements
         listView.setOnItemClickListener(this);
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
         listView.setMultiChoiceModeListener(this);
-   //     listView.setEmptyView(view.findViewById(R.id.emptyList));
+      //  listView.setEmptyView(view.findViewById(R.id.emptyList));
     }
     @Override
     public void setList(List list) {
@@ -126,7 +128,16 @@ public class CarParkFragment   extends Fragment implements
     }
 
     @Override
+    public void setReservationList(List list) {
+
+    }
+
+    @Override
     public void setCarPark(CarPark carpark) {
+    }
+
+    @Override
+    public void setReservation(Reservation reservation) {
     }
 
     @Override
@@ -165,8 +176,8 @@ public class CarParkFragment   extends Fragment implements
         {
             public void onClick(DialogInterface dialog, int id)
             {
-                //activity.app.dbManager.deleteCarPark(carPark.carParkId); // remove from our list
-                CarParkApi.delete("/carpark/" + carPark.carParkId);
+                activity.app.dbManager.deleteCarPark(carPark.carParkId); // remove from our list
+             //   CarParkApi.delete("/carpark/" + carPark.carParkId);
 
                 listAdapter.notifyDataSetChanged(); // refresh adapter
             }

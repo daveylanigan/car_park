@@ -15,11 +15,13 @@ import java.util.List;
 
 import ie.cp.db.DBManager;
 import ie.cp.models.CarPark;
+import ie.cp.models.Reservation;
 
 public class CarParkApp extends Application {
 
     private RequestQueue mRequestQueue;
     public List<CarPark> carparkList = new ArrayList<CarPark>();
+    public List<Reservation> reservationList = new ArrayList<Reservation>();
     public static final String TAG = CarParkApp.class.getName();
 
     /* Client used to interact with Google APIs. */

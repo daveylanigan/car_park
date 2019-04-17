@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.app.LoaderManager.LoaderCallbacks;
 
@@ -50,6 +51,7 @@ import java.util.List;
 import ie.cp.R;
 import ie.cp.api.CarParkApi;
 import ie.cp.main.CarParkApp;
+import ie.cp.models.CarPark;
 import ie.cp.models.Reservation;
 import ie.cp.models.User;
 import io.realm.OrderedRealmCollection;
@@ -59,7 +61,11 @@ import static android.Manifest.permission.READ_CONTACTS;
 /**
  * A login screen that offers login via email/password.
  */
-public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor>, GoogleApiClient.OnConnectionFailedListener, OnClickListener {
+public class Login extends AppCompatActivity implements
+        LoaderCallbacks<Cursor>,
+        GoogleApiClient.OnConnectionFailedListener,
+        OnClickListener
+{
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -308,10 +314,12 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor>,
                 app.googlePhoto = bitmap;
 
                 reservations = app.dbManager.getReservationsByUser(user.emailAddress);
-      //          reservations = CarParkApi.getReservations("/reservations/" + user.emailAddress);
-
-
                 app.spacesBooked = Integer.toString(reservations.size());
+         //       loadCarparksAndReservations(user.emailAddress);
+
+       //         CarParkApi.getReservations("/reservation/" + user.emailAddress);
+
+               // app.spacesBooked = Integer.toString(reservations.size());
             }
             startHomeScreen();
 
@@ -423,6 +431,7 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor>,
         Toast.makeText(this, "Error Signing in to Google " + connectionResult, Toast.LENGTH_LONG).show();
         Log.v(TAG, "ConnectionResult : " + connectionResult);
     }
+
 
     private interface ProfileQuery {
         String[] PROJECTION = {
@@ -555,9 +564,8 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor>,
             else {
                 app.googlePhotoURL = acct.getPhotoUrl().toString();
             }
-            // show the car park reservations also
-            reservations = app.dbManager.getReservationsByUser(acct.getEmail());
-            app.spacesBooked = Integer.toString(reservations.size());
+    //        loadCarparksAndReservations(acct.getEmail());
+
             // Show a message to the user that we are signing in.
             Toast.makeText(this, "Signing in " + app.googleName +" with " + app.googleMail , Toast.LENGTH_SHORT).show();
             startHomeScreen();

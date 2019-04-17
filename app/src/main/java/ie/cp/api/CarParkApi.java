@@ -29,6 +29,7 @@ import java.util.Map;
 
 import ie.cp.activities.Home;
 import ie.cp.models.CarPark;
+import ie.cp.models.Reservation;
 
 public class CarParkApi {
 
@@ -84,7 +85,6 @@ public class CarParkApi {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-
                         vListener.setList(result); //99 indicates a 'GetAll' on Server
 
                         if (result.size() > 0) {
@@ -209,7 +209,7 @@ public class CarParkApi {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        System.out.println("Something went wrong!");
+                        System.out.println("Something went wrong getting google photo!");
                         error.printStackTrace();
                     }
                 });
@@ -262,6 +262,51 @@ public class CarParkApi {
                 return headers;
             }
         };
+        // Add the request to the queue
+        Home.app.add(gsonRequest);
+    }
+
+    public static void getReservations(String url) {
+        // Request a string response
+        Log.v("carparkApplication","GET REQUEST : " + LocalhostURL + url);
+
+        JsonArrayRequest gsonRequest = new JsonArrayRequest(Request.Method.GET, LocalhostURL + url,null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        // Result handling
+                        List<Reservation> result = new ArrayList<Reservation>();
+
+                        try {
+                           for (int j = 0; j < response.length(); j++){
+                                JSONObject obj = response.getJSONObject(j);
+
+                                result.add(new Reservation(obj.getString("_id"),obj.getString("userId"),obj.getString("carParkId"),obj.getString("carParkSpaceId")));
+
+                            }
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                       vListener.setReservationList(result);
+
+                        if (result.size() > 0) {
+                            vListener.setReservation(result.get(0));
+                        }
+                        vListener.updateUI((Fragment) vListener);
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // Error handling
+                System.out.println("Something went wrong!");
+                error.printStackTrace();
+            }
+        });
+
         // Add the request to the queue
         Home.app.add(gsonRequest);
     }

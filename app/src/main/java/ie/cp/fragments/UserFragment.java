@@ -20,6 +20,7 @@ import ie.cp.api.CarParkApi;
 import ie.cp.api.VolleyListener;
 import ie.cp.main.CarParkApp;
 import ie.cp.models.CarPark;
+import ie.cp.models.Reservation;
 
 public class UserFragment extends Fragment implements
         View.OnClickListener,
@@ -45,6 +46,8 @@ public class UserFragment extends Fragment implements
         super.onCreate(savedInstanceState);
 
         app = (CarParkApp) getActivity().getApplication();
+
+
     }
 
     @Override
@@ -61,6 +64,8 @@ public class UserFragment extends Fragment implements
 
         ImageView img = v.findViewById(R.id.profile);
         img.setImageBitmap(app.googlePhoto);
+
+    //    CarParkApi.getReservations("/reservation/" + app.googleMail);
 
         TextView userSpacesBooked = v.findViewById(R.id.userSpacesBooked);
         userSpacesBooked.setText(app.spacesBooked);
@@ -103,7 +108,6 @@ public class UserFragment extends Fragment implements
                         .commit();
             }
         });
-
 
         return v;
     }
@@ -177,13 +181,29 @@ public class UserFragment extends Fragment implements
     }
 
     @Override
+    public void setReservationList(List list) {
+        app.reservationList = list;
+        app.spacesBooked = String.valueOf(list.size());
+    }
+
+    @Override
     public void setCarPark(CarPark carpark) {
     }
 
     @Override
+    public void setReservation(Reservation reservation) {
+
+
+    }
+
+    @Override
     public void updateUI(Fragment fragment) {
+        View v = fragment.getView();
+        TextView userSpacesBooked = v.findViewById(R.id.userSpacesBooked);
+        userSpacesBooked.setText(app.spacesBooked);
         fragment.onResume();
-  //      checkSwipeRefresh(v);
+
+        //      checkSwipeRefresh(v);
     }
     public void setSwipeRefresh(View v)
     {

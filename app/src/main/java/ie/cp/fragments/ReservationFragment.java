@@ -16,21 +16,29 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import java.util.List;
+
 import ie.cp.R;
 import ie.cp.activities.Home;
 import ie.cp.adapters.ReservationListAdapter;
+import ie.cp.api.CarParkApi;
+import ie.cp.api.VolleyListener;
 import ie.cp.main.CarParkApp;
+import ie.cp.models.CarPark;
 import ie.cp.models.Reservation;
+import io.realm.RealmResults;
 
 public class ReservationFragment extends Fragment implements
         AdapterView.OnItemClickListener,
         View.OnClickListener,
-        AbsListView.MultiChoiceModeListener
+        AbsListView.MultiChoiceModeListener,
+        VolleyListener
 {
     public Home activity;
     public static ReservationListAdapter listAdapter;
     public ListView listView;
     private CarParkApp app;
+    public View v;
 
     public ReservationFragment() {
         // Required empty public constructor
@@ -61,6 +69,8 @@ public class ReservationFragment extends Fragment implements
     {
         super.onAttach(context);
         this.activity = (Home) context;
+        CarParkApi.attachListener(this);
+        CarParkApi.attachDialog(activity.loader);
     }
 
     @Override
@@ -69,6 +79,15 @@ public class ReservationFragment extends Fragment implements
 
         super.onCreate(savedInstanceState);
         app = (CarParkApp) getActivity().getApplication();
+
+        RealmResults<Reservation> realmResults = activity.app.dbManager.getAllReservations(app.googleMail);
+
+        List<Reservation> reservations = activity.app.dbManager.realmDatabase.copyFromRealm(realmResults);
+        setList(reservations);
+
+
+        //   CarParkApi.getReservations("/reservation/" + app.googleMail);
+
     }
 
     @Override
@@ -77,9 +96,12 @@ public class ReservationFragment extends Fragment implements
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home, parent, false);
 
+        // create our dropdown list of carparks
         listAdapter = new ReservationListAdapter(activity, this, app.dbManager.getAllReservations(app.googleMail));
 
         listView = v.findViewById(R.id.homeList);
+      //  updateView();
+
         setListView(v);
 
         getActivity().setTitle(R.string.reservationsLbl);
@@ -122,8 +144,13 @@ public class ReservationFragment extends Fragment implements
         {
             public void onClick(DialogInterface dialog, int id)
             {
-                app.dbManager.deleteReservation(reservation.reservationId); // remove from our list
+                app.dbManager.deleteReservation(reservation.reservationId);
+                // remove from our list
                 listAdapter.notifyDataSetChanged(); // refresh adapter
+                // update the spacesbooked amount
+                int count = Integer.parseInt(app.spacesBooked);
+                if (count > 0) count = count - 1;
+                app.spacesBooked = Integer.toString(count);
             }
         }).setNegativeButton("No", new DialogInterface.OnClickListener()
         {
@@ -134,10 +161,6 @@ public class ReservationFragment extends Fragment implements
         });
         AlertDialog alert = builder.create();
         alert.show();
-        // update the spacesbooked amount
-        int count = Integer.parseInt(app.spacesBooked);
-        if (count > 0) count = count - 1;
-        app.spacesBooked = Integer.toString(count);
 
     }
 
@@ -194,4 +217,38 @@ public class ReservationFragment extends Fragment implements
     }
 
     /* ************ MultiChoiceModeListener methods (end) *********** */
+
+    public void updateView() {
+        listAdapter = new ReservationListAdapter(activity, this, activity.app.reservationList);
+
+        setListView(v);
+
+
+        listAdapter.notifyDataSetChanged(); // Update the adapter
+    }
+
+    @Override
+    public void setList(List list) {
+        activity.app.reservationList = list;
+    }
+
+    @Override
+    public void setReservationList(List list) {
+
+    }
+
+    @Override
+    public void setReservation(Reservation reservation) {
+    }
+
+    @Override
+    public void setCarPark(CarPark carpark) {
+    }
+
+    @Override
+    public void updateUI(Fragment fragment) {
+        fragment.onResume();
+    }
+
+
 }

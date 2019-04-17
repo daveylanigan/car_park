@@ -70,8 +70,8 @@ public class AddCarParkFragment extends Fragment {
             //car park id will be added by mongo
             CarPark c = new CarPark("",carParkName, carParkAddress, carParkLocation, "0", "0");
 
-         //   app.dbManager.addCarPark(c);
-            CarParkApi.putCarPark("/carpark",c);
+            app.dbManager.addCarPark(c);
+        //    CarParkApi.putCarPark("/carpark",c);
          //   startActivity(new Intent(this.getActivity(), Home.class));
             CarParkFragment nextFrag = CarParkFragment.newInstance();
             getActivity().getSupportFragmentManager().beginTransaction()

@@ -13,10 +13,12 @@ import android.widget.Toast;
 import java.util.List;
 
 import ie.cp.R;
+import ie.cp.activities.Home;
 import ie.cp.api.CarParkApi;
 import ie.cp.api.VolleyListener;
 import ie.cp.main.CarParkApp;
 import ie.cp.models.CarPark;
+import ie.cp.models.Reservation;
 import io.realm.RealmResults;
 
 public class EditCarParkFragment extends Fragment   implements VolleyListener {
@@ -44,15 +46,15 @@ public class EditCarParkFragment extends Fragment   implements VolleyListener {
     {
         super.onCreate(savedInstanceState);
         app = (CarParkApp) getActivity().getApplication();
-      //  RealmResults<CarPark> res = null;
+        RealmResults<CarPark> res = null;
 
         if(getArguments() != null)
-         //   res = app.dbManager.getCarPark(getArguments().getString("carParkId"));
-         //   if (res.size()>0) {
-         //       aCarPark = res.first();
-         //  }
+            res = app.dbManager.getCarPark(getArguments().getString("carParkId"));
+            if (res.size()>0) {
+                aCarPark = res.first();
+           }
     //        CarParkApi.getCarParks("/carpark/" + getArguments().getString("carParkId"));
-        CarParkApi.getCarParks("/carpark");
+      //  CarParkApi.getCarParks("/carpark");
 
     }
 
@@ -96,6 +98,8 @@ public class EditCarParkFragment extends Fragment   implements VolleyListener {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }
+        CarParkApi.attachListener(this);
+
     }
 
     @Override
@@ -110,9 +114,19 @@ public class EditCarParkFragment extends Fragment   implements VolleyListener {
     }
 
     @Override
+    public void setReservationList(List list) {
+
+    }
+
+    @Override
     public void setCarPark(CarPark carPark) {
 
         aCarPark = carPark;
+    }
+
+    @Override
+    public void setReservation(Reservation reservation) {
+
     }
 
 
