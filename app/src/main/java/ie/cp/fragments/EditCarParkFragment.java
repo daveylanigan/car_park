@@ -52,7 +52,7 @@ public class EditCarParkFragment extends Fragment   implements VolleyListener {
             res = app.dbManager.getCarPark(getArguments().getString("carParkId"));
             if (res.size()>0) {
                 aCarPark = res.first();
-           }
+            }
     //        CarParkApi.getCarParks("/carpark/" + getArguments().getString("carParkId"));
       //  CarParkApi.getCarParks("/carpark");
 
@@ -63,6 +63,16 @@ public class EditCarParkFragment extends Fragment   implements VolleyListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_carpark_edit, container, false);
+
+        ((TextView)v.findViewById(R.id.editCarParkTitleTV)).setText(aCarPark.carParkName);
+
+        name = v.findViewById(R.id.editCarParkNameET);
+        address = v.findViewById(R.id.editCarParkAddressET);
+        location = v.findViewById(R.id.editCarParkLocationET);
+
+        name.setText(aCarPark.carParkName);
+        location.setText(aCarPark.location);
+        address.setText(""+aCarPark.address);
 
         return v;
     }
@@ -76,10 +86,15 @@ public class EditCarParkFragment extends Fragment   implements VolleyListener {
             if ((carParkName.length() > 0) && (carParkAddress.length() > 0) && (carParkLocation.length() > 0)) {
                 app.dbManager.updateCarPark(aCarPark,carParkName,carParkAddress,carParkLocation,"0","0");
 
-                if (getActivity().getSupportFragmentManager().getBackStackEntryCount() > 0) {
-                    getFragmentManager().popBackStack();
-                    return;
-                }
+                CarParkFragment nextFrag = CarParkFragment.newInstance();
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.homeFrame, nextFrag)
+                        .addToBackStack(null)
+                        .commit();
+        //        if (getActivity().getSupportFragmentManager().getBackStackEntryCount() > 0) {
+         //           getFragmentManager().popBackStack();
+         //           return;
+          //      }
             }
         } else
             Toast.makeText(getActivity(), "You must Enter Something for Name, Location and Address", Toast.LENGTH_SHORT).show();

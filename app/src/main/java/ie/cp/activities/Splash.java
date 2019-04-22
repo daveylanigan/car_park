@@ -26,11 +26,11 @@ public class Splash extends Activity {
         ImageView im = findViewById(R.id.imageView);
 
         try {
-            AnimatedImageDrawable coffeeAnimation;
-            coffeeAnimation = (AnimatedImageDrawable) ImageDecoder.decodeDrawable(
-                    ImageDecoder.createSource(getResources(), R.drawable.giphy));
-            im.setImageDrawable(coffeeAnimation);
-            coffeeAnimation.start();
+            AnimatedImageDrawable animation;
+            animation = (AnimatedImageDrawable) ImageDecoder.decodeDrawable(
+                    ImageDecoder.createSource(getResources(), R.drawable.cpark));
+            im.setImageDrawable(animation);
+            animation.start();
         }
         catch(Exception e)
         {

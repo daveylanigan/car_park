@@ -260,7 +260,7 @@ public class DBManager {
 
     public RealmResults getCarPark(String carParkName) {
         return realmDatabase.where(CarPark.class)
-                .equalTo("carParkName",carParkName)
+                .equalTo("carParkId",carParkName)
                 .findAll();
     }
     public RealmResults getCarParkSpace(String carParkSpaceName) {

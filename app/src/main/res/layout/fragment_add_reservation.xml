@@ -8,23 +8,6 @@
     tools:context=".fragments.AddCarParkFragment">
 
 
-    <TextView
-        android:id="@+id/addreservationfooter"
-        android:layout_width="0dp"
-        android:layout_height="36dp"
-        android:background="@color/colorPrimary"
-        android:paddingTop="5dp"
-        android:text="@string/appWebsite"
-        android:textAlignment="center"
-        android:textColor="@color/colorFontWhite"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.523"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/addCarParkSpaceCarParkTV"
@@ -67,14 +50,17 @@
         android:layout_width="220dp"
         android:layout_height="45dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="184dp"
+        android:layout_marginTop="360dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/buttonstylewithgradient"
         android:text="@string/addReservationBtnLbl"
         android:textColor="#fff"
-        app:layout_constraintBottom_toTopOf="@+id/addreservationfooter"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.034" />
 
     <TextView
         android:id="@+id/addReservationCarParkSpaceTV"
@@ -115,7 +101,7 @@
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
-        android:layout_height="21dp"
+        android:layout_height="25dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -146,6 +132,6 @@
         app:layout_constraintHorizontal_bias="0.137"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.109" />
+        app:layout_constraintVertical_bias="0.126" />
 
 </android.support.constraint.ConstraintLayout>

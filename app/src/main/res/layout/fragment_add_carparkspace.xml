@@ -7,23 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".fragments.AddCarParkFragment">
 
-    <TextView
-        android:id="@+id/addcarparkspacefooter"
-        android:layout_width="0dp"
-        android:layout_height="36dp"
-        android:background="@color/colorPrimary"
-        android:paddingTop="5dp"
-        android:text="@string/appWebsite"
-        android:textAlignment="center"
-        android:textColor="@color/colorFontWhite"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.523"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/addCarParkSpaceCarParkTV"
@@ -132,17 +115,17 @@
 
     <Button
         android:id="@+id/addCarParkSpaceBtn"
+        android:layout_width="220dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="312dp"
+        android:background="@drawable/buttonstylewithgradient"
         android:elevation="5dp"
-        android:layout_width="79dp"
-        android:layout_height="84dp"
-        android:layout_marginTop="68dp"
-        android:background="@color/colorFontOffWhite"
-        android:drawableTop="@drawable/blue_add_48"
         android:text="@string/addCarParkSpaceBtnLbl"
-        app:layout_constraintBottom_toTopOf="@+id/addcarparkspacefooter"
+        android:textColor="#fff"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_bias="0.714" />
+        app:layout_constraintHorizontal_bias="0.445"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
