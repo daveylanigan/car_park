@@ -72,8 +72,8 @@ implements NavigationView.OnNavigationItemSelectedListener,
 
         //SetUp GooglePhoto and Email for Drawer here
         googlePhoto = navigationView.getHeaderView(0).findViewById(R.id.googlephoto);
- //       CarParkApi.getGooglePhoto(app.googlePhotoURL,googlePhoto);
-        googlePhoto.setImageBitmap(app.googlePhoto);
+        CarParkApi.getGooglePhoto(app.googlePhotoURL,googlePhoto);
+       // googlePhoto.setImageBitmap(app.googlePhoto);
 
         TextView googleName = navigationView.getHeaderView(0).findViewById(R.id.googlename);
         googleName.setText(app.googleName);

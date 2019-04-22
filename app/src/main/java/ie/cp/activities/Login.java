@@ -94,7 +94,7 @@ public class Login extends AppCompatActivity implements
     /* Request code used to invoke sign in user interactions. */
     private static final int RC_SIGN_IN = 0;
     private static final String TAG = "carpark";
-    private OrderedRealmCollection<Reservation> reservations;
+//    private OrderedRealmCollection<Reservation> reservations;
     private Bitmap bitmap;
 
     @Override
@@ -313,8 +313,13 @@ public class Login extends AppCompatActivity implements
                 bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.android);
                 app.googlePhoto = bitmap;
 
-                reservations = app.dbManager.getReservationsByUser(user.emailAddress);
-                app.spacesBooked = Integer.toString(reservations.size());
+//                reservations = app.dbManager.getReservationsByUser(user.emailAddress);
+//                if (reservations.size() > 0) {
+//                    app.spacesBooked = Integer.toString(reservations.size());
+//                } else {
+//                    app.spacesBooked = Integer.toString(0);
+//                }
+
          //       loadCarparksAndReservations(user.emailAddress);
 
        //         CarParkApi.getReservations("/reservation/" + user.emailAddress);

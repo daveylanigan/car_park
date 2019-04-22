@@ -21,6 +21,7 @@ import ie.cp.api.VolleyListener;
 import ie.cp.main.CarParkApp;
 import ie.cp.models.CarPark;
 import ie.cp.models.Reservation;
+import io.realm.OrderedRealmCollection;
 
 public class UserFragment extends Fragment implements
         View.OnClickListener,
@@ -66,6 +67,16 @@ public class UserFragment extends Fragment implements
         img.setImageBitmap(app.googlePhoto);
 
     //    CarParkApi.getReservations("/reservation/" + app.googleMail);
+        OrderedRealmCollection<Reservation> reservations;
+
+        reservations = app.dbManager.getReservationsByUser(app.googleMail);
+        if (reservations.size() > 0) {
+            app.spacesBooked = Integer.toString(reservations.size());
+        } else {
+            app.spacesBooked = Integer.toString(0);
+        }
+
+
 
         TextView userSpacesBooked = v.findViewById(R.id.userSpacesBooked);
         userSpacesBooked.setText(app.spacesBooked);

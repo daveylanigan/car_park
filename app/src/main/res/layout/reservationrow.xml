@@ -6,23 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_activated">
 
-    <ImageView
-        android:id="@+id/rowFavouriteImg"
-        android:layout_width="39dp"
-        android:layout_height="39dp"
-        android:layout_alignParentLeft="true"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:contentDescription="fav"
-        android:gravity="center_vertical"
-        android:src="@drawable/favourites_72"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.024"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
+   <ImageView
         android:id="@+id/rowDeleteImg"
         android:layout_width="45dp"
         android:layout_height="45dp"
