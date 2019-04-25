@@ -16,20 +16,6 @@
         android:background="@drawable/background_activated">
 
         <ImageView
-            android:id="@+id/rowFavouriteImg"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_alignParentLeft="true"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:contentDescription="fav"
-            android:gravity="center_vertical"
-            android:src="@drawable/favourites_72" />
-
-        <ImageView
             android:id="@+id/rowDeleteImg"
             android:layout_width="48dp"
             android:layout_height="49dp"
@@ -44,11 +30,11 @@
 
         <TextView
             android:id="@+id/rowCarParkSpaceName"
-            android:layout_width="130dp"
-            android:layout_height="20dp"
+            android:layout_width="210dp"
+            android:layout_height="wrap_content"
             android:layout_alignTop="@+id/rowFavouriteImg"
             android:layout_alignParentStart="true"
-            android:layout_marginStart="68dp"
+            android:layout_marginStart="0dp"
             android:gravity="center_vertical"
             android:text="@string/car_park_space_row_name"
             android:textColor="@color/colorPrimary"
@@ -57,12 +43,12 @@
 
         <TextView
             android:id="@+id/rowCarParkSpaceDescription"
-            android:layout_width="130dp"
-            android:layout_height="16dp"
-            android:layout_alignStart="@+id/rowCarParkSpaceName"
-            android:layout_alignBottom="@+id/rowFavouriteImg"
+            android:layout_width="209dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/rowCarParkSpaceName"
+            android:layout_alignParentStart="true"
             android:layout_marginStart="0dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="-18dp"
             android:gravity="center_vertical"
             android:text="@string/car_park_space_row_description"
             android:textColor="@color/colorFontBlack"
@@ -71,12 +57,12 @@
 
         <TextView
             android:id="@+id/rowCarParkSpaceCarPark"
-            android:layout_width="130dp"
-            android:layout_height="16dp"
-            android:layout_alignStart="@+id/rowCarParkSpaceName"
-            android:layout_alignBottom="@+id/rowFavouriteImg"
+            android:layout_width="209dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/rowCarParkSpaceDescription"
+            android:layout_alignParentStart="true"
             android:layout_marginStart="0dp"
-            android:layout_marginBottom="-8dp"
+            android:layout_marginBottom="-16dp"
             android:gravity="center_vertical"
             android:text="@string/car_park_space_row_carpark"
             android:textColor="@color/colorFontBlack"

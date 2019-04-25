@@ -26,6 +26,10 @@ public class CarParkItem  {
         ImageView imgDelete = view.findViewById(R.id.rowDeleteImg);
         imgDelete.setTag(carpark);
         imgDelete.setOnClickListener(deleteListener);
+
+        ImageView imgSpaces = view.findViewById(R.id.rowSpaceImg);
+        imgSpaces.setTag(carpark);
+        imgSpaces.setOnClickListener(deleteListener);
     }
 
     private void updateControls(CarPark carpark) {

@@ -78,7 +78,7 @@ public class AddReservationFragment extends Fragment {
 
                 String selectedCarPark = spinner.getSelectedItem().toString();
 
-                RealmResults<CarParkSpace> realmResults2 = app.dbManager.getCarParkSpaces(selectedCarPark);
+                RealmResults<CarParkSpace> realmResults2 = app.dbManager.getCarParkSpaces(selectedCarPark, true);
                 List<CarParkSpace> carParkSpaces = app.dbManager.realmDatabase.copyFromRealm(realmResults2);
 
                 ArrayAdapter<CarParkSpace> adapter2 = new ArrayAdapter<>(view.getContext(), android.R.layout.simple_list_item_1, carParkSpaces);

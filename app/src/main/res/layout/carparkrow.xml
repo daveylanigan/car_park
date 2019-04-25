@@ -10,11 +10,11 @@
         android:id="@+id/rowDeleteImg"
         android:layout_width="45dp"
         android:layout_height="45dp"
-        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_marginEnd="8dp"
+        android:layout_alignParentRight="true"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:contentDescription="fav"
         android:src="@android:drawable/ic_delete"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,9 +22,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/rowSpaceImg"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:contentDescription="fav"
+        android:src="@android:drawable/ic_dialog_dialer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.871"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/rowCarParkName"
-        android:layout_width="130dp"
+        android:layout_width="197dp"
         android:layout_height="20dp"
         android:layout_alignTop="@+id/rowFavouriteImg"
         android:layout_marginStart="8dp"
@@ -44,7 +60,7 @@
 
     <TextView
         android:id="@+id/rowCarParkAddress"
-        android:layout_width="130dp"
+        android:layout_width="195dp"
         android:layout_height="16dp"
         android:layout_alignLeft="@+id/rowCarParkName"
         android:layout_alignBottom="@+id/rowFavouriteImg"
@@ -67,7 +83,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/rowDeleteImg"
-        android:layout_marginStart="304dp"
+        android:layout_marginStart="296dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
@@ -79,10 +95,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.023"
+        app:layout_constraintHorizontal_bias="0.01"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.035" />
+        app:layout_constraintVertical_bias="0.034" />
 
     <TextView
         android:id="@+id/rowSpacesAvailable"
@@ -90,7 +106,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/rowTotalSpaces"
         android:layout_alignTop="@+id/rowDeleteImg"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="284dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
@@ -101,15 +117,15 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.732"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.001" />
+        app:layout_constraintVertical_bias="0.002" />
 
     <TextView
         android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="76dp"
+        android:layout_height="14dp"
         android:layout_marginStart="208dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -124,13 +140,13 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.001" />
+        app:layout_constraintVertical_bias="0.002" />
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="208dp"
+        android:layout_marginStart="204dp"
         android:layout_marginTop="32dp"
         android:layout_marginBottom="8dp"
         android:gravity="center_vertical"

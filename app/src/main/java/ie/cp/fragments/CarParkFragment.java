@@ -156,7 +156,12 @@ public class CarParkFragment   extends Fragment implements
     {
         if (view.getTag() instanceof CarPark)
         {
-            onCarParkDelete ((CarPark) view.getTag());
+            if (view.getId() == R.id.rowDeleteImg) {
+                onCarParkDelete((CarPark) view.getTag());
+            }
+            if (view.getId() == R.id.rowSpaceImg) {
+                onCarParkSpace((CarPark) view.getTag());
+            }
         }
     }
 
@@ -177,7 +182,7 @@ public class CarParkFragment   extends Fragment implements
             public void onClick(DialogInterface dialog, int id)
             {
                 activity.app.dbManager.deleteCarPark(carPark.carParkId); // remove from our list
-             //   CarParkApi.delete("/carpark/" + carPark.carParkId);
+                //   CarParkApi.delete("/carpark/" + carPark.carParkId);
 
                 listAdapter.notifyDataSetChanged(); // refresh adapter
             }
@@ -190,6 +195,16 @@ public class CarParkFragment   extends Fragment implements
         });
         AlertDialog alert = builder.create();
         alert.show();
+    }
+
+    public void onCarParkSpace(final CarPark carPark)
+    {
+      //  String stringName = carPark.carParkName;
+        CarParkSpaceFragment nextFrag = CarParkSpaceFragment.newInstance(carPark.carParkName);
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.homeFrame, nextFrag)
+                .addToBackStack(null)
+                .commit();
     }
 
     /* ************ MultiChoiceModeListener methods (begin) *********** */

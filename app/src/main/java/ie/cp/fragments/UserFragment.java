@@ -64,7 +64,10 @@ public class UserFragment extends Fragment implements
         userGoogleMail.setText(app.googleMail);
 
         ImageView img = v.findViewById(R.id.profile);
-        img.setImageBitmap(app.googlePhoto);
+        //SetUp GooglePhoto and Email for Drawer here
+        CarParkApi.getGooglePhoto(app.googlePhotoURL,img);
+
+  //      img.setImageBitmap(app.googlePhoto);
 
     //    CarParkApi.getReservations("/reservation/" + app.googleMail);
         OrderedRealmCollection<Reservation> reservations;

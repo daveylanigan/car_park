@@ -43,16 +43,30 @@
             android:contentDescription="fav"
             android:src="@android:drawable/ic_delete" />
 
+        <ImageView
+            android:id="@+id/rowSpaceImg"
+            android:layout_width="48dp"
+            android:layout_height="49dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="57dp"
+            android:layout_marginRight="57dp"
+            android:contentDescription="fav"
+            android:src="@android:drawable/ic_dialog_dialer" />
+
         <TextView
             android:id="@+id/rowCarParkName"
-            android:layout_width="130dp"
-            android:layout_height="20dp"
+            android:layout_width="184dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="0dp"
             android:layout_marginTop="7dp"
-            android:layout_marginEnd="281dp"
+            android:layout_marginEnd="227dp"
             android:gravity="center_vertical"
             android:text="@string/car_park_row_name"
             android:textColor="@color/colorPrimary"
@@ -61,14 +75,14 @@
 
         <TextView
             android:id="@+id/rowCarParkAddress"
-            android:layout_width="130dp"
-            android:layout_height="16dp"
+            android:layout_width="182dp"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/rowCarParkName"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="0dp"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="281dp"
+            android:layout_marginEnd="229dp"
             android:gravity="center_vertical"
             android:text="@string/car_park_row_address"
             android:textColor="@color/colorFontBlack"

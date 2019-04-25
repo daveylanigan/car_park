@@ -15,7 +15,6 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import ie.cp.R;
 
@@ -56,6 +55,15 @@ public class CarParkSpaceFragment extends Fragment implements
         return fragment;
     }
 
+    public static CarParkSpaceFragment newInstance(String carParkName) {
+        CarParkSpaceFragment fragment = new CarParkSpaceFragment();
+        Bundle args = new Bundle();
+        args.putString("carParkId",carParkName);
+
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
     public void onAttach(Context context)
     {
@@ -72,11 +80,19 @@ public class CarParkSpaceFragment extends Fragment implements
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
+        Bundle bundle=getArguments();
+        String carParkId ="";
+        carParkId = bundle.getString("carParkId");
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home, parent, false);
 
-        listAdapter = new CarParkSpaceListAdapter(activity, this, activity.app.dbManager.getAllCarParkSpaces());
- ////       carParkFilter = new CarParkFilter(activity.app.dbManager, listAdapter);
+        if (carParkId.isEmpty()){
+            listAdapter = new CarParkSpaceListAdapter(activity, this, activity.app.dbManager.getAllCarParkSpaces());
+        }else {
+            listAdapter = new CarParkSpaceListAdapter(activity, this, activity.app.dbManager.getCarParkSpaces(carParkId, false));
+        }
+
+        ////       carParkFilter = new CarParkFilter(activity.app.dbManager, listAdapter);
 
         listView = v.findViewById(R.id.homeList);
         setListView(v);

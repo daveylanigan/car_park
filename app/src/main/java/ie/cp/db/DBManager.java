@@ -235,13 +235,21 @@ public class DBManager {
         return result;
     }
 
-    public RealmResults<CarParkSpace> getCarParkSpaces(String carParkName) {
+    public RealmResults<CarParkSpace> getCarParkSpaces(String carParkName, boolean unBooked) {
         // get available spaces for a particular car park
-        RealmResults<CarParkSpace> result = realmDatabase.where(CarParkSpace.class)
-                .equalTo("carParkId",carParkName)
-                .equalTo("booked",false)
-                .findAll();
-        return result;
+        if (unBooked){
+            RealmResults<CarParkSpace> result = realmDatabase.where(CarParkSpace.class)
+                    .equalTo("carParkId",carParkName)
+                    .equalTo("booked",false)
+                    .findAll();
+            return result;
+        } else {
+
+            RealmResults<CarParkSpace> result = realmDatabase.where(CarParkSpace.class)
+                    .equalTo("carParkId", carParkName)
+                    .findAll();
+            return result;
+        }
     }
 
     public RealmResults<Reservation> getAllReservations(String userEmail) {
