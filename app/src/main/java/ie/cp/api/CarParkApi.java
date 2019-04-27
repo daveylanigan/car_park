@@ -33,8 +33,7 @@ import ie.cp.models.Reservation;
 
 public class CarParkApi {
 
-   // private static final String hostURL = "http://coffeemate-nodeserver.herokuapp.com";
-   // private static final String LocalhostURL = "http://localhost:8080/api";
+   // private static final String hostURL = "http://whispering-dawn-74037.herokuapp.com";
     private static final String LocalhostURL = "http://10.0.2.2:8080/api";
     private static List<CarPark> result = null;
     private static VolleyListener vListener;

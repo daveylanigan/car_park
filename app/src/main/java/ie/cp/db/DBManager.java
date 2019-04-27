@@ -271,6 +271,12 @@ public class DBManager {
                 .equalTo("carParkId",carParkName)
                 .findAll();
     }
+
+    public RealmResults getCarParkByName(String carParkName) {
+        return realmDatabase.where(CarPark.class)
+                .equalTo("carParkName",carParkName)
+                .findAll();
+    }
     public RealmResults getCarParkSpace(String carParkSpaceName) {
         return realmDatabase.where(CarParkSpace.class)
                 .equalTo("carParkSpaceName",carParkSpaceName)
@@ -323,10 +329,24 @@ public class DBManager {
     }
     public void deleteCarPark(String carParkId) {
         realmDatabase.beginTransaction();
-        realmDatabase.where(CarPark.class)
-                .equalTo("carParkId",carParkId)
-                .findAll()
-                .deleteAllFromRealm();
+
+            CarPark c = realmDatabase.where(CarPark.class)
+                    .equalTo("carParkId",carParkId)
+                    .findAll()
+                    .first();
+
+            realmDatabase.where(CarParkSpace.class)
+                    .equalTo("carParkId",c.carParkName)
+                    .findAll()
+                    .deleteAllFromRealm();
+
+
+            realmDatabase.where(CarPark.class)
+                        .equalTo("carParkId",carParkId)
+                        .findAll()
+                        .deleteAllFromRealm();
+
+
         realmDatabase.commitTransaction();
     }
 
@@ -346,12 +366,12 @@ public class DBManager {
                     .findAll()
                     .deleteAllFromRealm();
 
-        CarPark cp = realmDatabase.where(CarPark.class)
-                .equalTo("carParkName",carParkId)
-                .findAll()
-                .first();
-        cp.totalSpaces = Integer.toString(Integer.parseInt(cp.totalSpaces) - 1);
-        cp.spacesAvailable = Integer.toString(Integer.parseInt(cp.spacesAvailable) - 1);
+            CarPark cp = realmDatabase.where(CarPark.class)
+                    .equalTo("carParkName",carParkId)
+                    .findAll()
+                    .first();
+            cp.totalSpaces = Integer.toString(Integer.parseInt(cp.totalSpaces) - 1);
+            cp.spacesAvailable = Integer.toString(Integer.parseInt(cp.spacesAvailable) - 1);
 
             // find the car park
      //       realmDatabase.where(CarPark.class)

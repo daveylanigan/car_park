@@ -138,19 +138,19 @@ implements NavigationView.OnNavigationItemSelectedListener,
     }
 
     public void setupCarParks(){
-      //      RealmResults res;
-       //     res = app.dbManager.getCarPark("MultiStory 1");
-       //     if (res.size() == 0){
-       //         app.dbManager.addCarPark(new CarPark("MultiStory 1", "Newgate Street", "Waterford", "4", "4"));
-       //     }
-        //    res = app.dbManager.getCarPark("MultiStory 2");
-        //    if (res.size() == 0){
-         //       app.dbManager.addCarPark(new CarPark("MultiStory 2", "City Square","Waterford","4","4"));
-        //    }
-        //    res = app.dbManager.getCarPark("MultiStory 3");
-        //    if (res.size() == 0){
-        //        app.dbManager.addCarPark(new CarPark("MultiStory 3", "The Quay","New Ross","4","4"));
-        //    }
+            RealmResults res;
+            res = app.dbManager.getCarParkByName("MultiStory 1");
+            if (res.size() == 0){
+                app.dbManager.addCarPark(new CarPark("","MultiStory 1", "Newgate Street", "Waterford", "4", "4"));
+            }
+            res = app.dbManager.getCarParkByName("MultiStory 2");
+            if (res.size() == 0){
+                app.dbManager.addCarPark(new CarPark("","MultiStory 2", "City Square","Waterford","4","4"));
+            }
+            res = app.dbManager.getCarParkByName("MultiStory 3");
+            if (res.size() == 0){
+                app.dbManager.addCarPark(new CarPark("","MultiStory 3", "The Quay","New Ross","4","4"));
+            }
 
     }
 

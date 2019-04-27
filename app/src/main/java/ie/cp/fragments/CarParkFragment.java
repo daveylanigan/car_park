@@ -24,7 +24,6 @@ import ie.cp.adapters.CarParkListAdapter;
 import ie.cp.api.CarParkApi;
 import ie.cp.api.VolleyListener;
 import ie.cp.models.CarPark;
-import ie.cp.models.CarParkSpace;
 import ie.cp.models.Reservation;
 import io.realm.RealmResults;
 
@@ -102,14 +101,14 @@ public class CarParkFragment   extends Fragment implements
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home, parent, false);
 
- //       listAdapter = new CarParkListAdapter(activity, this, activity.app.dbManager.getAllCarParks());
+        listAdapter = new CarParkListAdapter(activity, this, activity.app.dbManager.getAllCarParks());
 
         listView = v.findViewById(R.id.homeList);
-        updateView();
-  //      setListView(v);
+   //     updateView();
 
+        setListView(v);
 
- //       getActivity().setTitle(R.string.recentlyViewedLbl);
+        getActivity().setTitle(R.string.carParksLbl);
 
         return v;
     }
@@ -120,7 +119,7 @@ public class CarParkFragment   extends Fragment implements
         listView.setOnItemClickListener(this);
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
         listView.setMultiChoiceModeListener(this);
-      //  listView.setEmptyView(view.findViewById(R.id.emptyList));
+    //    listView.setEmptyView(view.findViewById(R.id.emptyList));
     }
     @Override
     public void setList(List list) {
@@ -183,8 +182,9 @@ public class CarParkFragment   extends Fragment implements
             {
                 activity.app.dbManager.deleteCarPark(carPark.carParkId); // remove from our list
                 //   CarParkApi.delete("/carpark/" + carPark.carParkId);
-
+                // remove from our list
                 listAdapter.notifyDataSetChanged(); // refresh adapter
+
             }
         }).setNegativeButton("No", new DialogInterface.OnClickListener()
         {
