@@ -24,6 +24,7 @@ import ie.cp.adapters.CarParkListAdapter;
 import ie.cp.api.CarParkApi;
 import ie.cp.api.VolleyListener;
 import ie.cp.models.CarPark;
+import ie.cp.models.CarParkSpace;
 import ie.cp.models.Reservation;
 import io.realm.RealmResults;
 
@@ -48,6 +49,9 @@ public class CarParkFragment   extends Fragment implements
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         Bundle activityInfo = new Bundle(); // Creates a new Bundle object
         activityInfo.putString("carParkId", (String) view.getTag());
+
+        CarPark c = (CarPark) adapterView.getAdapter().getItem(i);
+        activityInfo.putString("carParkName", c.carParkName);
 
         Fragment fragment = EditCarParkFragment.newInstance(activityInfo);
         getActivity().setTitle(R.string.editCarParkLbl);
@@ -85,13 +89,13 @@ public class CarParkFragment   extends Fragment implements
     {
 
         super.onCreate(savedInstanceState);
-      //  CarParkApi.getCarParks("/carpark");
+        CarParkApi.getCarParks("/carpark");
 
         // create our dropdown list of carparks
-        RealmResults<CarPark> realmResults = activity.app.dbManager.getAllCarParks();
+    //    RealmResults<CarPark> realmResults = activity.app.dbManager.getAllCarParks();
 
-        List<CarPark> carParks = activity.app.dbManager.realmDatabase.copyFromRealm(realmResults);
-        setList(carParks);
+    //    List<CarPark> carParks = activity.app.dbManager.realmDatabase.copyFromRealm(realmResults);
+     //   setList(carParks);
 
     }
 
@@ -101,14 +105,15 @@ public class CarParkFragment   extends Fragment implements
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home, parent, false);
 
-        listAdapter = new CarParkListAdapter(activity, this, activity.app.dbManager.getAllCarParks());
+    //    listAdapter = new CarParkListAdapter(activity, this, activity.app.dbManager.getAllCarParks());
+    //    listAdapter = new CarParkListAdapter(activity, this, activity.app.carparkList);
 
         listView = v.findViewById(R.id.homeList);
-   //     updateView();
+        updateView();
 
-        setListView(v);
+  //dbmanager      setListView(v);
 
-        getActivity().setTitle(R.string.carParksLbl);
+    //    getActivity().setTitle(R.string.carParksLbl);
 
         return v;
     }
@@ -127,6 +132,11 @@ public class CarParkFragment   extends Fragment implements
     }
 
     @Override
+    public void setSpaceList(List list) {
+
+    }
+
+    @Override
     public void setReservationList(List list) {
 
     }
@@ -142,6 +152,16 @@ public class CarParkFragment   extends Fragment implements
     @Override
     public void updateUI(Fragment fragment) {
         fragment.onResume();
+    }
+
+    @Override
+    public void setCarParkSpace(CarParkSpace carParkSpace) {
+
+    }
+
+    @Override
+    public void updateCarParkSpaceDropdown(Fragment fragment) {
+
     }
 
     @Override
@@ -180,8 +200,8 @@ public class CarParkFragment   extends Fragment implements
         {
             public void onClick(DialogInterface dialog, int id)
             {
-                activity.app.dbManager.deleteCarPark(carPark.carParkId); // remove from our list
-                //   CarParkApi.delete("/carpark/" + carPark.carParkId);
+              //app.db  activity.app.dbManager.deleteCarPark(carPark.carParkId); // remove from our list
+                   CarParkApi.delete("/carpark/" + carPark.carParkId);
                 // remove from our list
                 listAdapter.notifyDataSetChanged(); // refresh adapter
 

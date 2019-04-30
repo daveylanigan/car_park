@@ -160,25 +160,6 @@ public class DBManager {
 
     }
 
-    public void updateCarParkSpace(CarParkSpace c, String name ,String carParkSpaceDescription, String carParkId, boolean booked)
-    {
-        realmDatabase.beginTransaction();
-        c.carParkSpaceName = name;
-        c.carParkSpaceDescription = carParkSpaceDescription;
-        c.carParkId = carParkId;
-        c.booked = booked;
-        realmDatabase.commitTransaction();
-    }
-
-    public void updateReservation(Reservation c, String userId ,String carParkId, String carParkSpaceId)
-    {
-        realmDatabase.beginTransaction();
-        c.userId = userId;
-        c.carParkId = carParkId;
-        c.carParkSpaceId = carParkSpaceId;
-        realmDatabase.commitTransaction();
-    }
-
     public void resetReservation() {
         realmDatabase.beginTransaction();
         realmDatabase.where(Reservation.class)
@@ -373,18 +354,6 @@ public class DBManager {
             cp.totalSpaces = Integer.toString(Integer.parseInt(cp.totalSpaces) - 1);
             cp.spacesAvailable = Integer.toString(Integer.parseInt(cp.spacesAvailable) - 1);
 
-            // find the car park
-     //       realmDatabase.where(CarPark.class)
-      //          .equalTo("carParkName",carParkId)
-       //         .findAll()
-       //             .setString("totalSpaces",Integer.toString(Integer.parseInt(cp.totalSpaces) - 1))
-        //            .setString("spacesAvailable",Integer.toString(Integer.parseInt(cp.spacesAvailable) - 1);
-
-
-       // now update the car park with the number of spaces available
-      //  updateCarParkBookedSpace(cp.carParkId ,false, true);
- //       cp.totalSpaces = Integer.toString(Integer.parseInt(cp.totalSpaces) - 1);
-    //    cp.spacesAvailable = Integer.toString(Integer.parseInt(cp.spacesAvailable) - 1);
 
         realmDatabase.commitTransaction();
 

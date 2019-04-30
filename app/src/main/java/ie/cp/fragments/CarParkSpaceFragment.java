@@ -16,20 +16,28 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import java.util.List;
+
 import ie.cp.R;
 
 import ie.cp.activities.Home;
 import ie.cp.adapters.CarParkSpaceListAdapter;
+import ie.cp.api.CarParkApi;
+import ie.cp.api.VolleyListener;
+import ie.cp.models.CarPark;
 import ie.cp.models.CarParkSpace;
+import ie.cp.models.Reservation;
 
 public class CarParkSpaceFragment extends Fragment implements
         AdapterView.OnItemClickListener,
         View.OnClickListener,
-        AbsListView.MultiChoiceModeListener
+        AbsListView.MultiChoiceModeListener,
+        VolleyListener
 {
     public Home activity;
     public static CarParkSpaceListAdapter listAdapter;
     public ListView listView;
+    public View v;
 
     public CarParkSpaceFragment() {
         // Required empty public constructor
@@ -74,25 +82,38 @@ public class CarParkSpaceFragment extends Fragment implements
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
+
         super.onCreate(savedInstanceState);
+                 Bundle bundle=getArguments();
+                 String carParkId ="";
+                 if(bundle != null) {
+                     carParkId = bundle.getString("carParkId");
+                }
+              if (carParkId.isEmpty()){
+                  CarParkApi.getCarParkSpaces("/carparkspace");
+              }else {
+                  CarParkApi.getCarParkSpaces("/carparkspace/" + carParkId);
+              }
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
-        Bundle bundle=getArguments();
-        String carParkId ="";
-        if(bundle != null) {
-            carParkId = bundle.getString("carParkId");
-        }
+ //app.db         Bundle bundle=getArguments();
+ //app.db         String carParkId ="";
+ //app.db         if(bundle != null) {
+ //app.db             carParkId = bundle.getString("carParkId");
+  //app.db        }
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home, parent, false);
 
-        if (carParkId.isEmpty()){
-            listAdapter = new CarParkSpaceListAdapter(activity, this, activity.app.dbManager.getAllCarParkSpaces());
-        }else {
-            listAdapter = new CarParkSpaceListAdapter(activity, this, activity.app.dbManager.getCarParkSpaces(carParkId, false));
-        }
+  //app.db      if (carParkId.isEmpty()){
+  //app.db          listAdapter = new CarParkSpaceListAdapter(activity, this, activity.app.dbManager.getAllCarParkSpaces());
+  //app.db      }else {
+  //app.db          listAdapter = new CarParkSpaceListAdapter(activity, this, activity.app.dbManager.getCarParkSpaces(carParkId, false));
+  //app.db      }
 
         ////       carParkFilter = new CarParkFilter(activity.app.dbManager, listAdapter);
 
@@ -110,7 +131,7 @@ public class CarParkSpaceFragment extends Fragment implements
         listView.setOnItemClickListener(this);
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
         listView.setMultiChoiceModeListener(this);
-        listView.setEmptyView(view.findViewById(R.id.emptyList));
+      //  listView.setEmptyView(view.findViewById(R.id.emptyList));
     }
 
     @Override
@@ -140,7 +161,9 @@ public class CarParkSpaceFragment extends Fragment implements
         {
             public void onClick(DialogInterface dialog, int id)
             {
-                activity.app.dbManager.deleteCarParkSpace(carParkSpace.carParkSpaceId);
+             //app.db   activity.app.dbManager.deleteCarParkSpace(carParkSpace.carParkSpaceId);
+                CarParkApi.deleteSpace("/carparkspace/" + carParkSpace.carParkSpaceId);
+
                 // remove from our list
                 listAdapter.notifyDataSetChanged(); // refresh adapter
             }
@@ -206,5 +229,63 @@ public class CarParkSpaceFragment extends Fragment implements
     public void onItemCheckedStateChanged(ActionMode actionMode, int i, long l, boolean b) {
     }
 
+    @Override
+    public void setList(List list) {
+        activity.app.carparkspaceList = list;
+
+    }
+
+    @Override
+    public void setSpaceList(List list) {
+        activity.app.carparkspaceList = list;
+
+    }
+
+    @Override
+    public void setReservationList(List list) {
+
+    }
+
+    @Override
+    public void setCarPark(CarPark carpark) {
+
+    }
+
+    @Override
+    public void setReservation(Reservation reservation) {
+
+    }
+
+    @Override
+    public void updateUI(Fragment fragment) {
+        fragment.onResume();
+
+    }
+
+    @Override
+    public void setCarParkSpace(CarParkSpace carParkSpace) {
+
+    }
+
+    @Override
+    public void updateCarParkSpaceDropdown(Fragment fragment) {
+
+    }
+
     /* ************ MultiChoiceModeListener methods (end) *********** */
+    public void onResume() {
+        super.onResume();
+        CarParkApi.attachListener(this);
+        updateView();
+    }
+
+    public void updateView() {
+        listAdapter = new CarParkSpaceListAdapter(activity, this, activity.app.carparkspaceList);
+
+        setListView(v);
+
+        listAdapter.notifyDataSetChanged(); // Update the adapter
+    }
+
 }
+

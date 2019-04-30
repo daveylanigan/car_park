@@ -15,12 +15,14 @@ import java.util.List;
 
 import ie.cp.db.DBManager;
 import ie.cp.models.CarPark;
+import ie.cp.models.CarParkSpace;
 import ie.cp.models.Reservation;
 
 public class CarParkApp extends Application {
 
     private RequestQueue mRequestQueue;
     public List<CarPark> carparkList = new ArrayList<CarPark>();
+    public List<CarParkSpace> carparkspaceList = new ArrayList<CarParkSpace>();
     public List<Reservation> reservationList = new ArrayList<Reservation>();
     public static final String TAG = CarParkApp.class.getName();
 

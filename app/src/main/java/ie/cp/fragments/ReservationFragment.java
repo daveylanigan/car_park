@@ -25,6 +25,7 @@ import ie.cp.api.CarParkApi;
 import ie.cp.api.VolleyListener;
 import ie.cp.main.CarParkApp;
 import ie.cp.models.CarPark;
+import ie.cp.models.CarParkSpace;
 import ie.cp.models.Reservation;
 import io.realm.RealmResults;
 
@@ -80,13 +81,13 @@ public class ReservationFragment extends Fragment implements
         super.onCreate(savedInstanceState);
         app = (CarParkApp) getActivity().getApplication();
 
-        RealmResults<Reservation> realmResults = activity.app.dbManager.getAllReservations(app.googleMail);
+     //app.db   RealmResults<Reservation> realmResults = activity.app.dbManager.getAllReservations(app.googleMail);
 
-        List<Reservation> reservations = activity.app.dbManager.realmDatabase.copyFromRealm(realmResults);
-        setList(reservations);
+    //app.db    List<Reservation> reservations = activity.app.dbManager.realmDatabase.copyFromRealm(realmResults);
+    //app.db    setList(reservations);
 
 
-        //   CarParkApi.getReservations("/reservation/" + app.googleMail);
+           CarParkApi.getReservations("/reservation/" + app.googleMail);
 
     }
 
@@ -97,14 +98,14 @@ public class ReservationFragment extends Fragment implements
         View v = inflater.inflate(R.layout.fragment_home, parent, false);
 
         // create our dropdown list of carparks
-        listAdapter = new ReservationListAdapter(activity, this, app.dbManager.getAllReservations(app.googleMail));
+  //app.db      listAdapter = new ReservationListAdapter(activity, this, app.dbManager.getAllReservations(app.googleMail));
 
         listView = v.findViewById(R.id.homeList);
-      //  updateView();
+        updateView();
 
-        setListView(v);
+  //app.db      setListView(v);
 
-        getActivity().setTitle(R.string.reservationsLbl);
+  //app.db      getActivity().setTitle(R.string.reservationsLbl);
 
         return v;
     }
@@ -115,7 +116,7 @@ public class ReservationFragment extends Fragment implements
         listView.setOnItemClickListener(this);
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
         listView.setMultiChoiceModeListener(this);
-        listView.setEmptyView(view.findViewById(R.id.emptyList));
+      //  listView.setEmptyView(view.findViewById(R.id.emptyList));
     }
 
     @Override
@@ -137,14 +138,15 @@ public class ReservationFragment extends Fragment implements
     {
         String stringName = reservation.carParkSpaceId;
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        builder.setMessage("Are you sure you want to Delete the \'Reservation\' " + stringName + "?");
+        builder.setMessage("Are you sure you want to Delete the \'Reservation\' for " + stringName + "?");
         builder.setCancelable(false);
 
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener()
         {
             public void onClick(DialogInterface dialog, int id)
             {
-                app.dbManager.deleteReservation(reservation.reservationId);
+              //app.db  app.dbManager.deleteReservation(reservation.reservationId);
+                CarParkApi.deleteReservation("/reservation/" + reservation.reservationId);
                 // remove from our list
                 listAdapter.notifyDataSetChanged(); // refresh adapter
                 // update the spacesbooked amount
@@ -223,7 +225,7 @@ public class ReservationFragment extends Fragment implements
 
         setListView(v);
 
-
+        getActivity().setTitle(R.string.reservationsLbl);
         listAdapter.notifyDataSetChanged(); // Update the adapter
     }
 
@@ -233,8 +235,13 @@ public class ReservationFragment extends Fragment implements
     }
 
     @Override
-    public void setReservationList(List list) {
+    public void setSpaceList(List list) {
 
+    }
+
+    @Override
+    public void setReservationList(List list) {
+        activity.app.reservationList = list;
     }
 
     @Override
@@ -250,5 +257,20 @@ public class ReservationFragment extends Fragment implements
         fragment.onResume();
     }
 
+    @Override
+    public void setCarParkSpace(CarParkSpace carParkSpace) {
+
+    }
+
+    @Override
+    public void updateCarParkSpaceDropdown(Fragment fragment) {
+
+    }
+
+    public void onResume() {
+        super.onResume();
+        CarParkApi.attachListener(this);
+        updateView();
+    }
 
 }

@@ -73,7 +73,6 @@ implements NavigationView.OnNavigationItemSelectedListener,
         //SetUp GooglePhoto and Email for Drawer here
         googlePhoto = navigationView.getHeaderView(0).findViewById(R.id.googlephoto);
         CarParkApi.getGooglePhoto(app.googlePhotoURL,googlePhoto);
-       // googlePhoto.setImageBitmap(app.googlePhoto);
 
         TextView googleName = navigationView.getHeaderView(0).findViewById(R.id.googlename);
         googleName.setText(app.googleName);
@@ -87,8 +86,8 @@ implements NavigationView.OnNavigationItemSelectedListener,
         ft.replace(R.id.homeFrame, fragment);
         ft.commit();
 
-        this.setupCarParks();
-        this.setupCarParkSpaces();
+    //    this.setupCarParks();
+    //    this.setupCarParkSpaces();
         this.setTitle(R.string.recentlyViewedLbl);
     }
 
@@ -162,55 +161,55 @@ implements NavigationView.OnNavigationItemSelectedListener,
             if (cp.carParkName.equalsIgnoreCase("MultiStory 1") ) {
                 res = app.dbManager.getCarParkSpace("Space 1");
                 if (res.size() == 0) {
-                    app.dbManager.addCarParkSpace(new CarParkSpace("Space 1", "Space 1", cp.carParkName, false));
+                    app.dbManager.addCarParkSpace(new CarParkSpace("","Space 1", "Space 1", cp.carParkName, false));
                 }
                 res = app.dbManager.getCarParkSpace("Space 2");
                 if (res.size() == 0) {
-                    app.dbManager.addCarParkSpace(new CarParkSpace("Space 2", "Space 2", cp.carParkName, false));
+                    app.dbManager.addCarParkSpace(new CarParkSpace("","Space 2", "Space 2", cp.carParkName, false));
                 }
                 res = app.dbManager.getCarParkSpace("Space 3");
                 if (res.size() == 0) {
-                    app.dbManager.addCarParkSpace(new CarParkSpace("Space 3", "Space 3", cp.carParkName, false));
+                    app.dbManager.addCarParkSpace(new CarParkSpace("","Space 3", "Space 3", cp.carParkName, false));
                 }
                 res = app.dbManager.getCarParkSpace("Space 4");
                 if (res.size() == 0) {
-                    app.dbManager.addCarParkSpace(new CarParkSpace("Space 4", "Space 4", cp.carParkName, false));
+                    app.dbManager.addCarParkSpace(new CarParkSpace("","Space 4", "Space 4", cp.carParkName, false));
                 }
            }
             else if (cp.carParkName.equalsIgnoreCase("MultiStory 2") ) {
                 res = app.dbManager.getCarParkSpace("Space 5");
                 if (res.size() == 0) {
-                    app.dbManager.addCarParkSpace(new CarParkSpace("Space 5", "Space 5", cp.carParkName, false));
+                    app.dbManager.addCarParkSpace(new CarParkSpace("","Space 5", "Space 5", cp.carParkName, false));
                 }
                 res = app.dbManager.getCarParkSpace("Space 6");
                 if (res.size() == 0) {
-                    app.dbManager.addCarParkSpace(new CarParkSpace("Space 6", "Space 6", cp.carParkName, false));
+                    app.dbManager.addCarParkSpace(new CarParkSpace("","Space 6", "Space 6", cp.carParkName, false));
                 }
                 res = app.dbManager.getCarParkSpace("Space 7");
                 if (res.size() == 0) {
-                    app.dbManager.addCarParkSpace(new CarParkSpace("Space 7", "Space 7", cp.carParkName, false));
+                    app.dbManager.addCarParkSpace(new CarParkSpace("","Space 7", "Space 7", cp.carParkName, false));
                 }
                 res = app.dbManager.getCarParkSpace("Space 8");
                 if (res.size() == 0) {
-                    app.dbManager.addCarParkSpace(new CarParkSpace("Space 8", "Space 8", cp.carParkName, false));
+                    app.dbManager.addCarParkSpace(new CarParkSpace("","Space 8", "Space 8", cp.carParkName, false));
                 }
             }
             else if (cp.carParkName.equalsIgnoreCase("MultiStory 3") ) {
                 res = app.dbManager.getCarParkSpace("Space 9");
                 if (res.size() == 0) {
-                    app.dbManager.addCarParkSpace(new CarParkSpace("Space 9", "Space 9", cp.carParkName, false));
+                    app.dbManager.addCarParkSpace(new CarParkSpace("","Space 9", "Space 9", cp.carParkName, false));
                 }
                 res = app.dbManager.getCarParkSpace("Space 10");
                 if (res.size() == 0) {
-                    app.dbManager.addCarParkSpace(new CarParkSpace("Space 10", "Space 10", cp.carParkName, false));
+                    app.dbManager.addCarParkSpace(new CarParkSpace("","Space 10", "Space 10", cp.carParkName, false));
                 }
                 res = app.dbManager.getCarParkSpace("Space 11");
                 if (res.size() == 0) {
-                    app.dbManager.addCarParkSpace(new CarParkSpace("Space 11", "Space 11", cp.carParkName, false));
+                    app.dbManager.addCarParkSpace(new CarParkSpace("","Space 11", "Space 11", cp.carParkName, false));
                 }
                 res = app.dbManager.getCarParkSpace("Space 12");
                 if (res.size() == 0) {
-                    app.dbManager.addCarParkSpace(new CarParkSpace("Space 12", "Space 12", cp.carParkName, false));
+                    app.dbManager.addCarParkSpace(new CarParkSpace("","Space 12", "Space 12", cp.carParkName, false));
                 }
             }
         } // end for

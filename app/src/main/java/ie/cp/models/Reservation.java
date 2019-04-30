@@ -20,8 +20,8 @@ public class Reservation extends RealmObject
 
     public Reservation(String reservationId, String userId, String carParkId, String carParkSpaceId)
     {
-        this.reservationId = UUID.randomUUID().toString();
-     //   this.reservationId = reservationId;
+     //   this.reservationId = UUID.randomUUID().toString();
+        this.reservationId = reservationId;
         this.userId = userId;
         this.carParkId = carParkId;
         this.carParkSpaceId = carParkSpaceId;

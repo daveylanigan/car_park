@@ -3,13 +3,11 @@ package ie.cp.fragments;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -20,6 +18,7 @@ import ie.cp.api.CarParkApi;
 import ie.cp.api.VolleyListener;
 import ie.cp.main.CarParkApp;
 import ie.cp.models.CarPark;
+import ie.cp.models.CarParkSpace;
 import ie.cp.models.Reservation;
 import io.realm.OrderedRealmCollection;
 
@@ -64,24 +63,24 @@ public class UserFragment extends Fragment implements
         userGoogleMail.setText(app.googleMail);
 
         ImageView img = v.findViewById(R.id.profile);
-        //SetUp GooglePhoto and Email for Drawer here
+        //SetUp GooglePhoto
         CarParkApi.getGooglePhoto(app.googlePhotoURL,img);
 
-  //      img.setImageBitmap(app.googlePhoto);
 
-    //    CarParkApi.getReservations("/reservation/" + app.googleMail);
-        OrderedRealmCollection<Reservation> reservations;
+        CarParkApi.getReservations("/reservation/" + app.googleMail);
+    //    OrderedRealmCollection<Reservation> reservations;
 
-        reservations = app.dbManager.getReservationsByUser(app.googleMail);
-        if (reservations.size() > 0) {
-            app.spacesBooked = Integer.toString(reservations.size());
-        } else {
-            app.spacesBooked = Integer.toString(0);
-        }
+    //    reservations = app.dbManager.getReservationsByUser(app.googleMail);
+    //    if (reservations.size() > 0) {
+     //       app.spacesBooked = Integer.toString(reservations.size());
+     //   } else {
+     //       app.spacesBooked = Integer.toString(0);
+     //   }
 
 
 
         TextView userSpacesBooked = v.findViewById(R.id.userSpacesBooked);
+
         userSpacesBooked.setText(app.spacesBooked);
 
         carParkBtn = v.findViewById(R.id.userCarParkButton);
@@ -133,33 +132,6 @@ public class UserFragment extends Fragment implements
     }
 
 
-    /* ************ MultiChoiceModeListener methods (begin) *********** */
-  //  @Override
-  //  public boolean onCreateActionMode(ActionMode actionMode, Menu menu)
-  //  {
-  //      MenuInflater inflater = actionMode.getMenuInflater();
-  //      inflater.inflate(R.menu.delete_carparkspacelist_context, menu);
-  //      return true;
-  //  }
-
-  //  @Override
-  //  public boolean onPrepareActionMode(ActionMode actionMode, Menu menu) {
-  //      return false;
-  //  }
-
-  //  @Override
-  //  public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem)
-  //  {
-      //  switch (menuItem.getItemId())
-      //  {
-       //     case R.id.menu_item_delete_carparkspace:
-       //         deleteCarParkSpace(actionMode);
-       //         return true;
-       //     default:
-       //         return false;
-      //  }
-   // }
-
     @Override
     public void onClick(View view)
     {
@@ -195,9 +167,18 @@ public class UserFragment extends Fragment implements
     }
 
     @Override
+    public void setSpaceList(List list) {
+
+    }
+
+    @Override
     public void setReservationList(List list) {
         app.reservationList = list;
-        app.spacesBooked = String.valueOf(list.size());
+        if (list.size() > 0) {
+           app.spacesBooked = Integer.toString(list.size());
+        } else {
+           app.spacesBooked = Integer.toString(0);
+        }
     }
 
     @Override
@@ -219,6 +200,17 @@ public class UserFragment extends Fragment implements
 
         //      checkSwipeRefresh(v);
     }
+
+    @Override
+    public void setCarParkSpace(CarParkSpace carParkSpace) {
+
+    }
+
+    @Override
+    public void updateCarParkSpaceDropdown(Fragment fragment) {
+
+    }
+
     public void setSwipeRefresh(View v)
     {
    //     SwipeRefreshLayout swipeRefresh = v.findViewById(R.id.swiperefresh);
