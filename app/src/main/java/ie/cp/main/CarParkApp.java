@@ -39,6 +39,7 @@ public class CarParkApp extends Application {
     public Bitmap googlePhoto;
     public String spacesBooked;
     public DBManager dbManager;
+    public int validStatus;
 
     @Override
     public void onCreate()

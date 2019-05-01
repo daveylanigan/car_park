@@ -1,5 +1,6 @@
 package ie.cp.fragments;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -60,6 +61,7 @@ public class AddCarParkFragment extends Fragment {
         return v;
     }
 
+
     public void addCarPark() {
 
         carParkName = name.getText().toString();
@@ -89,3 +91,4 @@ public class AddCarParkFragment extends Fragment {
         }
     }
 }
+

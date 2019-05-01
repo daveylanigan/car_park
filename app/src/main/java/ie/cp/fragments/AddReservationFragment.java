@@ -234,6 +234,11 @@ public class AddReservationFragment extends Fragment  implements VolleyListener 
     }
 
     @Override
+    public void setValidStatus(int result) {
+
+    }
+
+    @Override
     public void setCarParkSpace(CarParkSpace carParkSpace) {
 
     }

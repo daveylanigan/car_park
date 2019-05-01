@@ -17,4 +17,5 @@ public interface VolleyListener {
     void updateUI(Fragment fragment);
     void setCarParkSpace(CarParkSpace carParkSpace);
     void updateCarParkSpaceDropdown(Fragment fragment);
+    void setValidStatus(int result);
 }

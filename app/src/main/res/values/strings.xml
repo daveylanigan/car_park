@@ -10,9 +10,9 @@
     <string name="nav_header_subtitle">daveylanigan@gmail.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
-    <string name="app_about">Car Park Application 1.0</string>
+    <string name="app_about">Car Park Application 1.1</string>
     <string name="app_desc">This app allows a user to book car park spaces at their chosen Car Park</string>
-    <string name="app_more_info">The chosen database is Realm</string>
+    <string name="app_more_info">The app uses a Node.js and MongoDB backend that is deployed on Heroku. The app talks to Heroku via Volley and Swagger</string>
     <string name="splash_title">Car Park Booking System</string>
     <string name="splash_image_desc">an image</string>
     <string name="car_park_row_name">Car Park Name</string>

@@ -75,6 +75,12 @@ public class ReservationFragment extends Fragment implements
     }
 
     @Override
+    public void onDetach() {
+        super.onDetach();
+        CarParkApi.detachListener();
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState)
     {
 
@@ -264,6 +270,11 @@ public class ReservationFragment extends Fragment implements
 
     @Override
     public void updateCarParkSpaceDropdown(Fragment fragment) {
+
+    }
+
+    @Override
+    public void setValidStatus(int result) {
 
     }
 

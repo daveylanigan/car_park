@@ -184,6 +184,11 @@ public class EditCarParkFragment extends Fragment   implements VolleyListener {
 
     }
 
+    @Override
+    public void setValidStatus(int result) {
+
+    }
+
 
     public interface OnFragmentInteractionListener {
         void toggle(View v);

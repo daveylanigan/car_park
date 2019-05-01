@@ -197,4 +197,9 @@ public class AddCarParkSpaceFragment extends Fragment implements VolleyListener 
     public void updateCarParkSpaceDropdown(Fragment fragment) {
 
     }
+
+    @Override
+    public void setValidStatus(int result) {
+
+    }
 }

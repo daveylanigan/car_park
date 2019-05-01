@@ -165,6 +165,11 @@ public class CarParkFragment   extends Fragment implements
     }
 
     @Override
+    public void setValidStatus(int result) {
+
+    }
+
+    @Override
     public void onStart()
     {
         super.onStart();

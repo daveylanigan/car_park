@@ -272,6 +272,11 @@ public class CarParkSpaceFragment extends Fragment implements
 
     }
 
+    @Override
+    public void setValidStatus(int result) {
+
+    }
+
     /* ************ MultiChoiceModeListener methods (end) *********** */
     public void onResume() {
         super.onResume();

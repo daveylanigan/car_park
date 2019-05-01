@@ -211,6 +211,11 @@ public class UserFragment extends Fragment implements
 
     }
 
+    @Override
+    public void setValidStatus(int result) {
+
+    }
+
     public void setSwipeRefresh(View v)
     {
    //     SwipeRefreshLayout swipeRefresh = v.findViewById(R.id.swiperefresh);

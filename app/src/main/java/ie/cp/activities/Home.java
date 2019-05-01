@@ -88,6 +88,7 @@ implements NavigationView.OnNavigationItemSelectedListener,
 
     //    this.setupCarParks();
     //    this.setupCarParkSpaces();
+        createLoader();
         this.setTitle(R.string.recentlyViewedLbl);
     }
 

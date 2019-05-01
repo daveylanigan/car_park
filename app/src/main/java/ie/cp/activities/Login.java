@@ -66,6 +66,7 @@ public class Login extends AppCompatActivity implements
         GoogleApiClient.OnConnectionFailedListener,
         OnClickListener
 {
+    public static CarParkApp app = CarParkApp.getInstance();
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -90,11 +91,9 @@ public class Login extends AppCompatActivity implements
     private EditText mUserNameView;
     private View mProgressView;
     private View mLoginFormView;
-    public CarParkApp app = CarParkApp.getInstance();
     /* Request code used to invoke sign in user interactions. */
     private static final int RC_SIGN_IN = 0;
     private static final String TAG = "carpark";
-//    private OrderedRealmCollection<Reservation> reservations;
     private Bitmap bitmap;
 
     @Override
@@ -268,6 +267,8 @@ public class Login extends AppCompatActivity implements
         }
 
         int result = app.dbManager.isValidUser(email, password);
+      //  CarParkApi.isValidUser("/validuser/" + email + "?password=" + password);
+      //  int result = app.validStatus;
 
         if (result== 0){
             // user doesn't exist so they need to fill in all the details
@@ -313,18 +314,6 @@ public class Login extends AppCompatActivity implements
                 bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.android);
                 app.googlePhoto = bitmap;
 
-//                reservations = app.dbManager.getReservationsByUser(user.emailAddress);
-//                if (reservations.size() > 0) {
-//                    app.spacesBooked = Integer.toString(reservations.size());
-//                } else {
-//                    app.spacesBooked = Integer.toString(0);
-//                }
-
-         //       loadCarparksAndReservations(user.emailAddress);
-
-       //         CarParkApi.getReservations("/reservation/" + user.emailAddress);
-
-               // app.spacesBooked = Integer.toString(reservations.size());
             }
             startHomeScreen();
 
@@ -551,13 +540,6 @@ public class Login extends AppCompatActivity implements
             GoogleSignInAccount acct = result.getSignInAccount();
             app.googleName = acct.getDisplayName();
 
-            // by default the profile url gives 50x50 px image only
-            // we can replace the value with whatever dimension we want by
-            // replacing sz=X
-//            personPhotoUrl = personPhotoUrl.substring(0,
-//                    personPhotoUrl.length() - 2)
-//                    + 100;
-
             app.googleToken = acct.getId();
             app.signedIn = true;
             app.googleMail = acct.getEmail();
@@ -569,8 +551,6 @@ public class Login extends AppCompatActivity implements
             else {
                 app.googlePhotoURL = acct.getPhotoUrl().toString();
             }
-    //        loadCarparksAndReservations(acct.getEmail());
-
             // Show a message to the user that we are signing in.
             Toast.makeText(this, "Signing in " + app.googleName +" with " + app.googleMail , Toast.LENGTH_SHORT).show();
             startHomeScreen();

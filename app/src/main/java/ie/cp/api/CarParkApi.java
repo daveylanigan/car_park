@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.Map;
 
 import ie.cp.activities.Home;
+import ie.cp.activities.Login;
 import ie.cp.fragments.AddReservationFragment;
 import ie.cp.models.CarPark;
 import ie.cp.models.CarParkSpace;
@@ -35,8 +36,8 @@ import ie.cp.models.Reservation;
 
 public class CarParkApi {
 
-    //private static final String LocalhostURL = "http://10.0.2.2:8080/api";
-    private static final String LocalhostURL = "http://carparkserver.herokuapp.com/api";
+    private static final String LocalhostURL = "http://10.0.2.2:8080/api";
+    //private static final String LocalhostURL = "http://carparkserver.herokuapp.com/api";
     private static VolleyListener vListener;
     private static AlertDialog loader;
 
@@ -45,11 +46,12 @@ public class CarParkApi {
         vListener  = null;
     }
     public static void attachDialog(AlertDialog aloader) {
+
         loader = aloader;
     }
 
     public static void getCarParks(String url) {
-        //    showLoader("Downloading Data...");
+            showLoader("Downloading Data...");
 
         // Request a string response
         Log.v("carparkApplication","GET REQUEST : " + LocalhostURL + url);
@@ -59,18 +61,11 @@ public class CarParkApi {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        //       try {
-                        //           FLAG = response.getInt(0);
-                        //       } catch (JSONException e) {
-                        //           e.printStackTrace();
-                        //      }
 
                         // Result handling
                         List<CarPark> result = new ArrayList<CarPark>();
-                        //                       Type collectionType = new TypeToken<List<CarPark>>(){}.getType();
 
                         try {
-                            //      result = new Gson().fromJson(response.getString("data"), collectionType);
 
                             for (int j = 0; j < response.length(); j++){
                                 JSONObject obj = response.getJSONObject(j);
@@ -87,8 +82,9 @@ public class CarParkApi {
 
                         if (result.size() > 0) {
                             vListener.setCarPark(result.get(0));
-                                    //       hideLoader();
+
                         }
+                        hideLoader();
                         vListener.updateUI((Fragment) vListener);
                     }
                 }, new Response.ErrorListener() {
@@ -104,8 +100,45 @@ public class CarParkApi {
         Home.app.add(gsonRequest);
     }
 
+    public static void isValidUser(String url) {
+      //  showLoader("checking status...");
+
+        // Request a string response
+        Log.v("carparkApplication","GET REQUEST : " + LocalhostURL + url);
+
+        JsonObjectRequest gsonRequest = new JsonObjectRequest(Request.Method.GET, LocalhostURL + url,null,
+     //   JsonArrayRequest gsonRequest = new JsonArrayRequest(Request.Method.GET, LocalhostURL + url,null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        // Result handling
+                        int result = 0;
+
+                        try {
+                            result = response.getInt("result");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        Login.app.validStatus =result;
+               //         hideLoader();
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // Error handling
+                System.out.println("Something went wrong!");
+                error.printStackTrace();
+            }
+        });
+
+        // Add the request to the queue
+        Login.app.add(gsonRequest);
+    }
+
     public static void getCarParkSpaces(String url) {
-          //  showLoader("Downloading Data...");
+            showLoader("Downloading Data...");
 
         // Request a string response
         Log.v("carparkApplication","GET REQUEST : " + LocalhostURL + url);
@@ -133,11 +166,9 @@ public class CarParkApi {
                         vListener.setSpaceList(result);
 
                         if (result.size() > 0) {
-                            //  if(FLAG == 99) {
-                            //  }
                             vListener.setCarParkSpace(result.get(0));
-                            //               hideLoader();
                         }
+                        hideLoader();
                         if(vListener instanceof AddReservationFragment){
                             vListener.updateCarParkSpaceDropdown((Fragment) vListener);
                         } else {
@@ -159,7 +190,7 @@ public class CarParkApi {
     }
 
     public static void delete(String url) {
-       // showLoader("Deleting Data...");
+        showLoader("Deleting Data...");
         Log.v("carparkApplication", "DELETEing from " + url);
 
         // Request a string response
@@ -170,7 +201,7 @@ public class CarParkApi {
                         // Result handling
                         Log.v("carparkApplication", "DELETE success " + response);
                         getCarParks("/carpark"); // Forcing a refresh of the updated list on the Server
-                      //  hideLoader();
+                        hideLoader();
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -186,7 +217,7 @@ public class CarParkApi {
     }
 
     public static void deleteSpace(String url) {
-        //   showLoader("Deleting Data...");
+           showLoader("Deleting Data...");
         Log.v("carparkApplication", "DELETEing from " + url);
 
         // Request a string response
@@ -197,7 +228,7 @@ public class CarParkApi {
                         // Result handling
                         Log.v("carparkApplication", "DELETE success " + response);
                         getCarParks("/carparkspace"); // Forcing a refresh of the updated list on the Server
-                        //   hideLoader();
+                        hideLoader();
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -213,7 +244,7 @@ public class CarParkApi {
     }
 
     public static void deleteReservation(String url) {
-        //   showLoader("Deleting Data...");
+           showLoader("Deleting Data...");
         Log.v("carparkApplication", "DELETEing from " + url);
 
         // Request a string response
@@ -224,7 +255,7 @@ public class CarParkApi {
                         // Result handling
                         Log.v("carparkApplication", "DELETE success " + response);
                         getReservations("/reservation/" + Home.app.googleMail); // Forcing a refresh of the updated list on the Server
-                        //   hideLoader();
+                        hideLoader();
                     }
                 }, new Response.ErrorListener() {
             @Override
