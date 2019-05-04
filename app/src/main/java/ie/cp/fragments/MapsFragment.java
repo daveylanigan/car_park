@@ -289,8 +289,8 @@ public class MapsFragment extends SupportMapFragment implements
             mMap.addMarker(new MarkerOptions()
                     .position(new LatLng(c.latitude, c.longitude))
                     .title(c.carParkName + " " + c.address)
-                    .snippet(c.location + " " + c.spacesAvailable + " spaces available")
-                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.carparkicon)));
+                    .snippet(c.spacesAvailable + " spaces available")
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.mapmarker)));
     }
 
     @Override
