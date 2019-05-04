@@ -216,7 +216,7 @@ public class CarParkApi {
         Home.app.add(stringRequest);
     }
 
-    public static void deleteSpace(String url) {
+    public static void deleteSpace(String url, final String carParkId) {
            showLoader("Deleting Data...");
         Log.v("carparkApplication", "DELETEing from " + url);
 
@@ -227,7 +227,7 @@ public class CarParkApi {
                     public void onResponse(String response) {
                         // Result handling
                         Log.v("carparkApplication", "DELETE success " + response);
-                        getCarParks("/carparkspace"); // Forcing a refresh of the updated list on the Server
+                        getCarParkSpaces("/carparkspace/" + carParkId); // Forcing a refresh of the updated list on the Server
                         hideLoader();
                     }
                 }, new Response.ErrorListener() {

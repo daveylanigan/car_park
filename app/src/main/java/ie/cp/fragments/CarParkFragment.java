@@ -90,12 +90,6 @@ public class CarParkFragment   extends Fragment implements
         super.onCreate(savedInstanceState);
         CarParkApi.getCarParks("/carpark");
 
-        // create our dropdown list of carparks
-    //    RealmResults<CarPark> realmResults = activity.app.dbManager.getAllCarParks();
-
-    //    List<CarPark> carParks = activity.app.dbManager.realmDatabase.copyFromRealm(realmResults);
-     //   setList(carParks);
-
     }
 
     @Override
@@ -104,15 +98,8 @@ public class CarParkFragment   extends Fragment implements
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home, parent, false);
 
-    //    listAdapter = new CarParkListAdapter(activity, this, activity.app.dbManager.getAllCarParks());
-    //    listAdapter = new CarParkListAdapter(activity, this, activity.app.carparkList);
-
         listView = v.findViewById(R.id.homeList);
         updateView();
-
-  //dbmanager      setListView(v);
-
-    //    getActivity().setTitle(R.string.carParksLbl);
 
         return v;
     }
@@ -207,7 +194,6 @@ public class CarParkFragment   extends Fragment implements
                 CarParkApi.delete("/carpark/" + carPark.carParkId);
                 // remove from our list
                 listAdapter.notifyDataSetChanged(); // refresh adapter
-
             }
         }).setNegativeButton("No", new DialogInterface.OnClickListener()
         {

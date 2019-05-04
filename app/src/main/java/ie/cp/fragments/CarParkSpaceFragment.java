@@ -77,6 +77,14 @@ public class CarParkSpaceFragment extends Fragment implements
     {
         super.onAttach(context);
         this.activity = (Home) context;
+        CarParkApi.attachListener(this);
+        CarParkApi.attachDialog(activity.loader);
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        CarParkApi.detachListener();
     }
 
     @Override
@@ -84,16 +92,16 @@ public class CarParkSpaceFragment extends Fragment implements
     {
 
         super.onCreate(savedInstanceState);
-                 Bundle bundle=getArguments();
-                 String carParkId ="";
-                 if(bundle != null) {
-                     carParkId = bundle.getString("carParkId");
-                }
-              if (carParkId.isEmpty()){
-                  CarParkApi.getCarParkSpaces("/carparkspace");
-              }else {
-                  CarParkApi.getCarParkSpaces("/carparkspace/" + carParkId);
-              }
+        Bundle bundle=getArguments();
+        String carParkId ="";
+        if(bundle != null) {
+             carParkId = bundle.getString("carParkId");
+        }
+        if (carParkId.isEmpty()){
+          CarParkApi.getCarParkSpaces("/carparkspace");
+        }else {
+          CarParkApi.getCarParkSpaces("/carparkspace/" + carParkId);
+        }
 
 
     }
@@ -101,23 +109,11 @@ public class CarParkSpaceFragment extends Fragment implements
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
- //app.db         Bundle bundle=getArguments();
- //app.db         String carParkId ="";
- //app.db         if(bundle != null) {
- //app.db             carParkId = bundle.getString("carParkId");
-  //app.db        }
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home, parent, false);
 
-  //app.db      if (carParkId.isEmpty()){
-  //app.db          listAdapter = new CarParkSpaceListAdapter(activity, this, activity.app.dbManager.getAllCarParkSpaces());
-  //app.db      }else {
-  //app.db          listAdapter = new CarParkSpaceListAdapter(activity, this, activity.app.dbManager.getCarParkSpaces(carParkId, false));
-  //app.db      }
-
-
         listView = v.findViewById(R.id.homeList);
-        setListView(v);
+        updateView();
 
         getActivity().setTitle(R.string.carParkSpacesLbl);
 
@@ -142,13 +138,15 @@ public class CarParkSpaceFragment extends Fragment implements
     @Override
     public void onClick(View view)
     {
+        Bundle bundle=getArguments();
+
         if (view.getTag() instanceof CarParkSpace)
         {
-            onCarParkSpaceDelete ((CarParkSpace) view.getTag());
+            onCarParkSpaceDelete ((CarParkSpace) view.getTag(), bundle.getString("carParkId"));
         }
     }
 
-    public void onCarParkSpaceDelete(final CarParkSpace carParkSpace)
+    public void onCarParkSpaceDelete(final CarParkSpace carParkSpace, final String carParkId)
     {
         if (carParkSpace.booked) return;
         String stringName = carParkSpace.carParkSpaceName;
@@ -160,7 +158,7 @@ public class CarParkSpaceFragment extends Fragment implements
         {
             public void onClick(DialogInterface dialog, int id)
             {
-                CarParkApi.deleteSpace("/carparkspace/" + carParkSpace.carParkSpaceId);
+                CarParkApi.deleteSpace("/carparkspace/" + carParkSpace.carParkSpaceId, carParkId);
                 // remove from our list
                 listAdapter.notifyDataSetChanged(); // refresh adapter
             }
@@ -228,7 +226,6 @@ public class CarParkSpaceFragment extends Fragment implements
 
     @Override
     public void setList(List list) {
-        activity.app.carparkspaceList = list;
 
     }
 
