@@ -70,7 +70,7 @@ public class AddCarParkFragment extends Fragment {
 
         if ((carParkName.length() > 0) && (carParkAddress.length() > 0) && (carParkLocation.length() > 0)) {
             //car park id will be added by mongo
-            CarPark c = new CarPark("",carParkName, carParkAddress, carParkLocation, "0", "0");
+            CarPark c = new CarPark("",carParkName, carParkAddress, carParkLocation, "0", "0",0,0);
 
         //app.db    app.dbManager.addCarPark(c);
             CarParkApi.putCarPark("/carpark",c);

@@ -44,6 +44,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.LocationServices;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -143,6 +144,7 @@ public class Login extends AppCompatActivity implements
                 .enableAutoManage(this /* FragmentActivity */,
                         this /* OnConnectionFailedListener */)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, app.mGoogleSignInOptions)
+                .addApi(LocationServices.API)
                 .build();
         // [END build_client]
 
@@ -265,8 +267,8 @@ public class Login extends AppCompatActivity implements
             focusView = mEmailView;
             cancel = true;
         }
-
-        int result = app.dbManager.isValidUser(email, password);
+        int result =0;
+  //      int result = app.dbManager.isValidUser(email, password);
       //  CarParkApi.isValidUser("/validuser/" + email + "?password=" + password);
       //  int result = app.validStatus;
 
@@ -287,7 +289,7 @@ public class Login extends AppCompatActivity implements
             if (!cancel){
                 // add the new user
                 user = new User(userName, email,password);
-                app.dbManager.addUser(user);
+           //     app.dbManager.addUser(user);
             }
         } else if (result== 1) {
             // user exists but wrong password
@@ -296,7 +298,7 @@ public class Login extends AppCompatActivity implements
             cancel = true;
         } else if (result== 2) {
             // user exists
-            user = app.dbManager.getUser(email);
+          //  user = app.dbManager.getUser(email);
         }
 
 

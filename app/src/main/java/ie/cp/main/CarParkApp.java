@@ -2,6 +2,7 @@ package ie.cp.main;
 
 import android.app.Application;
 import android.graphics.Bitmap;
+import android.location.Location;
 import android.util.Log;
 
 import com.android.volley.Request;
@@ -13,7 +14,6 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import java.util.ArrayList;
 import java.util.List;
 
-import ie.cp.db.DBManager;
 import ie.cp.models.CarPark;
 import ie.cp.models.CarParkSpace;
 import ie.cp.models.Reservation;
@@ -38,8 +38,8 @@ public class CarParkApp extends Application {
     public String googlePhotoURL;
     public Bitmap googlePhoto;
     public String spacesBooked;
-    public DBManager dbManager;
     public int validStatus;
+    public Location mCurrentLocation;
 
     @Override
     public void onCreate()
@@ -47,8 +47,6 @@ public class CarParkApp extends Application {
         mInstance = this;
         super.onCreate();
         Log.v("CarParkApp", "Car Park App Started");
-        dbManager = new DBManager(this);
-        dbManager.open();
         Log.v("CarParkApp", "Realm Database Created & Opened");
         mRequestQueue = Volley.newRequestQueue(getApplicationContext());
     }
@@ -58,7 +56,6 @@ public class CarParkApp extends Application {
     {
         super.onTerminate();
         Log.v("CarParkApp", "Realm Database Closed");
-        dbManager.close();
     }
     public static synchronized CarParkApp getInstance() {
         return mInstance;

@@ -115,7 +115,6 @@ public class CarParkSpaceFragment extends Fragment implements
   //app.db          listAdapter = new CarParkSpaceListAdapter(activity, this, activity.app.dbManager.getCarParkSpaces(carParkId, false));
   //app.db      }
 
-        ////       carParkFilter = new CarParkFilter(activity.app.dbManager, listAdapter);
 
         listView = v.findViewById(R.id.homeList);
         setListView(v);
@@ -216,7 +215,7 @@ public class CarParkSpaceFragment extends Fragment implements
         //        } else{
         //            Toast.makeText(this.getActivity(), "This space is already booked. Plaese cancel the booking first ", Toast.LENGTH_SHORT).show();
         //        }
-        activity.app.dbManager.deleteCarParkSpace(listAdapter.getItem(i).carParkSpaceId);
+    //    activity.app.dbManager.deleteCarParkSpace(listAdapter.getItem(i).carParkSpaceId);
             actionMode.finish();
             listAdapter.notifyDataSetChanged();
     }

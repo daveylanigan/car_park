@@ -59,13 +59,13 @@ public class CarParkSearchFragment extends CarParkFragment
 
             @Override
             public boolean onQueryTextSubmit(String query) {
-                carParkFilter.filter(query);
+      //          carParkFilter.filter(query);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                carParkFilter.filter(newText);
+       //         carParkFilter.filter(newText);
                 return false;
             }
         });
@@ -83,21 +83,6 @@ public class CarParkSearchFragment extends CarParkFragment
 
     private void checkSelected(String selected)
     {
-        if (selected != null) {
-            if (selected.equals("All Types")) {
-                carParkFilter.setFilter("all");
-  //          } else if (selected.equals("Favourites")) {
-  //              coffeeFilter.setFilter("favourites");
-            }
-
-            String filterText = ((SearchView)activity
-                    .findViewById(R.id.searchView)).getQuery().toString();
-
-            if(filterText.length() > 0)
-                carParkFilter.filter(filterText);
-            else
-                carParkFilter.filter("");
-        }
     }
 
     @Override

@@ -204,7 +204,7 @@ public class ReservationFragment extends Fragment implements
         Reservation c = null;
         for (int i = listAdapter.getCount() - 1; i >= 0; i--)
             if (listView.isItemChecked(i))
-                app.dbManager.deleteReservation(listAdapter.getItem(i).reservationId); //delete from DB
+           //     app.dbManager.deleteReservation(listAdapter.getItem(i).reservationId); //delete from DB
 
         actionMode.finish();
 

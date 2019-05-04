@@ -37,7 +37,6 @@ public class CarParkFragment   extends Fragment implements
     public Home activity;
     public static CarParkListAdapter listAdapter;
     public ListView listView;
-    public CarParkFilter carParkFilter;
     public View v;
 
     public CarParkFragment() {
@@ -224,7 +223,9 @@ public class CarParkFragment   extends Fragment implements
 
     public void onCarParkSpace(final CarPark carPark)
     {
-      //  String stringName = carPark.carParkName;
+
+        // switches to car park space view
+        //  String stringName = carPark.carParkName;
         CarParkSpaceFragment nextFrag = CarParkSpaceFragment.newInstance(carPark.carParkName);
         getActivity().getSupportFragmentManager().beginTransaction()
                 .replace(R.id.homeFrame, nextFrag)
@@ -264,7 +265,7 @@ public class CarParkFragment   extends Fragment implements
         CarPark c = null;
         for (int i = listAdapter.getCount() - 1; i >= 0; i--)
             if (listView.isItemChecked(i))
-                activity.app.dbManager.deleteCarPark(listAdapter.getItem(i).carParkId); //delete from DB
+        //        activity.app.dbManager.deleteCarPark(listAdapter.getItem(i).carParkId); //delete from DB
 
         actionMode.finish();
 

@@ -70,7 +70,7 @@ public class CarParkApi {
                             for (int j = 0; j < response.length(); j++){
                                 JSONObject obj = response.getJSONObject(j);
 
-                                result.add(new CarPark(obj.getString("_id"),obj.getString("carParkName"),obj.getString("address"),obj.getString("location"),obj.getString("spacesAvailable"),obj.getString("totalSpaces")));
+                                result.add(new CarPark(obj.getString("_id"),obj.getString("carParkName"),obj.getString("address"),obj.getString("location"),obj.getString("spacesAvailable"),obj.getString("totalSpaces"),obj.getDouble("latitude"),obj.getDouble("longitude")));
 
                             }
 

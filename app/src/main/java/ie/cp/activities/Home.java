@@ -36,6 +36,7 @@ import ie.cp.fragments.AddCarParkSpaceFragment;
 import ie.cp.fragments.AddReservationFragment;
 import ie.cp.fragments.CarParkFragment;
 import ie.cp.fragments.EditCarParkFragment;
+import ie.cp.fragments.MapsFragment;
 import ie.cp.fragments.ReservationFragment;
 import ie.cp.fragments.UserFragment;
 import ie.cp.main.CarParkApp;
@@ -70,6 +71,18 @@ implements NavigationView.OnNavigationItemSelectedListener,
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        // hide admin stuff
+        if (app.googleName.equalsIgnoreCase("admin")) {
+            Menu nav_Menu = navigationView.getMenu();
+            nav_Menu.findItem(R.id.nav_carpark_add).setVisible(true);
+            nav_Menu.findItem(R.id.nav_space_add).setVisible(true);
+
+        }else{
+            Menu nav_Menu = navigationView.getMenu();
+            nav_Menu.findItem(R.id.nav_carpark_add).setVisible(false);
+            nav_Menu.findItem(R.id.nav_space_add).setVisible(false);
+        }
+
         //SetUp GooglePhoto and Email for Drawer here
         googlePhoto = navigationView.getHeaderView(0).findViewById(R.id.googlephoto);
         CarParkApi.getGooglePhoto(app.googlePhotoURL,googlePhoto);
@@ -90,6 +103,7 @@ implements NavigationView.OnNavigationItemSelectedListener,
     //    this.setupCarParkSpaces();
         createLoader();
         this.setTitle(R.string.recentlyViewedLbl);
+
     }
 
     @Override
@@ -117,6 +131,12 @@ implements NavigationView.OnNavigationItemSelectedListener,
             ft.addToBackStack(null);
             ft.commit();
 
+        } else if (id == R.id.nav_map) {
+            fragment = MapsFragment.newInstance();
+            ft.replace(R.id.homeFrame, fragment);
+            ft.addToBackStack(null);
+            ft.commit();
+
         } else if (id == R.id.nav_logout) {
             this.menuSignOut(null);
 
@@ -135,91 +155,6 @@ implements NavigationView.OnNavigationItemSelectedListener,
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    public void setupCarParks(){
-            RealmResults res;
-            res = app.dbManager.getCarParkByName("MultiStory 1");
-            if (res.size() == 0){
-                app.dbManager.addCarPark(new CarPark("","MultiStory 1", "Newgate Street", "Waterford", "4", "4"));
-            }
-            res = app.dbManager.getCarParkByName("MultiStory 2");
-            if (res.size() == 0){
-                app.dbManager.addCarPark(new CarPark("","MultiStory 2", "City Square","Waterford","4","4"));
-            }
-            res = app.dbManager.getCarParkByName("MultiStory 3");
-            if (res.size() == 0){
-                app.dbManager.addCarPark(new CarPark("","MultiStory 3", "The Quay","New Ross","4","4"));
-            }
-
-    }
-
-    public void setupCarParkSpaces(){
-        OrderedRealmCollection<CarPark> carParks = app.dbManager.getAllCarParks();
-        RealmResults res;
-        // add 4 spaces for each carpark
-        for(CarPark cp : carParks) {
-            if (cp.carParkName.equalsIgnoreCase("MultiStory 1") ) {
-                res = app.dbManager.getCarParkSpace("Space 1");
-                if (res.size() == 0) {
-                    app.dbManager.addCarParkSpace(new CarParkSpace("","Space 1", "Space 1", cp.carParkName, false));
-                }
-                res = app.dbManager.getCarParkSpace("Space 2");
-                if (res.size() == 0) {
-                    app.dbManager.addCarParkSpace(new CarParkSpace("","Space 2", "Space 2", cp.carParkName, false));
-                }
-                res = app.dbManager.getCarParkSpace("Space 3");
-                if (res.size() == 0) {
-                    app.dbManager.addCarParkSpace(new CarParkSpace("","Space 3", "Space 3", cp.carParkName, false));
-                }
-                res = app.dbManager.getCarParkSpace("Space 4");
-                if (res.size() == 0) {
-                    app.dbManager.addCarParkSpace(new CarParkSpace("","Space 4", "Space 4", cp.carParkName, false));
-                }
-           }
-            else if (cp.carParkName.equalsIgnoreCase("MultiStory 2") ) {
-                res = app.dbManager.getCarParkSpace("Space 5");
-                if (res.size() == 0) {
-                    app.dbManager.addCarParkSpace(new CarParkSpace("","Space 5", "Space 5", cp.carParkName, false));
-                }
-                res = app.dbManager.getCarParkSpace("Space 6");
-                if (res.size() == 0) {
-                    app.dbManager.addCarParkSpace(new CarParkSpace("","Space 6", "Space 6", cp.carParkName, false));
-                }
-                res = app.dbManager.getCarParkSpace("Space 7");
-                if (res.size() == 0) {
-                    app.dbManager.addCarParkSpace(new CarParkSpace("","Space 7", "Space 7", cp.carParkName, false));
-                }
-                res = app.dbManager.getCarParkSpace("Space 8");
-                if (res.size() == 0) {
-                    app.dbManager.addCarParkSpace(new CarParkSpace("","Space 8", "Space 8", cp.carParkName, false));
-                }
-            }
-            else if (cp.carParkName.equalsIgnoreCase("MultiStory 3") ) {
-                res = app.dbManager.getCarParkSpace("Space 9");
-                if (res.size() == 0) {
-                    app.dbManager.addCarParkSpace(new CarParkSpace("","Space 9", "Space 9", cp.carParkName, false));
-                }
-                res = app.dbManager.getCarParkSpace("Space 10");
-                if (res.size() == 0) {
-                    app.dbManager.addCarParkSpace(new CarParkSpace("","Space 10", "Space 10", cp.carParkName, false));
-                }
-                res = app.dbManager.getCarParkSpace("Space 11");
-                if (res.size() == 0) {
-                    app.dbManager.addCarParkSpace(new CarParkSpace("","Space 11", "Space 11", cp.carParkName, false));
-                }
-                res = app.dbManager.getCarParkSpace("Space 12");
-                if (res.size() == 0) {
-                    app.dbManager.addCarParkSpace(new CarParkSpace("","Space 12", "Space 12", cp.carParkName, false));
-                }
-            }
-        } // end for
-
-        OrderedRealmCollection<CarParkSpace> carParkSpaces = app.dbManager.getAllCarParkSpaces();
-
-        Log.d("car park spaces", "arr: " + Arrays.toString(new OrderedRealmCollection[]{carParkSpaces}));
-
-
     }
 
 

@@ -40,7 +40,8 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="5dp"
-            android:contentDescription="fav"
+            android:contentDescription="delete"
+            android:background="@drawable/border"
             android:src="@android:drawable/ic_delete" />
 
         <ImageView
@@ -54,8 +55,9 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="57dp"
             android:layout_marginRight="57dp"
-            android:contentDescription="fav"
-            android:src="@android:drawable/ic_dialog_dialer" />
+            android:contentDescription="spaces"
+            android:background="@drawable/border"
+            android:src="@drawable/spaces" />
 
         <TextView
             android:id="@+id/rowCarParkName"
