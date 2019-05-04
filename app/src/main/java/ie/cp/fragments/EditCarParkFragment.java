@@ -64,16 +64,6 @@ public class EditCarParkFragment extends Fragment   implements VolleyListener {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_carpark_edit, container, false);
 
-   //app.db     ((TextView)v.findViewById(R.id.editCarParkTitleTV)).setText(aCarPark.carParkName);
-
-   //app.db     name = v.findViewById(R.id.editCarParkNameET);
-   //app.db     address = v.findViewById(R.id.editCarParkAddressET);
-   //app.db     location = v.findViewById(R.id.editCarParkLocationET);
-
-   //app.db     name.setText(aCarPark.carParkName);
-   //app.db     location.setText(aCarPark.location);
-   //app.db     address.setText(""+aCarPark.address);
-
         return v;
     }
 
@@ -81,7 +71,8 @@ public class EditCarParkFragment extends Fragment   implements VolleyListener {
         if (mListener != null) {
             String carParkName = name.getText().toString();
             String carParkAddress = address.getText().toString();
-            String carParkLocation = location.getText().toString();
+        //    String carParkLocation = location.getText().toString();
+            String carParkLocation = "";
             CarPark c = new CarPark();
 
             c.carParkId = aCarPark.carParkId;
@@ -92,7 +83,6 @@ public class EditCarParkFragment extends Fragment   implements VolleyListener {
             c.totalSpaces = aCarPark.totalSpaces;
 
             if ((carParkName.length() > 0) && (carParkAddress.length() > 0) && (carParkLocation.length() > 0)) {
-            //app.db    app.dbManager.updateCarPark(aCarPark,carParkName,carParkAddress,carParkLocation,"0","0");
                 CarParkApi.putCarPark("/carpark/" + aCarPark.carParkId, c);
 
                 CarParkFragment nextFrag = CarParkFragment.newInstance();
@@ -100,13 +90,9 @@ public class EditCarParkFragment extends Fragment   implements VolleyListener {
                         .replace(R.id.homeFrame, nextFrag)
                         .addToBackStack(null)
                         .commit();
-        //        if (getActivity().getSupportFragmentManager().getBackStackEntryCount() > 0) {
-         //           getFragmentManager().popBackStack();
-         //           return;
-          //      }
             }
         } else
-            Toast.makeText(getActivity(), "You must Enter Something for Name, Location and Address", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "You must Enter Something for Name and Address", Toast.LENGTH_SHORT).show();
     }
 
     public void toggle(View v) {
@@ -165,11 +151,13 @@ public class EditCarParkFragment extends Fragment   implements VolleyListener {
         ((TextView)v.findViewById(R.id.editCarParkTitleTV)).setText(aCarPark.carParkName);
 
         name = v.findViewById(R.id.editCarParkNameET);
+       // address = v.findViewById(R.id.editCarParkAddressET);
+       // location = v.findViewById(R.id.editCarParkLocationET);
         address = v.findViewById(R.id.editCarParkAddressET);
-        location = v.findViewById(R.id.editCarParkLocationET);
+      //  location = "";
 
         name.setText(aCarPark.carParkName);
-        location.setText(aCarPark.location);
+     //   location.setText(aCarPark.location);
         address.setText(""+aCarPark.address);
         fragment.onResume();
     }

@@ -81,8 +81,8 @@ public class AddCarParkFragment extends Fragment implements
         View v = inflater.inflate(R.layout.fragment_add_carpark, container, false);
         getActivity().setTitle(R.string.addCarParkBtnLbl);
         name = v.findViewById(R.id.addCarParkNameET);
-        address =  v.findViewById(R.id.addCarParkAddressET);
-        location =  v.findViewById(R.id.addCarParkLocationET);
+     //   address =  v.findViewById(R.id.addCarParkAddressET);
+    //    location =  v.findViewById(R.id.addCarParkLocationET);
         saveButton = v.findViewById(R.id.addCarParkBtn);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,10 +99,10 @@ public class AddCarParkFragment extends Fragment implements
 
         carParkName = name.getText().toString();
         //carParkAddress = address.getText().toString();
-        carParkLocation = location.getText().toString();
+        carParkLocation = "";
         carParkAddress = getAddressFromLocation(app.mCurrentLocation);
 
-        if ((carParkName.length() > 0) && (carParkAddress.length() > 0) && (carParkLocation.length() > 0)) {
+        if ((carParkName.length() > 0) && (carParkAddress.length() > 0)) {
             //car park id will be added by mongo
             CarPark c = new CarPark("",carParkName, carParkAddress, carParkLocation, "0", "0",app.mCurrentLocation.getLatitude(),app.mCurrentLocation.getLongitude());
 
@@ -120,7 +120,7 @@ public class AddCarParkFragment extends Fragment implements
             Toast.makeText(
                     this.getActivity(),
                     "You must Enter Something for "
-                            + "\'Name\', \'Address\' and \'Location\'",
+                            + "\'Name\'",
                     Toast.LENGTH_SHORT).show();
         }
     }
@@ -179,7 +179,7 @@ public class AddCarParkFragment extends Fragment implements
     private void resetFields() {
         name.setText("");
         address.setText("");
-        location.setText("");
+     //   location.setText("");
         name.requestFocus();
         name.setFocusable(true);
     }

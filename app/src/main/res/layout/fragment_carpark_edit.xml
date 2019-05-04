@@ -27,23 +27,6 @@
         app:layout_constraintVertical_bias="0.084" />
 
     <TextView
-        android:id="@+id/editCarParkLocationTV"
-        android:layout_width="99dp"
-        android:layout_height="43dp"
-        android:layout_marginBottom="8dp"
-        android:paddingTop="10dp"
-        android:text="@string/carParkLocationLbl"
-        android:textAlignment="textEnd"
-        android:textColor="@color/colorFontBlack"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.057"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.585" />
-
-    <TextView
         android:id="@+id/editCarParkAddressTV"
         android:layout_width="99dp"
         android:layout_height="43dp"
@@ -96,24 +79,6 @@
         app:layout_constraintVertical_bias="0.34" />
 
     <EditText
-        android:id="@+id/editCarParkLocationET"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:ems="10"
-        android:hint="Location"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.446"
-        app:layout_constraintStart_toEndOf="@+id/editCarParkLocationTV"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.582" />
-
-    <EditText
         android:id="@+id/editCarParkAddressET"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -145,10 +110,10 @@
         android:textColor="#fff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.544"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.913" />
     />
 
     <TextView

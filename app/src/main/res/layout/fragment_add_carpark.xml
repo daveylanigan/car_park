@@ -9,47 +9,6 @@
 
 
     <TextView
-        android:id="@+id/addCarParkLocationTV"
-        android:layout_width="123dp"
-        android:layout_height="43dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:paddingTop="10dp"
-        android:text="@string/carParkLocationLbl"
-        android:textColor="@color/colorFontBlack"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.312" />
-
-    <TextView
-        android:id="@+id/addCarParkAddressTV"
-        android:layout_width="99dp"
-        android:layout_height="43dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:paddingTop="10dp"
-        android:text="@string/carParkAddressLbl"
-        android:textColor="@color/colorFontBlack"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.226" />
-
-    <TextView
         android:id="@+id/addCarParkNameTV"
         android:layout_width="99dp"
         android:layout_height="43dp"
@@ -87,40 +46,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.125" />
 
-    <EditText
-        android:id="@+id/addCarParkLocationET"
-        android:layout_width="185dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:ems="10"
-        android:hint="Enter Location"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.78"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.312" />
-
-    <EditText
-        android:id="@+id/addCarParkAddressET"
-        android:layout_width="189dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="40dp"
-        android:ems="10"
-        android:hint="Enter Address"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.942"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.23" />
-
     <Button
         android:id="@+id/addCarParkBtn"
         android:layout_width="220dp"
@@ -137,21 +62,20 @@
         app:layout_constraintHorizontal_bias="0.418"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addmap"
-        app:layout_constraintVertical_bias="0.291" />
+        app:layout_constraintVertical_bias="0.304" />
 
     <fragment
         android:id="@+id/addmap"
         android:name="ie.cp.fragments.MapsFragment"
-        android:layout_width="360dp"
-        android:layout_height="204dp"
+        android:layout_width="358dp"
+        android:layout_height="272dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="284dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="200dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.483"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/addCarParkNameET"
+        app:layout_constraintVertical_bias="1.0" />
 </android.support.constraint.ConstraintLayout>
