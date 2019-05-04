@@ -160,9 +160,7 @@ public class CarParkSpaceFragment extends Fragment implements
         {
             public void onClick(DialogInterface dialog, int id)
             {
-             //app.db   activity.app.dbManager.deleteCarParkSpace(carParkSpace.carParkSpaceId);
                 CarParkApi.deleteSpace("/carparkspace/" + carParkSpace.carParkSpaceId);
-
                 // remove from our list
                 listAdapter.notifyDataSetChanged(); // refresh adapter
             }

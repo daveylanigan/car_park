@@ -29,11 +29,9 @@ import io.realm.RealmResults;
 
 public class AddReservationFragment extends Fragment  implements VolleyListener {
 
- //   private String carParkSpaceName, carParkSpaceDecription, carParkSpaceCarPark;
     private CarParkSpace reservationCarParkSpace;
     private CarPark reservationCarPark;
     private boolean carParkSpaceBooked;
- //   private EditText name, description;
     private Spinner carpark;
     private Spinner carParkSpace;
     private CheckBox booked;

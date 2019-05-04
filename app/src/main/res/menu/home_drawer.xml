@@ -9,13 +9,13 @@
             android:icon="@drawable/ic_menu_home"
             android:title="Home" />
         <item
+            android:id="@+id/nav_map"
+            android:icon="@drawable/ic_menu_map"
+            android:title="View CarParks on Map" />
+        <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/ic_menu_send"
             android:title="Log out" />
-        <item
-            android:id="@+id/nav_map"
-            android:icon="@drawable/ic_menu_map"
-            android:title="View on Map" />
     </group>
     <item android:title="Admin" >
         <menu>

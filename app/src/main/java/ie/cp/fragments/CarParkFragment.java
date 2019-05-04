@@ -204,8 +204,7 @@ public class CarParkFragment   extends Fragment implements
         {
             public void onClick(DialogInterface dialog, int id)
             {
-              //app.db  activity.app.dbManager.deleteCarPark(carPark.carParkId); // remove from our list
-                   CarParkApi.delete("/carpark/" + carPark.carParkId);
+                CarParkApi.delete("/carpark/" + carPark.carParkId);
                 // remove from our list
                 listAdapter.notifyDataSetChanged(); // refresh adapter
 
