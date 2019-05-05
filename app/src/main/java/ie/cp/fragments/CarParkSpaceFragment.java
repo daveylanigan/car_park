@@ -100,7 +100,7 @@ public class CarParkSpaceFragment extends Fragment implements
         if (carParkId.isEmpty()){
           CarParkApi.getCarParkSpaces("/carparkspace");
         }else {
-          CarParkApi.getCarParkSpaces("/carparkspace/" + carParkId);
+          CarParkApi.getCarParkSpaces("/carparkspace/" + carParkId + "/true");
         }
 
 
@@ -158,7 +158,7 @@ public class CarParkSpaceFragment extends Fragment implements
         {
             public void onClick(DialogInterface dialog, int id)
             {
-                CarParkApi.deleteSpace("/carparkspace/" + carParkSpace.carParkSpaceId, carParkId);
+                CarParkApi.deleteSpace("/carparkspace/" + carParkSpace.carParkSpaceId + "/true", carParkId);
                 // remove from our list
                 listAdapter.notifyDataSetChanged(); // refresh adapter
             }

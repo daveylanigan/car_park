@@ -82,7 +82,7 @@ public class EditCarParkFragment extends Fragment   implements VolleyListener {
             c.spacesAvailable = aCarPark.spacesAvailable;
             c.totalSpaces = aCarPark.totalSpaces;
 
-            if ((carParkName.length() > 0) && (carParkAddress.length() > 0) && (carParkLocation.length() > 0)) {
+            if ((carParkName.length() > 0) && (carParkAddress.length() > 0)) {
                 CarParkApi.putCarPark("/carpark/" + aCarPark.carParkId, c);
 
                 CarParkFragment nextFrag = CarParkFragment.newInstance();

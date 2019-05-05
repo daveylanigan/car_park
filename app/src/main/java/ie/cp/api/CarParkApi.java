@@ -36,8 +36,8 @@ import ie.cp.models.Reservation;
 
 public class CarParkApi {
 
-    private static final String LocalhostURL = "http://10.0.2.2:8080/api";
-    //private static final String LocalhostURL = "http://carparkserver.herokuapp.com/api";
+    //private static final String LocalhostURL = "http://10.0.2.2:8080/api";
+    private static final String LocalhostURL = "http://carparkserver.herokuapp.com/api";
     private static VolleyListener vListener;
     private static AlertDialog loader;
 
@@ -227,7 +227,7 @@ public class CarParkApi {
                     public void onResponse(String response) {
                         // Result handling
                         Log.v("carparkApplication", "DELETE success " + response);
-                        getCarParkSpaces("/carparkspace/" + carParkId); // Forcing a refresh of the updated list on the Server
+                        getCarParkSpaces("/carparkspace/" + carParkId + "/true"); // Forcing a refresh of the updated list on the Server
                         hideLoader();
                     }
                 }, new Response.ErrorListener() {
